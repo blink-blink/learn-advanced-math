@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Linear Algebra and Differential Equations: An Interactive Review</title>
+<meta name="description" content="A deep interactive review of linear algebra and differential equations: vector spaces, matrices, linear transformations, eigenvalues, SVD, ODEs, systems, Laplace transforms and Fourier series, with history, worked examples, videos, numpy demos and interactive canvases."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap"/>
+<link rel="stylesheet" href="styles.css"/>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="progress"></div>
+<header class="site">
+<h1>Linear Algebra and Differential Equations</h1>
+<p class="sub">An interactive review of the whole sequence. Each chapter leads with the intuition, then the formal theory, worked examples you can check line by line, a runnable numpy demo, embedded videos, live interactive canvases, and the history of why each tool exists.</p>
+<div>
+<span class="pill">12 chapters</span><span class="pill">14 interactive visuals</span><span class="pill">35+ worked examples</span><span class="pill">numpy demos per topic</span><span class="pill">videos: 3Blue1Brown · MIT OCW</span><span class="pill">0 build deps (MathJax via CDN)</span>
+</div>
+</header>
+<div class="layout">
+<nav class="side" id="sideNav">
+<div class="cap">Foundations</div>
+<details class="grp" open data-for="map"><summary><a href="#map">0 · Orientation</a></summary><div class="subs">
+<a href="#map-thread">The one thread</a><a href="#map-timeline">Master timeline</a><a href="#map-howto">How to use this site</a></div></details>
+<details class="grp" data-for="vectors"><summary>1 · Vector spaces</summary><div class="subs">
+<a href="#v-def">Definition &amp; subspaces</a><a href="#v-span">Span · independence · basis</a><a href="#v-inner">Inner products · Gram–Schmidt</a><a href="#v-4sub">Four fundamental subspaces</a><a href="#v-viz">Visuals 1–2</a><a href="#v-ex">Worked examples</a></div></details>
+<details class="grp" data-for="matrices"><summary>2 · Matrices &amp; determinants</summary><div class="subs">
+<a href="#m-mult">Multiplication = composition</a><a href="#m-elim">Elimination &amp; LU</a><a href="#m-inv">Inverses: the equivalence chain</a><a href="#m-det">Determinants</a><a href="#m-viz">Visual 3</a><a href="#m-ex">Examples + numpy</a></div></details>
+<details class="grp" data-for="lintrans"><summary>3 · Linear transformations</summary><div class="subs">
+<a href="#t-def">Kernel · range · rank–nullity</a><a href="#t-matrix">The matrix of a transform</a><a href="#t-basis">Change of basis · similarity</a><a href="#t-ex">Worked examples</a></div></details>
+<div class="cap">The eigen core</div>
+<details class="grp" data-for="eigen"><summary>4 · Eigenvalues</summary><div class="subs">
+<a href="#e-def">Av=λv + the recipe</a><a href="#e-ex4">Four worked examples</a><a href="#e-table">Property table</a><a href="#e-probe">Visual 4 · eigen probe</a><a href="#e-pi">Visual 5 · power iteration</a><a href="#e-pagerank">PageRank end-to-end</a></div></details>
+<details class="grp" data-for="diag"><summary>5 · Diagonalization &amp; SVD</summary><div class="subs">
+<a href="#d-diag">PDP⁻¹ and Aᵏ</a><a href="#d-jordan">Defective matrices · Jordan</a><a href="#d-svd">SVD, derived</a><a href="#d-viz">Visual 6 · SVD morph</a><a href="#d-lowrank">Low-rank + numpy</a></div></details>
+<div class="cap">Differential equations</div>
+<details class="grp" data-for="ode"><summary>6 · Single ODEs</summary><div class="subs">
+<a href="#o-first">First-order: 4 types</a><a href="#o-second">Second-order, constant coeff</a><a href="#o-uncoh">Undetermined coeff. · resonance</a><a href="#o-viz">Visual 7 · slope fields</a><a href="#o-ex">Examples + numpy</a></div></details>
+<details class="grp" data-for="systems"><summary>7 · Systems x′ = Ax</summary><div class="subs">
+<a href="#s-solve">Eigen = solution</a><a href="#s-class">Trace/det classification</a><a href="#s-viz">Visuals 8–10</a><a href="#s-ex">Worked example</a></div></details>
+<details class="grp" data-for="laplace"><summary>8 · Laplace transforms</summary><div class="subs">
+<a href="#l-def">The transform, de-magicked</a><a href="#l-table">Table + derivations</a><a href="#l-step">Steps · impulses · shifts</a><a href="#l-poles">Poles &amp; stability</a><a href="#l-viz">Visual 11</a><a href="#l-ex">Examples</a></div></details>
+<details class="grp" data-for="fourier"><summary>9 · Fourier series</summary><div class="subs">
+<a href="#f-def">Euler formulas = projections</a><a href="#f-conv">Convergence &amp; Gibbs</a><a href="#f-parseval">Parseval &amp; compression</a><a href="#f-viz">Visuals 12–14</a><a href="#f-ex">Worked examples</a><a href="#f-bridge">Bridge to FFT</a></div></details>
+<div class="cap">Capstone</div>
+<details class="grp" data-for="capstone"><summary>10 · CS case studies</summary><div class="subs">
+<a href="#c-graphics">Graphics pipeline</a><a href="#c-pagerank">PageRank at scale</a><a href="#c-audio">Audio filtering · JPEG</a><a href="#c-netflix">Netflix &amp; SVD</a><a href="#c-control">Control &amp; stability</a></div></details>
+<details class="grp" data-for="exam"><summary>11 · Exam pack</summary><div class="subs">
+<a href="#x-algo">7 recipes</a><a href="#x-drill">Timed drill + solutions</a><a href="#x-cheat">One-screen cheat sheet</a><a href="#x-refs">Master references</a></div></details>
+</nav>
+<main>
+
+<!-- ============================== 0 ============================== -->
+<section class="card" id="map">
+<h2><span class="chno">00</span>Orientation: the map, the timeline, the one thread</h2>
+<div class="meta"><span class="pill">beginner · 5 min read</span><span class="pill">no prerequisites</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#map-thread">One idea behind the whole semester</a></li>
+<li><a href="#map-timeline">Master timeline, why this review is in this order</a></li>
+<li><a href="#map-howto">How to use this site</a></li></ol></div>
+
+<h3 id="map-thread">1. One idea behind the whole semester <a class="anchor" href="#map-thread">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>This whole course is <b>one trick, used over and over</b>: when something is a tangled mess, look at it from a different set of coordinates so the tangle disappears. A matrix can be all mixed together — every number leaning on every other number. Switch to the right coordinates and every piece just gets multiplied by one number, with nothing mixing at all. Each chapter is a different way of finding those coordinates, plus what to do on the rare occasion they don't exist.</p></div>
+<p>Every chapter in this review is the same move, played on a different stage:</p>
+<div class="formula">\[ \textbf{Find the basis in which the operator becomes simple (diagonal).} \]</div>
+<p>A linear map \(A\) looks complicated in the standard basis. It mixes every coordinate into every other. But in the basis of its <span class="term" data-tip="The special directions that a map only &lt;b&gt;stretches or shrinks&lt;/b&gt;, never bends. Finding them is the whole point of §4.">eigenvectors</span>, each coordinate is merely multiplied by its own number: \(D=\mathrm{diag}(\lambda_i)\). Everything in this review is machinery for finding, exploiting, or generalizing that <span class="term" data-tip="A &lt;b&gt;basis&lt;/b&gt; is the list of arrows that describes the whole space with no leftovers and no redundancy. Like the difference between a full vocabulary and a handful of words you can't say without.">basis</span> — and of the <span class="term" data-tip="Any rule that takes a vector in and hands back a vector out. A matrix is the usual operator; differentiation is a stranger one you'll meet in §6.">operator</span> it applies to:</p>
+<ul>
+<li><b>§1–§3</b> build the language: what a "basis" even is, how matrices represent maps, and what "changing basis" formally means, namely \(B=P^{-1}AP\).</li>
+<li><b>§4–§5</b> find the special basis (eigenvalues/vectors), use it (diagonalization, \(A^k=PD^kP^{-1}\)), and when it doesn't exist, fall back to the SVD, the "diagonalization for everyone."</li>
+<li><b>§6–§7</b> discover that differentiation <i>is</i> a linear operator on a function space, whose "eigenvectors" are exponentials: \(\frac{d}{dt}e^{rt}=r\,e^{rt}\). Solving \(y''+3y'+2y=0\) is literally an eigenvalue problem for \(\frac{d}{dt}\). That's why the "characteristic equation" has "characteristic polynomial" in its name.</li>
+<li><b>§8</b> the Laplace transform is the change-of-basis that turns differentiation into multiplication by \(s\).</li>
+<li><b>§9</b> Fourier is the eigenbasis of differentiation restricted to periodic functions, sines and cosines, and it is an <i>infinite-dimensional</i> Gram–Schmidt (§1) applied to functions.</li>
+</ul>
+<p>Hold that one sentence during the exam: <span class="term" data-tip="Rewriting a matrix in a new basis so it becomes a plain list of numbers down the diagonal. §5 is entirely about how to do it, and what to do when you can't."><b>“diagonalize”</b></span> is what every method on this site secretly does. When a problem feels like a bag of tricks, ask "what is the operator here, and what are its eigenvectors?"</p>
+
+<h3 id="map-timeline">2. Master timeline: why this review is in this order <a class="anchor" href="#map-timeline">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>None of this is new. Some of it is about eighteen hundred years older than the computer you're reading it on — Chinese scribes were solving linear systems around the year 200 AD, and the people who invented calculus did it specifically so they could write down an equation for motion. The chapters are ordered roughly <b>the way the ideas were actually discovered</b>, so the course reads as a story with a plot: letters first, then numbers, then the shapes that pull it all together.</p></div>
+<div class="hist"><b>Master timeline.</b> Scan the years, ignore the details on a first pass — this is here so you can place each chapter in time, and so the "why does this exist?" question always has an answer.
+<ul class="tl">
+<li><span class="yr">~200 AD</span><span class="ev">The Chinese <i>Nine Chapters on the Mathematical Art</i> solves linear systems by a procedure identical to Gaussian elimination. <b>1650 years early.</b></span></li>
+<li><span class="yr">1670s</span><span class="ev">Newton and Leibniz invent calculus explicitly to write differential equations.</span></li>
+<li><span class="yr">1740s</span><span class="ev">Euler analyzes rigid-body rotation, finds the <b>principal axes</b> (proto-eigenvectors) and the method for constant-coefficient ODEs.</span></li>
+<li><span class="yr">1750</span><span class="ev">Cramer publishes determinants-for-systems.</span></li>
+<li><span class="yr">1780s</span><span class="ev">Laplace's transform appears in probability and celestial mechanics.</span></li>
+<li><span class="yr">1807/1822</span><span class="ev">Fourier claims heat profiles are sine series; Lagrange objects (both partly right).</span></li>
+<li><span class="yr">1829</span><span class="ev">Cauchy systematizes symmetric eigenvalue theory; Dirichlet fixes Fourier's convergence claim.</span></li>
+<li><span class="yr">1844–88</span><span class="ev">Grassmann's vector spaces (1844), Cayley's matrix algebra (1858), Peano's axioms (1888) — the abstraction finally catches up with the computations.</span></li>
+<li><span class="yr">1872</span><span class="ev">Klein's Erlangen program: a geometry <i>is</i> the invariants of a transformation group.</span></li>
+<li><span class="yr">1880s–90s</span><span class="ev">Poincaré invents phase-plane qualitative theory; Lyapunov makes stability rigorous.</span></li>
+<li><span class="yr">1898</span><span class="ev">Gibbs explains the Fourier overshoot.</span></li>
+<li><span class="yr">1900s</span><span class="ev">Hilbert pushes eigen-theory to infinite dimensions; quantum mechanics will use the word <i>eigenvalue</i> verbatim.</span></li>
+<li><span class="yr">1930s–40s</span><span class="ev">von Neumann &amp; Turing make linear algebra <i>computable</i>: LU, pivoting, conditioning, floating-point error.</span></li>
+<li><span class="yr">1961</span><span class="ev">Francis &amp; Kublanovskaya's QR algorithm finally computes eigenvalues of big matrices.</span></li>
+<li><span class="yr">1965</span><span class="ev">Cooley–Tukey FFT (<a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1" target="_blank" rel="noopener">paper</a>) makes frequency analysis cheap.</span></li>
+<li><span class="yr">1998</span><span class="ev">PageRank ranks the entire web with one dominant eigenvector.</span></li>
+</ul>
+A standard syllabus compresses roughly 300 years of mathematics into one semester, in essentially the order it was discovered.</div>
+
+<h3 id="map-howto">3. How to use this site <a class="anchor" href="#map-howto">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>Every chapter is built the same way, so once you've read one you already know the layout of the other eleven. Each one starts with <b>why anyone cared</b>, gives you <b>the facts to memorize</b>, then <b>derives them</b> so no formula is magic, shows you <b>2–5 worked examples</b> you can open and check line by line, hands you <b>runnable code</b> and <b>videos</b> and something <b>you can play with</b>, and closes with <b>the ways people get it wrong</b> and <b>where to read more</b>.</p></div>
+<p>Read §1–§9 in order; each section leans on the previous one and says which subsection it needs. The fixed chapter arc is:</p>
+<dl class="dl">
+<div><dt>History</dt><dd>why the tool exists, and the problem that demanded it</dd></div>
+<div><dt>Theory to memorize</dt><dd>the facts an exam will actually ask for</dd></div>
+<div><dt>Derivation</dt><dd>where each formula comes from, so it stops being magic</dd></div>
+<div><dt>2–5 worked examples</dt><dd>click a summary to open it, then verify <i>every line</i> yourself</dd></div>
+<div><dt>Runnable numpy demo</dt><dd>the same computation, in code you can paste and run</dd></div>
+<div><dt>Videos</dt><dd>click to load — nothing auto-downloads</dd></div>
+<div><dt>Interactive canvas</dt><dd>play with the idea yourself, with guided experiments</dd></div>
+<div><dt>Pitfalls</dt><dd>the mistakes that actually cost marks</dd></div>
+<div><dt>References</dt><dd>where to read more, at the depth you need</dd></div>
+</dl>
+<div class="note"><b>If you have one night left:</b> §4's recipe + Ex A, §7.2's trace/det table, §8.4's Laplace-worked IVP, §9.4's square-wave example, then §11's seven recipes and the timed drill. <b>If you have one hour:</b> the seven recipes and the canvases only, dragging a slider to watch eigen-directions emerge teaches more than re-reading three pages.</div>
+<div class="chapnav"><span></span><a class="nx" href="#vectors">Next: 1 · Vector spaces →</a></div>
+</section>
+
+<!-- ============================== 1 ============================== -->
+<section class="card" id="vectors">
+<h2><span class="chno">01</span>Vector spaces</h2>
+<div class="meta"><span class="pill">beginner</span><span class="pill">⏱ 25 min</span><span class="pill">prerequisite for every later chapter</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#v-def">What a vector space is; the subspace test</a></li>
+<li><a href="#v-span">Span, linear independence, basis, dimension</a></li>
+<li><a href="#v-inner">Inner products &amp; Gram–Schmidt (and where it goes next)</a></li>
+<li><a href="#v-4sub">The four fundamental subspaces</a></li>
+<li><a href="#v-viz">Interactive: span explorer + Gram–Schmidt machine</a></li>
+<li><a href="#v-ex">Worked examples</a></li></ol></div>
+
+<div class="hist"><b>History in five lines.</b> <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Grassmann.html" target="_blank" rel="noopener">Grassmann</a> (1844, <i>Die lineale Ausdehnungslehre</i>) proposed n-dimensional "extensive quantities", so far ahead of its notation that it was ignored for 45 years (Gibbs discovered him only in 1877). Gibbs &amp; Heaviside (1880s) independently cut Hamilton's quaternions down to the 3-D dot/cross product engineers actually use. Peano (1888) distilled all of it into the eight axioms you could quote today. Banach &amp; Hilbert (1920s) ran the same axioms on <i>infinite-dimensional function spaces</i>, the space where Fourier series secretly live: sines are "vectors," and integrals of products are "dot products."</div>
+
+<h3 id="v-def">1. What a vector space is; the subspace test <a class="anchor" href="#v-def">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>Some places let you add things together and multiply them by plain numbers without anything ever breaking. Arrows do that. A list of numbers does that. A grid of numbers does that — that's a <i>matrix</i>. A recipe for a curve does that — that's a <i>polynomial</i>. Calling all of them <span class="term" data-tip="Any place where you can add two things and scale by a plain number, and the answers always stay inside. The name exists so that &lt;b&gt;one&lt;/b&gt; set of rules covers all of them at once."><b>vector spaces</b></span> is not a restriction — it's a shortcut, because <b>every rule in the rest of the course works identically in all of them</b>. You learn it once, you can use it everywhere.</p>
+<p>A <span class="term" data-tip="A vector space living inside a bigger one. Like one floor of a building: you can still move around on it completely normally, but you can't walk off the edge."><b>subspace</b></span> is just a vector space hiding inside a bigger one, with the same three-part test every time.</p></div>
+<p>A <span class="term" data-tip="Any place where you can add two things and scale by a plain number, and the answers always stay inside. The name exists so that &lt;b&gt;one&lt;/b&gt; set of rules covers all of them at once.">vector space</span> \(V\) over \(\mathbb{R}\) is a set with \(+\) and \(\cdot\) obeying 8 axioms: associativity and commutativity of addition, an additive identity \(0\) and inverses, and the scalar-distribution/associativity/unit laws. The point of the axioms: <i>anything that satisfies them behaves like arrows</i>, so a theorem proved once applies everywhere. Examples on exams, with the reason each qualifies:</p>
+<ul>
+<li>\(\mathbb{R}^n\), the prototype.</li>
+<li>\(M_{m\times n}\): all \(m\times n\) <b>matrices are vectors</b>, add them, scale them, the axioms hold.</li>
+<li>\(P_n\): polynomials of degree \(\le n\), dimension \(n+1\), basis \(\{1,x,x^2,\dots,x^n\}\) (careful: \(n+1\), the constant term is a dimension).</li>
+<li>\(C[a,b]\): continuous functions on \([a,b]\), <i>infinite</i>-dimensional; the arena of §9.</li>
+<li><b>Every</b> solution set of a homogeneous linear ODE: if \(y_1,y_2\) solve \(y''+py'+qy=0\), so does \(cy_1+dy_2\) (the differential operator is linear). This is why "general solution \(=C_1y_1+C_2y_2\)" is secretly a statement about <b>bases of a 2-dimensional solution space</b>. §6 will repeat this in disguise, and §8 too.</li>
+</ul>
+<p><b>Subspace test</b>, a nonempty \(W\subseteq V\) is a subspace iff (a) \(0\in W\), (b) closed under \(+\), (c) closed under scalar multiplication. In \(\mathbb{R}^3\) the subspaces are exactly: the origin, lines <i>through the origin</i>, planes <i>through the origin</i>, and all of \(\mathbb{R}^3\). Anything else (a shifted line, the unit circle, the first quadrant) fails at least one check, practice naming which.</p>
+<div class="note"><b>Why \(0\in W\) is the fastest disproof:</b> if \(W\) is closed under scalar mult. and nonempty, then \(0\cdot w=0\in W\) for free, so a set missing the origin (like the affine line \(y=2x+1\)) fails automatically. Check (a) first, always.</div>
+
+<h3 id="v-span">2. Span, linear independence, basis, dimension <a class="anchor" href="#v-span">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>You can't list every point in a space — there are too many. So you pick a few <b>generators</b> instead, and then everything in the space is a recipe using those. Three words, three questions:</p>
+<ul>
+<li><span class="term" data-tip="Everything you can build by adding and scaling the vectors you were given. &lt;b&gt;Is my list big enough?&lt;/b&gt;"><b>Span</b></span> — what can I build from these?</li>
+<li><span class="term" data-tip="No vector is a recipe for the others. &lt;b&gt;Is my list smaller than it needs to be?&lt;/b&gt;"><b>Linear independence</b></span> — is any of them wasting its place?</li>
+<li><span class="term" data-tip="Enough to build everything, with nothing spare. The list of arrows that genuinely describes the space. §3 changes this list; §4 hunts for a special one."><b>Basis</b></span> — both at once. And <b>dimension</b> is how many it takes, which no choice of list can change.</li>
+</ul>
+</div>
+<ul>
+<li><b>Span:</b> \(\mathrm{span}\{v_1,\dots,v_k\}=\{\sum c_iv_i\}\), automatically the smallest subspace containing them (proof: it's closed, and any subspace containing the \(v_i\)'s must contain every combination).</li>
+<li><b>Linear independence:</b> \(c_1v_1+\dots+c_kv_k=0\Rightarrow\) every \(c_i=0\). In practice: stack as columns of \(A\); independent \(\iff \mathrm{rank}A=k\) \(\iff\) \(Ax=0\) has only the trivial solution. Geometrically: nobody is redundant, no \(v_i\) is buildable from the rest.</li>
+<li><b>Basis</b> = independent + spans \(V\). <b>Dimension</b> = the (uniquely determined) size of any basis. In \(\mathbb{R}^n\): any \(n\) independent vectors are automatically a basis. You only check one property.</li>
+</ul>
+<div class="note"><b>The mental model.</b> Independence answers <i>how few</i> vectors describe the space without redundancy; spanning answers <i>is that enough?</i> A basis is the sweet spot of both. And when later chapters say "choose coordinates," they mean "choose a basis" — the same physical vector has <i>different number-tuples</i> in different bases, which is exactly what §3.3's change-of-basis and §5's diagonalization manipulate.</div>
+
+<h3 id="v-inner">3. Inner products, norms, Gram–Schmidt <a class="anchor" href="#v-inner">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>So far a vector is just a bag of numbers with no sense of size or direction — you can add and scale it, but you can't say how <i>long</i> it is or what angle it points at. Add <b>one</b> extra rule, the <span class="term" data-tip="The dot product — the one rule that brings geometry back to a bare vector space. Multiply matching parts, add them up. It lets you measure length and angles, which bare vector spaces cannot.">inner product</span> (multiply matching parts, add them up), and geometry returns: length, angle, and "perpendicular."</p>
+<p><span class="term" data-tip="&lt;b&gt;Gram–Schmidt&lt;/b&gt; takes any basis and straightens it, one step at a time, into a basis where every pair is at right angles. Subtracting the piece that's already spoken for is the whole idea.">Gram–Schmidt</span> is the machine that does the straightening, and it is the single most reused step in the course: §5's QR factorization, §5's least squares, and §9's Fourier coefficients are all this same machine run on different inputs.</p></div>
+<div class="formula">\[ u\cdot v=\sum_i u_iv_i,\qquad \|v\|=\sqrt{v\cdot v},\qquad \cos\theta=\frac{u\cdot v}{\|u\|\,\|v\|} \]</div>
+<p><span class="term" data-tip="At right angles: dot product exactly zero. Orthogonality is the goal Gram–Schmidt is reaching for.">Orthogonal</span> means \(u\cdot v=0\). An <b>orthogonal set of nonzero vectors is automatically independent</b> (dot the combination with \(v_i\) to isolate \(c_i\)). <b>Gram–Schmidt</b> converts any basis into an orthogonal one by subtracting, step by step, the projection onto directions already accepted:</p>
+<div class="formula">\[ u_1=v_1,\qquad u_{k}=v_k-\sum_{j&lt;k}\frac{v_k\cdot u_j}{u_j\cdot u_j}\,u_j,\qquad e_i=\frac{u_i}{\|u_i\|} \]</div>
+<p><b>Where this goes:</b> applied to the columns of a matrix, Gram–Schmidt <i>is</i> the <b>QR factorization</b> \(A=QR\) (Q orthonormal columns, R upper-triangular) — the numerically stable route to least squares, which is why ML libraries avoid forming \(A^TA\) by hand: it squares your conditioning error.</p>
+<div class="note"><b>And it comes back one last time in §9.</b> The <span class="term" data-tip="Taking the part of v that lies along u: the shadow v casts in u's direction. The one formula that connects §1 to §9.">projection</span> formula \(\mathrm{proj}_u\,v=\frac{v\cdot u}{u\cdot u}u\) reappears, word for word, as the <b>Euler coefficient formula of Fourier series</b>: same projection, infinitely many directions instead of two.</div>
+<div class="use"><b>CS uses of this chapter.</b>
+<ul>
+<li><b>Embeddings:</b> a document/user/image is a point in \(\mathbb{R}^n\), and cosine similarity <i>is</i> the \(\cos\theta\) above.</li>
+<li><b>Pixels:</b> pixels \(\in\mathbb{R}^3\), and RGB→grayscale is one linear functional — the BT.601 matrix \([0.299,0.587,0.114]\) lives in every JPEG encoder.</li>
+<li><b>Coding theory:</b> valid codewords of a linear block code are exactly \(\ker H\), a subspace. That is <i>why</i> "XOR two valid codewords gives another valid codeword," and why syndrome decoding works.</li>
+<li><b>Circuits:</b> Kirchhoff's current laws are linear constraints, so the space of legal current assignments is a null space — and its dimension is the number of independent loops. Euler's formula for graphs, hiding in an EE course.</li>
+</ul></div>
+
+<h3 id="v-4sub">4. The four fundamental subspaces <a class="anchor" href="#v-4sub">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>A matrix splits the world in two, twice over. On one side are the directions it can <b>produce</b>; on the other, the directions it <b>flattens to nothing</b>. The surprising part is that the same two questions can be asked of the matrix <i>and</i> of its transpose, which gives four spaces instead of two — and every one of their sizes is readable straight off the row-reduced matrix, by counting pivots and free variables.</p>
+<p>Once you have the four, the question "does \(Ax=b\) have a solution?" stops being an elimination slog and becomes a one-line test: is \(b\) standing at right angles to the left null space?</p></div>
+<p>For \(A\) of size \(m\times n\), <span class="term" data-tip="The number of pivots after row reduction. It counts how many dimensions get through unharmed — and it is the only number you need for most of this chapter.">rank</span> \(r\) (Strang's picture, draw it once and \(Ax=b\) forever makes sense):</p>
+<table>
+<tr><th>Subspace</th><th>Sits in</th><th>Dimension</th><th>Basis from</th></tr>
+<tr><td><span class="term" data-tip="Everything the matrix can produce: plug in any input, read off an output. The columns are already the generators.">Column space</span> \(C(A)\)</td><td>\(\mathbb{R}^m\)</td><td>\(r\)</td><td>pivot columns of \(A\) (of \(A\), not of \(U\)!)</td></tr>
+<tr><td><span class="term" data-tip="The inputs that come out as nothing. These are exactly the directions the matrix destroys — and the leftovers after you solve Ax=0.">Null space</span> \(N(A)\)</td><td>\(\mathbb{R}^n\)</td><td>\(n-r\)</td><td>free-variable special solutions of \(Ax=0\)</td></tr>
+<tr><td><span class="term" data-tip="The transpose's column space: the matrix read sideways. Same rank r, so same size as C(A) — but a genuinely different set of vectors.">Row space</span> \(C(A^T)\)</td><td>\(\mathbb{R}^n\)</td><td>\(r\)</td><td>pivot rows of the echelon form \(U\)</td></tr>
+<tr><td><span class="term" data-tip="The null space of the transpose: the 'invisible' directions of A. Decides whether Ax=b is solvable at all.">Left null space</span> \(N(A^T)\)</td><td>\(\mathbb{R}^m\)</td><td>\(m-r\)</td><td>zero rows of the elimination matrix \(E\)</td></tr>
+</table>
+<p><b><span class="term" data-tip="rank + nullity = n. The dimensions of what gets through and what gets crushed always add up to the size of the input. §3 proves the abstract version.">Rank–nullity</span>:</b> \(\mathrm{rank}+\mathrm{nullity}=n\), the domain splits into "directions that survive independently" + "directions crushed to 0." The deep fact: \(C(A^T)\perp N(A)\) in \(\mathbb{R}^n\), and \(C(A)\perp N(A^T)\) in \(\mathbb{R}^m\), every linear map carves both spaces into orthogonal pairs.</p>
+<div class="note"><b>Why you'll care later.</b> \(Ax=b\) is solvable \(\iff\) \(b\) is orthogonal to every vector in \(N(A^T)\) — the Fredholm alternative, which is just a dressed-up way of saying "the equations can't contradict each other." And least squares (§5) works by finding the closest reachable \(b\) inside \(C(A)\), by <i>projection</i>. Gram–Schmidt again.</div>
+
+<h3 id="v-viz">5. Interactive visuals <a class="anchor" href="#v-viz">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>Two things you can grab. The first is a pair of stretchy arrows and a slider: drag it and watch the shaded region <b>collapse from a plane to a line</b> the moment the arrows stop being independent — that collapse is exactly what a singular matrix does, drawn in real time. The second is a machine that pulls the second arrow's "along the first arrow" piece off and shows you the orthogonal leftover. That machine <i>is</i> Gram–Schmidt, and watching it hold the dot product at exactly zero <b>is</b> the proof.</p></div>
+<div class="viz"><span class="viztitle">Visual 1 · Span explorer</span> \(a,b\) are your candidate basis; the green arrow is \(w=s\,a+t\,b\).
+<div class="controls">
+<label>aₓ <input id="spanAx" type="number" value="2" step="0.5"/></label><label>aᵧ <input id="spanAy" type="number" value="1" step="0.5"/></label>
+<label>bₓ <input id="spanBx" type="number" value="-1" step="0.5"/></label><label>bᵧ <input id="spanBy" type="number" value="2" step="0.5"/></label>
+<label>s <input id="spanS" type="number" value="1" step="0.25"/></label><label>t <input id="spanT" type="number" value="0.5" step="0.25"/></label>
+</div>
+<canvas id="spanCanvas"></canvas>
+<div class="kv muted" id="spanOut"></div>
+<div class="muted"><b>Two experiments:</b>
+<ul>
+<li><b>Set \(b=(4,2)=2a\)</b> → the plane-shading vanishes and \(w\) is locked to a line: span collapsed from \(\mathbb{R}^2\) to \(\mathbb{R}^1\), exactly what a singular matrix does.</li>
+<li><b>Leave \(a,b\) generic</b>, pick any target \(w\) you like, and hunt for \((s,t)\) by trial. There's always exactly one answer <i>because</i> independence = "unique coordinates."</li>
+</ul></div>
+</div>
+<div class="viz"><span class="viztitle">Visual 2 · Gram–Schmidt machine</span> v₁, v₂ as you type; the grey dashed arrow is the projection being subtracted; the purple arrow is the orthogonal leftover.
+<div class="controls">
+<label>v₁ₓ <input id="gsAx" type="number" value="3" step="0.5"/></label><label>v₁ᵧ <input id="gsAy" type="number" value="1" step="0.5"/></label>
+<label>v₂ₓ <input id="gsBx" type="number" value="1" step="0.5"/></label><label>v₂ᵧ <input id="gsBy" type="number" value="3" step="0.5"/></label>
+</div>
+<canvas id="gsCanvas"></canvas>
+<div class="kv muted" id="gsOut"></div>
+<div class="muted">Drag the inputs and watch the printed dot product u₁·u₂ stay pinned at 0, the construction <i>guarantees</i> orthogonality, which is the entire proof (dot \(v_2-\mathrm{proj}\) against \(u_1\)).</div>
+</div>
+
+<h3 id="v-ex">6. Worked examples <a class="anchor" href="#v-ex">#</a></h3>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>Four problems, each carried all the way to a finished answer: <b>is it a subspace?</b>, <b>are these vectors independent?</b>, <b>straighten a basis</b>, and <b>find every solution of \(Ax=0\)</b>. Open them one at a time and check every line yourself — the arithmetic is deliberately unhurried, because on an exam the arithmetic is where the marks are won or lost.</p></div>
+<details open><summary>Example 1 · subspace triage (three sets, one-line verdicts)</summary>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>Three sets, one question: is it a vector space? Run the three-part subspace test on each — and watch how fast the very first check (does it contain the origin?) kills the second one outright.</p></div>
+<ul>
+<li><b>\(S=\{(x,y):y=2x\}\)</b>: \(0\in S\); \(c_1(x_1,2x_1)+c_2(x_2,2x_2)=(c_1x_1+c_2x_2,\;2(c_1x_1+c_2x_2))\in S\). ✔ subspace (a line through the origin; basis \(\{(1,2)\}\), dim 1).</li>
+<li><b>\(S'=\{(x,y):y=2x+1\}\)</b>: \((0,0)\notin S'\). ✘ not a subspace; it's a <span class="term" data-tip="A subspace that has been slid sideways off the origin. Adding two cosets never gets you back to one, which is exactly why shifted lines fail the test.">coset</span> of one (an affine line, parallel to a subspace but shifted).</li>
+<li><b>\(S''=\{p\in P_2 : p(3)=0\}\)</b>: evaluation at 3 is a linear functional, so its kernel is a subspace ✔. By the factor theorem every such \(p\) is \((x-3)(a+bx)\), so a basis is \(\{x-3,(x-3)^2\}\), dim 2, <i>not</i> 3: one condition = one lost dimension. (Same bookkeeping as rank–nullity: the map \(p\mapsto p(3)\) has rank 1, nullity \(\dim P_2-1=2\).)</li>
+</ul></details>
+<details><summary>Example 2 · independence via rank (with the elimination written out)</summary>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>Stack three vectors as columns, row-reduce, and count the pivots. Three pivots means nobody is redundant, so they're independent.</p></div>
+<p>Are \(v_1=(1,2,1),\;v_2=(2,5,3),\;v_3=(1,1,-1)\) independent? Stack and eliminate:
+\(\begin{bmatrix}1&2&1\\2&5&3\\1&1&-1\end{bmatrix}\xrightarrow{R_2-2R_1,\;R_3-R_1}\begin{bmatrix}1&2&1\\0&1&1\\0&-1&-2\end{bmatrix}\xrightarrow{R_3+R_2}\begin{bmatrix}1&2&1\\0&1&1\\0&0&-1\end{bmatrix}\).
+Three pivots → rank 3 → independent → a basis of \(\mathbb{R}^3\). Had the last row become all-zero, they'd span a plane and one vector would be a combination of the others. Side note: the elimination shows \(\det=\) product of pivots \(=-1\neq0\), the §2 "equivalence chain" in a single computation.</p></details>
+<details><summary>Example 3 · Gram–Schmidt with real numbers, then use it</summary>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>The same machine as Visual 2, done with actual arithmetic instead of symbols. Then look at what fell out: a 45° rotation. Worth doing by hand once, because after this you never have to wonder about the signs again.</p></div>
+<p>\(v_1=(1,1),\;v_2=(0,2)\). \(u_1=v_1\). \(u_2=v_2-\frac{v_2\cdot u_1}{u_1\cdot u_1}u_1=(0,2)-\frac{2}{2}(1,1)=(-1,1)\). Check \(u_1\cdot u_2=-1+1=0\) ✔. Normalize: \(e_1=(\tfrac1{\sqrt2},\tfrac1{\sqrt2}),\;e_2=(-\tfrac1{\sqrt2},\tfrac1{\sqrt2})\). The matrix \(Q=[e_1\;e_2]=\tfrac1{\sqrt2}\begin{bmatrix}1&-1\\1&1\end{bmatrix}\) satisfies \(Q^TQ=I\). It's a <b>rotation by 45°</b>. Orthonormal bases are exactly "coordinate systems related by rotations/reflections": which is the reason SVD's \(U,V\) (orthogonal columns) can be read as pure rotations in §5's morph.</p></details>
+<details><summary>Example 4 · a full null-space computation (the workhorse of the chapter)</summary>
+<div class="eli5"><span class="lbl">In plain words</span>
+<p>The one calculation this chapter exists for. Reduce the matrix, spot the free variables, then write one clean vector per free variable with the pivot entries filled in to match. The same pattern — pivot columns for one space, special solutions for the other — returns in nearly every later chapter.</p></div>
+<p>\(A=\begin{bmatrix}1&2&0&3\\2&4&1&7\\1&2&1&4\end{bmatrix}\xrightarrow{R_2-2R_1,\,R_3-R_1}\begin{bmatrix}1&2&0&3\\0&0&1&1\\0&0&1&1\end{bmatrix}\xrightarrow{R_3-R_2}\begin{bmatrix}1&2&0&3\\0&0&1&1\\0&0&0&0\end{bmatrix}\). Pivots in columns 1 and 3; free variables \(x_2,x_4\). Solve for pivots: \(x_1=-2x_2-3x_4,\;x_3=-x_4\). So
+\[ N(A)=\mathrm{span}\left\{\begin{bmatrix}-2\\1\\0\\0\end{bmatrix},\begin{bmatrix}-3\\0\\-1\\1\end{bmatrix}\right\} \]
+Read it: "every solution is exactly a combination of these two, nothing else." Rank 2 + nullity 2 = 4 = n ✔. The same pattern, pivot columns give the basis of the column space, special solutions give the null space, is the whole answer to "describe all solutions of \(Ax=0\)." In §6 it will be re-skinned as "the homogeneous solution of an ODE," in §8 as "the free response."</p></details>
+<div class="warnbox"><b>Pitfalls.</b>
+<ul>
+<li>"Closed under \(+\) and scalar mult." must hold for <i>all</i> real scalars: the first quadrant is closed under \(+\) and positive scaling but fails at \(c=-1\).</li>
+<li>The pivot <b>columns of \(A\) itself</b> form the column-space basis; the nonzero rows of \(U\) span the row space. Don't mix the two.</li>
+<li>\(\dim P_n=n+1\) — the constant term is a dimension.</li>
+<li>A spanning set that's too big isn't "wrong," it's just dependent: independence is about minimality, spanning about adequacy.</li>
+</ul></div>
+
+<h4>Videos &amp; reading</h4>
+<div class="vidrow">
+<div class="vid" data-yt="fNk_zzaMoSs" tabindex="0" role="button" aria-label="Play: Vectors, 3Blue1Brown"><img src="https://i.ytimg.com/vi/fNk_zzaMoSs/hqdefault.jpg" alt="3Blue1Brown · Vectors" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Vectors | Essence of Linear Algebra ch.1 (~9 min)</div></div>
+<div class="vid" data-yt="k7RM-ot2NWY" tabindex="0" role="button" aria-label="Play: Span and basis"><img src="https://i.ytimg.com/vi/k7RM-ot2NWY/hqdefault.jpg" alt="3Blue1Brown · Span, linear combinations and basis" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Span, linear combinations and basis, ch.2</div></div>
+</div>
+<p class="muted">Text refs: Strang, <a href="https://math.mit.edu/~gs/books/books.html" target="_blank" rel="noopener"><i>Introduction to Linear Algebra</i></a> ch.2–3 · 3Blue1Brown, <a href="http://3b1b.co/eola" target="_blank" rel="noopener">Essence of Linear Algebra</a> (abstract-vector-space chapter) · MIT OCW <a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank" rel="noopener">18.06</a> lec 1–10 (esp. Lec 6–9: the four subspaces) · MacTutor, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Grassmann.html" target="_blank" rel="noopener">Grassmann biography</a>.</p>
+<div class="chapnav"><a href="#map">← 0 · Orientation</a><a class="nx" href="#matrices">Next: 2 · Matrices &amp; determinants →</a></div>
+</section>
+<!-- ============================== 2 ============================== -->
+<section class="card" id="matrices">
+<h2><span class="chno">02</span>Matrices &amp; determinants</h2>
+<div class="meta"><span class="pill">core</span><span class="pill">⏱ 30 min</span><span class="pill">prereq: §1</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#m-mult">Multiplication is composition</a></li>
+<li><a href="#m-elim">Elimination, rank, and LU</a></li>
+<li><a href="#m-inv">Invertibility: the equivalence chain</a></li>
+<li><a href="#m-det">Determinants as signed volume</a></li>
+<li><a href="#m-viz">Visual 3 · matrix as deformation</a></li>
+<li><a href="#m-ex">Worked examples + numpy</a></li></ol></div>
+
+<div class="hist"><b>History.</b> The <i>Nine Chapters</i> (~200 AD) already ran elimination on rectangular arrays of coefficients. "matrices" used for 1600 years before anyone named one. Leibniz (1693) and Cramer (1750) played with determinants; <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Cayley/" target="_blank" rel="noopener">Cayley</a> (1858, <i>A Memoir on the Theory of Matrices</i>) was the first to treat the array as <i>an object that you multiply, invert, and equate</i>. "a matrix is not a determinant," he insisted, "but they are closely connected"; Sylvester coined both words. The computational turn is 1930s–40s von Neumann &amp; Turing: a machine, unlike a human, cannot <i>see</i> that a system is nearly singular, so we had to make that perception numerical, hence LU, pivoting strategies, and conditioning/error analysis.</div>
+
+<h3 id="m-mult">1. Multiplication is composition <a class="anchor" href="#m-mult">#</a></h3>
+<p>\((AB)_{ij} = (\text{row } i \text{ of } A)\cdot(\text{col } j \text{ of } B)\). The ugly-looking rule has one meaning: <b>\(AB\) is the single matrix that does B's map, then A's</b>. If \(y=Bx\) and \(z=Ay\) then \(z=(AB)x\). That's why products are generally non-commutative: socks-then-shoes ≠ shoes-then-socks. Consequences you'll use constantly:
+\[ (AB)^T=B^TA^T,\qquad (AB)^{-1}=B^{-1}A^{-1} \]
+(both reverse order, the "undo in reverse" logic: take off socks before shoes). <b>Column view:</b> column \(j\) of \(AB\) equals \(A\cdot(\text{col } j\text{ of }B)\), a matrix product is just matrix–vector products lined up side by side. That view is also why BLAS parallelizes products so well and why, in §5, \(AP=PD\) is the entire proof of diagonalization in one symbol.</p>
+
+<h3 id="m-elim">2. Elimination, rank, and LU <a class="anchor" href="#m-elim">#</a></h3>
+<p>Gaussian elimination = multiplying on the left by elementary matrices that zero entries below pivots: \(E_{31}E_{32}E_{21}A=U\). Undo those operations in the right order and their multipliers reassemble (with flipped signs) into a lower-triangular matrix: \(\boxed{A=LU}\).</p>
+<div class="note"><b>Why factor instead of just solving:</b> one \(O(n^3)\) factorization buys infinitely many \(O(n^2)\) solves \(Ly=b,\;Ux=y\), for <i>different</i> right-hand sides. Graphics: one projection factorization, a million vertices per frame. Physics: one stiffness factorization per timestep, many load cases. Control: one system matrix, many inputs. "Factor once, solve many" is the structural idea behind every linear solver you'll ever call, and it's why LU, not Cramer's rule, is what <code>numpy.linalg.solve</code> runs inside.</div>
+<p><b>Solution trichotomy</b> for \(Ax=b\): a pivot ever appears in the augmented column (a row reducing to \(0=5\)) → <b>no solution</b>; no pivot there and no free columns → <b>unique</b>; free columns → <b>infinitely many</b>. The complete-solution shape:
+\[ x=x_p+c_1n_1+\dots \quad(\text{particular solution} + \text{anything in the null space}) \]
+This "particular + homogeneous" structure is the exact twin of \(y=y_h+y_p\) for ODEs (§6) and of \(Y=Y_{\text{zero-input}}+Y_{\text{zero-state}}\) (§8), all three are one theorem: solutions of a linear equation form an affine coset of the null space of the linear operator involved.</p>
+
+<h3 id="m-inv">3. Invertibility: the equivalence chain <a class="anchor" href="#m-inv">#</a></h3>
+<p>For a square \(A\), these are all equivalent: memorize the whole chain, because exams test the arrows between any two of them:
+\[ \begin{aligned} \det A\neq0 &\iff A^{-1}\text{ exists} \iff \mathrm{rank}A=n \iff N(A)=\{0\} \\[3pt] &\iff \text{cols independent} \iff \text{cols span } \mathbb{R}^n \iff 0 \text{ is not an eigenvalue} \\[3pt] &\iff Ax=b \text{ has a unique solution for every } b \iff A \text{ is a product of elementary matrices} \end{aligned} \]
+The 2×2 shortcut (and only for 2×2, it's a favorite wrong-tool temptation on bigger sizes):
+\[ \begin{bmatrix}a&b\\c&d\end{bmatrix}^{-1}=\frac1{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix} \]</p>
+
+<h3 id="m-det">4. Determinants as signed volume <a class="anchor" href="#m-det">#</a></h3>
+<p><b>Definition by properties</b> (the honest way, the axioms <i>are</i> the intuition): a function \(D\) of the rows with \(D(I)=1\); swapping two rows negates \(D\); \(D\) is linear in each row separately. Everything else is derived: two equal rows → \(D=0\); "add a multiple of one row to another" leaves \(D\) unchanged (so elimination preserves it!); triangular → product of the diagonal. That last item is how you actually compute: row-reduce to \(U\), multiply the pivots, times \((-1)^{\#\text{row swaps}}\).</p>
+<p><b>Geometry:</b> \(\det\) is the signed factor by which the map scales \(n\)-dimensional volume. 2×2: area of the image of the unit square (Visual 3 shows this directly); 3×3: the parallelepiped built on the three columns. The sign records orientation (a mirror has negative det). Then \(\det(AB)=\det A\det B\) is obvious, composing two scalings multiplies the factors, and \(\det A=0\) ⇔ volume crushed to zero ⇔ not invertible: all three views are the same fact.</p>
+<p>Cofactor expansion \(\det A=\sum_j(-1)^{i+j}a_{ij}M_{ij}\) is the exam tool for 3×3 (expand along the row/column with the most zeros, that's the entire "technique") and \(O(n!)\) in general; nobody computes real determinants that way. The identities \(\det A=\prod\lambda_i\) and \(\mathrm{tr}\,A=\sum\lambda_i\) (§4 proves them) give instant sanity checks: computed three eigenvalues whose sum misses the trace? One of them is wrong.</p>
+
+<h3 id="m-viz">5. Visual 3 · the matrix as a deformation <a class="anchor" href="#m-viz">#</a></h3>
+<div class="viz"><span class="viztitle">Visual 3 · Deformation of space</span> The dashed unit square becomes the blue parallelogram; green/pink arrows are the images of \(e_1,e_2\), literally the <b>columns of the matrix</b>. The gold/green dashed lines are eigenvector directions (when real), a preview of §4.
+<div class="controls">
+<label>a <input id="mA" type="number" value="2" step="0.25"/></label><label>b <input id="mB" type="number" value="1" step="0.25"/></label>
+<label>c <input id="mC" type="number" value="0" step="0.25"/></label><label>d <input id="mD" type="number" value="1.5" step="0.25"/></label>
+<button data-preset="1,0,0,1">Identity</button><button data-preset="0,-1,1,0" class="ghost">Rotate 90°</button><button data-preset="1,1,0,1" class="ghost">Shear</button><button data-preset="1,0,0,0" class="ghost">Project</button><button data-preset="-1,0,0,-1" class="ghost">Mirror (det&lt;0)</button><button data-preset="4,1,2,3" class="ghost">Eigen Ex A</button><button data-preset="3,1,1,2" class="ghost">Symmetric</button>
+</div>
+<canvas id="matCanvas"></canvas>
+<div class="kv muted" id="matDet"></div><div class="kv muted" id="eigenOut"></div>
+<div class="muted"><b>Guided tour:</b> <b>Shear</b> keeps det=1, equal areas, yet visibly distorts: area is not the only thing a matrix does (§1's "behavior like arrows" is not "behavior like the identity"). <b>Project</b>: det=0 and the square collapses to a segment, the null space has dimension 1, right on screen. <b>Mirror</b>: |det|=1 but negative, same area, flipped handedness. <b>Rotate</b>: the readout reports complex eigenvalues, no direction survives a 90° turn. <b>Symmetric</b>: the two eigen-lines land perpendicular, spectral theorem, §4.</div>
+</div>
+
+<h3 id="m-ex">6. Worked examples + numpy <a class="anchor" href="#m-ex">#</a></h3>
+<details open><summary>Example 1 · solve, invert, and read geometry from one matrix</summary>
+<p>\(A=\begin{bmatrix}4&1\\2&3\end{bmatrix}\): \(\det=4\cdot3-1\cdot2=10\), \(\mathrm{tr}=7\). \(A^{-1}=\frac1{10}\begin{bmatrix}3&-1\\-2&4\end{bmatrix}\), verify one entry: row 1 of A · col 1 of \(A^{-1}\) \(=\frac{12-2}{10}=1\) ✔. The unit square maps to a parallelogram of area 10 (check with Visual 3: columns (4,2) and (1,3) do enclose 10). Contrast \(P=\begin{bmatrix}1&0\\0&0\end{bmatrix}\): det 0, image = a segment, \(N(P)=\mathrm{span}\{e_2\}\), \(C(P)=\mathrm{span}\{e_1\}\), all four fundamental subspaces visible from memory.</p></details>
+<details><summary>Example 2 · 3×3 elimination, LU, and det: one pass, three prizes</summary>
+<p>\(A=\begin{bmatrix}2&1&1\\4&3&3\\8&7&9\end{bmatrix}\). \(R_2-2R_1\), \(R_3-4R_1\): \(\begin{bmatrix}2&1&1\\0&1&1\\0&3&5\end{bmatrix}\). Then \(R_3-3R_2\): \(U=\begin{bmatrix}2&1&1\\0&1&1\\0&0&2\end{bmatrix}\). Pivots 2,1,2 ⇒ rank 3, \(\det=2\cdot1\cdot2=4\). The multipliers 2,4,3 go into L (signs already correct since we subtracted them): \(L=\begin{bmatrix}1&0&0\\2&1&0\\4&3&1\end{bmatrix}\). Verify one entry: \((LU)_{32}=4\cdot1+3\cdot1=7\) ✔. Every row-reduction you do by hand this semester is secretly producing an LU, the "wasted" bookkeeping <i>is</i> the factorization.</p></details>
+<details><summary>Example 3 · Cramer's rule: why it's beautiful and why it's dead</summary>
+<p>For \(A=\begin{bmatrix}2&1\\1&3\end{bmatrix},\;b=(3,4)\): \(\det A=5\), \(x_1=\frac{\det\begin{bmatrix}3&1\\4&3\end{bmatrix}}{5}=\frac{9-4}{5}=1\), \(x_2=\frac{\det\begin{bmatrix}2&3\\1&4\end{bmatrix}}{5}=\frac{8-3}{5}=1\). Elegant! But Cramer needs \(n+1\) determinants, each \(O(n!)\) by cofactor expansion: for a 10,000×10,000 system, more arithmetic than the sun will ever run. Elimination is \(O(n^3)\) <i>total</i>. <b>Rule of thumb: Cramer for proofs and \(n\le3\); elimination for everything else.</b> (Cramer survives in textbooks because it's a clean formula, and in GPU shaders never at all.)</p></details>
+<details><summary>Example 4 · determinant properties as a computation shortcut</summary>
+<p>Given \(\det\begin{bmatrix}a&b\\c&d\end{bmatrix}=6\), find \(\det\begin{bmatrix}2a&2b\\c+3a&d+3b\end{bmatrix}\) without ever seeing the entries. "Add 3×row 1 to row 2" doesn't change det; scaling row 1 by 2 doubles it. Answer: 12. This is the entire genre of "det properties" exam questions: reduce to a known matrix using the three rules and keep score.</p></details>
+<pre class="codeblock"><div class="cbhead"><span>demo_matrices.py · numpy: solve, det, rank, and why you never call inv()</span><button class="cbcopy">Copy</button></div><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+
+A = np.array([[<span class="tok-num">4.</span>, <span class="tok-num">1.</span>], [<span class="tok-num">2.</span>, <span class="tok-num">3.</span>]])     <span class="tok-com"># Example 1</span>
+b = np.array([<span class="tok-num">1.</span>, <span class="tok-num">2.</span>])
+
+<span class="tok-fn">print</span>(<span class="tok-str">"det      ="</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">det</span>(A))            <span class="tok-com"># 10.0  (Ex 1 by hand: 10 ✔)</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"solve    ="</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">solve</span>(A, b))        <span class="tok-com"># LU inside: one factorization,</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"inv @ b  ="</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">inv</span>(A) @ b)         <span class="tok-com"># same answer — but solve is</span>
+                                              <span class="tok-com"># faster AND more stable. Never inv().</span>
+
+<span class="tok-com"># "nearly singular" made numerical: condition number</span>
+S = np.array([[<span class="tok-num">1.</span>, <span class="tok-num">1.</span>], [<span class="tok-num">1.</span>, <span class="tok-num">1.</span>+<span class="tok-num">1e-10</span>]])
+<span class="tok-fn">print</span>(<span class="tok-str">"det looks fine:"</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">det</span>(S), <span class="tok-str">"| but kappa ="</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">cond</span>(S))
+<span class="tok-com"># det = 1e-10 — nonzero! Yet kappa=1e10: the matrix "almost" has a null space.</span>
+<span class="tok-com"># Expect ~10 of your ~16 digits of accuracy to evaporate. This is Turing's point:</span>
+<span class="tok-com"># singularity is not binary — it's a continuum, and conditioning measures it.</span>
+
+<span class="tok-com"># rank &amp; the four subspaces, from the SVD (preview §5): tiny sigma = crushed direction</span>
+M = np.array([[<span class="tok-num">2.</span>,<span class="tok-num">4.</span>],[<span class="tok-num">1.</span>,<span class="tok-num">2.</span>]])
+<span class="tok-fn">print</span>(<span class="tok-str">"rank:"</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">matrix_rank</span>(M), <span class="tok-str">"sigma:"</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">svd</span>(M, compute_uv=<span class="tok-kw">False</span>))
+<span class="tok-com"># rank 1, sigmas ≈ [5, 0] — the 0 IS det=0 seen from the volume side.</span></code></pre>
+<div class="use"><b>CS uses.</b> Graphics: the entire pipeline is chained matrices (§3, §10A). Graphs: \((A^k)_{ij}\) of an adjacency matrix counts walks of length \(k\) from i to j (two-line induction), so \(A^2_{ij}\) counts common neighbours: the seed of link analysis (§4) and of every random-walk centrality. ML: least squares \(A^TAx=A^Tb\) = projecting \(b\) onto \(C(A)\), a regression fit <i>is</i> a column-space computation (§1's "why they're the same"). Robotics/CV: the Jacobian \(J\) linearizes a nonlinear sensor or arm map; \(\\det J\to0\) = kinematic singularity = "the arm cannot move that way," detected numerically as exactly what Example's cond() prints.</div>
+<div class="warnbox"><b>Pitfalls.</b> (1) \(AB=0\) with both nonzero is legal (project, then feed into the other's kernel). You cannot <i>cancel</i> matrices without an inverse. (2) \((A+B)^2\neq A^2+2AB+B^2\) unless \(AB=BA\). (3) Negative det ≠ shrinkage: |det| is the size factor, the sign is mirroring. (4) Never compute \(A^{-1}\) to solve: \(x=A^{-1}b\) is slower and less stable than solve, and if you find yourself writing <code>inv()</code> in production: that's the tell.</div>
+<h4>Videos &amp; reading</h4>
+<div class="vidrow">
+<div class="vid" data-yt="XkY2DOUCWMU" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/XkY2DOUCWMU/hqdefault.jpg" alt="3Blue1Brown · Linear transformations and matrices" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Linear transformations and matrices, ch.3 (watch before §3 too)</div></div>
+<div class="vid" data-yt="kYB8IZa5AuE" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/kYB8IZa5AuE/hqdefault.jpg" alt="3Blue1Brown · Linear transformations and matrices" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Linear transformations and matrices, ch.3 (the "read the columns" view)</div></div>
+</div>
+<p class="muted">Refs: Strang ch.2–3 (elimination, LU) · Lay ch.1–2 · MIT 18.06 lec 11–16 · Trefethen &amp; Bau, <i>Numerical Linear Algebra</i> lec 20–22 for conditioning, the "why floats matter" sequel to this chapter.</p>
+<div class="chapnav"><a href="#vectors">← 1 · Vector spaces</a><a class="nx" href="#lintrans">Next: 3 · Linear transformations →</a></div>
+</section>
+
+<!-- ============================== 3 ============================== -->
+<section class="card" id="lintrans">
+<h2><span class="chno">03</span>Linear transformations</h2>
+<div class="meta"><span class="pill">core</span><span class="pill">⏱ 20 min</span><span class="pill">prereq: §1–§2</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#t-def">Definition; kernel, range, rank–nullity</a></li>
+<li><a href="#t-matrix">The matrix of a transformation</a></li>
+<li><a href="#t-basis">Change of basis and similarity</a></li>
+<li><a href="#t-ex">Worked examples + numpy</a></li></ol></div>
+
+<div class="hist"><b>History.</b> Once Cayley had matrix <i>objects</i>, the geometric reading, rotations, reflections, projections, even differentiation, all as linear maps, unified algebra and geometry. Klein's 1872 Erlangen program went further: a geometry <i>is</i> the set of invariants of a chosen transformation group (Euclidean = invariants of rotations+translations; projective = invariants of a bigger group; "shape" is whatever your group forgets to change). Functional analysis then treated \(d/dt\) and \(\int\) themselves as linear operators on function spaces, the direct bridge to §6–§9, and the reason this chapter sits exactly here. Every "transformation matrix" in a game engine is one of Klein's groups, compiled into 4×4 floats.</div>
+
+<h3 id="t-def">1. Definition; kernel, range, rank–nullity <a class="anchor" href="#t-def">#</a></h3>
+<p>\(T:V\to W\) is linear \(\iff\) \(T(u+v)=T(u)+T(v)\) and \(T(cv)=cT(v)\). Instant corollaries: \(T(0)=0\) (origin fixed, the fastest disproof for any map that moves it, like translation), and linear maps send lines to lines (or crush them to points): the grid stays parallel and evenly spaced. Visual 3 is literally that sentence.</p>
+<ul>
+<li><b>Kernel</b> (null space) \(\ker T=\{v:T(v)=0\}\), everything that collapses. A subspace of \(V\). \(T\) injective \(\iff\ker T=\{0\}\).</li>
+<li><b>Image/range</b> \(\mathrm{im}\,T=\{T(v):v\in V\}\), everything reachable. A subspace of \(W\). \(T\) surjective \(\iff \mathrm{im}\,T=W\).</li>
+<li><b>Rank–nullity:</b> \(\dim\ker T+\dim\mathrm{im}\,T=\dim V\).</li>
+</ul>
+<div class="note"><b>One-paragraph proof worth memorizing (it generalizes everywhere):</b> take a basis of \(\ker T\), extend it to a basis of \(V\). The kernel part maps to 0; the extension vectors have linearly independent images (any dependence would hide another kernel vector in the combination). So \(\dim V\) splits exactly into "dimensions that died" + "dimensions that landed independently." Read again in §6: for an ODE, \(\ker\) = homogeneous solutions, \(\mathrm{im}\) = the functions you can produce by forcing, rank–nullity becomes "solution space dim = order of the equation." Same map, three costumes.</div>
+
+<h3 id="t-matrix">2. The matrix of a transformation <a class="anchor" href="#t-matrix">#</a></h3>
+<p>Fix bases and every linear map \(T:\mathbb{R}^n\to\mathbb{R}^m\) <b>is</b> a matrix: the matrix has as its \(j\)-th column the image of the \(j\)-th basis vector:
+\[ [T]=\begin{bmatrix}T(e_1)&\cdots&T(e_n)\end{bmatrix} \]
+"Linear transformation" and "matrix" are one chapter: the abstract object and its number-table <i>in chosen coordinates</i>. Standard 2-D recipes:
+\[ \text{Rot}_\theta=\begin{bmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{bmatrix}\quad \text{Ref}_{x}=\begin{bmatrix}1&0\\0&-1\end{bmatrix}\quad \text{Proj}_{x}=\begin{bmatrix}1&0\\0&0\end{bmatrix}\quad \text{Scale}=\begin{bmatrix}s_x&0\\0&s_y\end{bmatrix} \]
+<b>Derive the rotation yourself</b> (rule of thumb: never accept a formula on authority): where does \(e_1=(1,0)\) go? Straight to \((\cos\theta,\sin\theta)\), column 1. Where does \(e_2=(0,1)\)? The right triangle says \((-\sin\theta,\cos\theta)\), column 2. Done. The signs are now yours forever, and you've just performed the single most useful trick of the chapter: <i>read the columns from the geometry.</i></p>
+
+<h3 id="t-basis">3. Change of basis and similarity <a class="anchor" href="#t-basis">#</a></h3>
+<p>Same map, new coordinates. If \(P\) is the matrix whose columns are the new basis vectors (so \(P\) converts new-coordinates → old-coordinates), then the matrix of the same transformation in the new basis is
+\[ B=P^{-1}AP \qquad(\text{read right-to-left: into P-coords, act with A, back out}) \]
+and \(A,B\) are <b>similar</b>. Similar matrices share <b>everything coordinate-free</b>: determinant, trace, rank, eigenvalues, characteristic polynomial; they differ only in the <i>number-tuples of the eigenvectors</i>. §5's entire job is: <b>choose \(P\) so that \(B\) is diagonal</b>. This paragraph is the central argument of the whole review, stated plainly, if similarity makes sense to you, diagonalization is just "the most extreme legal change of coordinates," not a trick.</p>
+
+<h3 id="t-ex">4. Worked examples + numpy <a class="anchor" href="#t-ex">#</a></h3>
+<details open><summary>Example 1 · matrix from images of a NON-standard basis</summary>
+<p>\(T:\mathbb{R}^2\to\mathbb{R}^2\) sends \(v_1=(1,1)\mapsto(3,1)\) and \(v_2=(1,-1)\mapsto(1,-3)\), no standard-basis info given. Recover it by linearity: \(e_1=\frac{v_1+v_2}2\Rightarrow T(e_1)=\frac{(3,1)+(1,-3)}2=(2,-1)\); \(e_2=\frac{v_1-v_2}2\Rightarrow T(e_2)=\frac{(3,1)-(1,-3)}2=(1,2)\). So \([T]=\begin{bmatrix}2&1\\-1&2\end{bmatrix}\), det 5, eigenvalues \(2\pm i\): rotation+stretch by \(\sqrt5\), as §4 will confirm. The "images of a basis" problem <i>is</i> the eigenvector-verification problem run in reverse; one tool, both directions.</p></details>
+<details><summary>Example 2 · differentiation IS a matrix (and a nilpotent one)</summary>
+<p>\(T:P_3\to P_2,\;T(p)=p'\). Linear: \((cp+dq)'=cp'+dq'\) ✔. \(\ker T=\) constants (dim 1); \(\mathrm{im}\,T=P_2\) (dim 3); rank–nullity: \(1+3=4\) ✔. In the basis \(\{1,x,x^2,x^3\}\): \([T]=\begin{bmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\end{bmatrix}\) (columns = derivatives of basis elements). Differentiation is a 3×4 matrix. Now the sentence that unlocks §6: the eigen<i>functions</i> of \(\frac{d}{dt}\) on <i>functions</i> are \(e^{rt}\), because \(\frac{d}{dt}e^{rt}=re^{rt}\) is literally \(Av=\lambda v\) with \(A=\frac{d}{dt}\). The "characteristic equation" of an ODE is the characteristic polynomial of a linear operator, wearing a disguise.</p></details>
+<details><summary>Example 3 · similarity, by hand: diagonalizing before you're told to</summary>
+<p>Let \(A=\begin{bmatrix}2&1\\1&2\end{bmatrix}\) and use the "45° basis" \(P=\begin{bmatrix}1&1\\1&-1\end{bmatrix}\) (vectors \((1,1),(1,-1)\)). Then \(P^{-1}=\frac12\begin{bmatrix}1&1\\1&-1\end{bmatrix}\) and
+\[ P^{-1}AP=\begin{bmatrix}3&0\\0&1\end{bmatrix} \]
+Same map, stretch ×3 along \((1,1)\), ×1 along \((1,-1)\), zero mixing, finally visible. You have diagonalized a matrix before Chapter 5 told you that was allowed. (Those directions are of course its eigenvectors, see you in §4.) Sanity: det \(=3\) both sides ✔, tr \(=4\) both ✔, the invariants.</p></details>
+<details><summary>Example 4 · homogeneous coordinates: making the non-linear linear (§10A's seed)</summary>
+<p>\(T(x,y)=(x+2,y)\), translation, fails linearity (\(T(0)\neq0\)). But in 3-D with an appended 1:
+\[ \begin{bmatrix}x'\\y'\\1\end{bmatrix}=\begin{bmatrix}1&0&2\\0&1&0\\0&0&1\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix} \]
+which <i>is</i> linear, the §1 trick in action: <b>extend the space until the troublesome operation becomes linear</b>. Every engine transform is a 4×4 of this form; rotations+translations+perspective compose into one matrix because the extra dimension made the group linear.</p></details>
+<pre class="codeblock"><div class="cbhead"><span>demo_transforms.py · build maps from images, compose, and change basis</span><button class="cbcopy">Copy</button></div><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+
+th = np.<span class="tok-fn">pi</span>/<span class="tok-num">4</span>
+R = np.array([[np.<span class="tok-fn">cos</span>(th), -np.<span class="tok-fn">sin</span>(th)],      <span class="tok-com"># rotation 45°, built the honest way:</span>
+              [np.<span class="tok-fn">sin</span>(th),  np.<span class="tok-fn">cos</span>(th)]])     <span class="tok-com"># col1 = where e1 goes, col2 = e2</span>
+
+<span class="tok-fn">print</span>(<span class="tok-str">"e1 -&gt;"</span>, R @ np.array([<span class="tok-num">1.</span>,<span class="tok-num">0.</span>]))       <span class="tok-com"># [0.707 0.707] — read the first column ✔</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"R@R (90°):"</span>, R @ R)                     <span class="tok-com"># composition = multiplication ✔</span>
+
+A = np.array([[<span class="tok-num">2.</span>,<span class="tok-num">1.</span>],[<span class="tok-num">1.</span>,<span class="tok-num">2.</span>]])               <span class="tok-com"># Example 3</span>
+P = np.array([[<span class="tok-num">1.</span>,<span class="tok-num">1.</span>],[<span class="tok-num">1.</span>,-<span class="tok-num">1.</span>]])
+<span class="tok-fn">print</span>(np.<span class="tok-fn">linalg</span>.<span class="tok-fn">inv</span>(P) @ A @ P)                <span class="tok-com"># [[3,0],[0,1]] — similar &rarr; diagonal</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"invariants:"</span>, np.<span class="tok-fn">linalg</span>.<span class="tok-fn">det</span>(A), A.<span class="tok-fn">trace</span>())  <span class="tok-com"># 3.0 4.0 — same as the diagonal's</span>
+
+<span class="tok-com"># homogeneous: rotate 45 then translate (2,0) — one 3x3, no piecewise code</span>
+T = np.array([[<span class="tok-num">1.</span>,<span class="tok-num">0.</span>,<span class="tok-num">2.</span>],[<span class="tok-num">0.</span>,<span class="tok-num">1.</span>,<span class="tok-num">0.</span>],[<span class="tok-num">0.</span>,<span class="tok-num">0.</span>,<span class="tok-num">1.</span>]])
+R3 = np.block([[R, np.<span class="tok-fn">array</span>([[<span class="tok-num">0.</span>],[<span class="tok-num">0.</span>]])],[[<span class="tok-num">0.</span>,<span class="tok-num">0.</span>,<span class="tok-num">1.</span>]]])
+M = T @ R3                                   <span class="tok-com"># right-to-left: rotate, then translate</span>
+<span class="tok-fn">print</span>(M @ np.array([<span class="tok-num">1.</span>,<span class="tok-num">0.</span>,<span class="tok-num">1.</span>]))              <span class="tok-com"># [2.707  0.707  1. ]</span></code></pre>
+<div class="use"><b>CS uses.</b> Game/graphics engines chain model→view→projection via exactly these matrices; the perspective divide is a projective transform in 4×4 homogeneous form. Color matrices (RGB↔YCbCr, the first operation of every JPEG encoder) are ordinary change-of-basis. PCA projects data onto new axes: §3.3's similarity, applied to a covariance matrix (§4–5). And a neural network layer's pre-activation \(Wx+b\) is a linear map + translation, the nonlinearity is bolted on afterwards precisely <i>because</i> composing only linear maps would collapse to one matrix (do the thought exercise for two layers: \((W_2(W_1x))=(W_2W_1)x\)), the chapter's most practical corollary.</div>
+<div class="warnbox"><b>Pitfalls.</b> (1) Translation isn't linear (moves the origin), so it is <i>affine</i>; fix with homogeneous coordinates, never by pretending. (2) Read \(P^{-1}AP\) strictly right-to-left; writing \(APP^{-1}\) is the #1 similarity slip. (3) The same vector has different coordinate lists in different bases: \(x\) vs \(P^{-1}x\). Confusing the vector with its coordinates is the underlying cause of most §5 confusion, the map is the invariant, the matrix is a snapshot.</div>
+<div class="vidrow">
+<div class="vid" data-yt="k7RM-ot2NWY" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/k7RM-ot2NWY/hqdefault.jpg" alt="3B1B · Linear combinations" loading="lazy"/><span class="vplay"></span><div class="vcap">Re-watch ch.2 now: "linear combinations" = "compositions of linear maps" from the other side</div></div>
+<div class="vid" data-yt="XkY2DOUCWMU" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/XkY2DOUCWMU/hqdefault.jpg" alt="3Blue1Brown · Matrix multiplication as composition" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Matrix multiplication as composition, ch.4: this section's second paragraph, in video</div></div>
+</div>
+<p class="muted">Refs: 3Blue1Brown EOLA ch.3–4 · Strang ch.3.4 &amp; 5.4 (transformations, similarity) · MIT 18.06 lec 8–9, 18–20.</p>
+<div class="chapnav"><a href="#matrices">← 2 · Matrices</a><a class="nx" href="#eigen">Next: 4 · Eigenvalues →</a></div>
+</section>
+<!-- ============================== 4 ============================== -->
+<section class="card" id="eigen">
+<h2><span class="chno">04</span>Eigenvalues &amp; eigenvectors</h2>
+<div class="meta"><span class="pill">core, learn cold</span><span class="pill">⏱ 35 min</span><span class="pill">prereq: §2–§3</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#e-def">Definition, where the recipe comes from</a></li>
+<li><a href="#e-ex4">Four worked examples (real / complex / defective / triangular)</a></li>
+<li><a href="#e-table">Property table</a></li>
+<li><a href="#e-probe">Visual 4 · probe every direction at once</a></li>
+<li><a href="#e-pi">Visual 5 · power iteration</a></li>
+<li><a href="#e-pagerank">PageRank end-to-end</a></li></ol></div>
+
+<div class="hist"><b>History.</b> Euler (1740s) found that a rigid body rotates freely about special axes, <i>principal axes</i>, which are eigenvectors, a century before the word existed. Cauchy (1829) proved symmetric matrices have real eigenvalues with orthogonal eigenvectors. Hilbert and Schmidt (early 1900s) carried the theory to infinite dimensions, integral equations and then quantum mechanics, where "eigenvalue" is literally the German-English hybrid physicists kept (eigen = own, characteristic; observables are operators, and what you can measure <i>is</i> their eigenvalues, the most physically loaded math word there is). The computational era: Francis and Kublanovskaya independently found the <b>QR algorithm</b> in 1961, before it, eigenvalues of anything beyond 4×4 were essentially unobtainable by hand or machine; afterwards, "big eigenproblem" became a routine. Brin and Page (1998) spent one on the entire web.</div>
+
+<h3 id="e-def">1. Definition, and where the recipe comes from <a class="anchor" href="#e-def">#</a></h3>
+<div class="formula">\[ Av=\lambda v,\qquad v\neq 0 \]</div>
+<p>An <b>eigenvector</b> is a direction the map doesn't bend. It is only scaled by the <b>eigenvalue</b> \(\lambda\). \(\lambda\) may be 0 (the direction is crushed, a null-space direction, "eigen-ness" survives the collapse) or negative (the direction is kept but reversed). \(v=0\) is excluded by definition, else every \(\lambda\) would trivially "work" on it.</p>
+<p><b>The recipe, and its 30-second derivation</b> (so it's never magic): \(Av=\lambda v\iff(\lambda I-A)v=0\). A nonzero solution exists exactly when \(\lambda I-A\) has a nontrivial null space, i.e. is <b>singular</b>, i.e. \(\det(\lambda I-A)=0\) (§2's chain!). That determinant is a degree-\(n\) polynomial in \(\lambda\), the <b>characteristic polynomial</b>, and its roots <i>are</i> the eigenvalues by construction.</p>
+<div class="formula">\[ \textbf{Step 1: } \det(A-\lambda I)=0 \;\Rightarrow\; \lambda_1,\dots,\lambda_n \qquad \textbf{Step 2: for each } \lambda:\; (A-\lambda I)v=0 \text{ by elimination} \;\Rightarrow\; \text{eigenspace basis} \]</div>
+<div class="note"><b>For 2×2 there's a one-line shortcut</b> worth deriving once: \(\det(\lambda I-A)=\lambda^2-(\operatorname{tr}A)\lambda+\det A\), the sum of roots is the trace, the product is the determinant. So you can find eigenvalues of any 2×2 from <i>two numbers</i>, and verify in your head. Triangular matrix? The eigenvalues are the diagonal, already visible: the characteristic determinant is triangular too (skip Step 1 entirely).</div>
+<p><b>Step 3 (always):</b> multiply out \(Av\) and confirm it equals \(\lambda v\). Ten seconds; catches nearly every sign slip.</p>
+
+<h3 id="e-ex4">2. Four worked examples <a class="anchor" href="#e-ex4">#</a></h3>
+<details open><summary>Ex A · the canonical 2×2 (memorize this computation, cold): A=[[4,1],[2,3]]</summary>
+<p>\(\det\begin{bmatrix}4-\lambda&1\\2&3-\lambda\end{bmatrix}=(4-\lambda)(3-\lambda)-2=\lambda^2-7\lambda+10=(\lambda-5)(\lambda-2)\), so \(\lambda_1=5,\lambda_2=2\).<br/>
+\(\lambda=5\): \((A-5I)=\begin{bmatrix}-1&1\\2&-2\end{bmatrix}\to x=y\to v_1=\begin{bmatrix}1\\1\end{bmatrix}\). &nbsp; \(\lambda=2\): \(\begin{bmatrix}2&1\\2&1\end{bmatrix}\to y=-2x\to v_2=\begin{bmatrix}1\\-2\end{bmatrix}\).<br/>
+<b>Check:</b> \(A(1,1)^T=(5,5)=5(1,1)\) ✔, \(A(1,-2)^T=(2,-4)=2(1,-2)\) ✔. <b>Sanity:</b> \(5+2=7=\operatorname{tr}\) ✔, \(5\cdot2=10=\det\) ✔. Load "Eigen Ex A" in Visual 3 and the two dashed lines <i>are</i> these vectors, the algebra and the arrow agree, which is the point of both.</p></details>
+<details><summary>Ex B · a rotation has NO real eigenvalues: R=[[0,−1],[1,0]]</summary>
+<p>\(\lambda^2+1=0\Rightarrow\lambda=\pm i\). Geometrically instant: a 90° turn moves <i>every</i> nonzero vector off its own line, so no real eigenvector can exist. <b>"No real eigenvalues" is a correct, examinable answer</b>, and not a dead end: a complex pair \(\alpha\pm i\beta\) means <i>rotation combined with scaling</i>, because over \(\mathbb{C}\), \(e^{i\beta t}\) is a rotation by Euler's formula. §7's spirals (real trajectories that orbit while growing/decaying) and §8's complex poles (ringing in circuits) are this exact fact re-skinned. Also: \(\det=1, \operatorname{tr}=0\Rightarrow\lambda=\pm i\) from the trace/det shortcut without any determinant.</p></details>
+<details><summary>Ex C · defective, non-diagonalizable: J=[[1,1],[0,1]]</summary>
+<p>\((\lambda-1)^2=0\): one eigenvalue with <b>algebraic multiplicity 2</b>. \((J-I)=\begin{bmatrix}0&1\\0&0\end{bmatrix}\Rightarrow y=0\): the eigenspace is \(\mathrm{span}\{(1,0)\}\), <b>geometric multiplicity 1 &lt; 2</b>. One eigenvector only, so \(J\) cannot be diagonalized (§5). The geometry: J is identity + shear. It stretches nothing along either axis and bends along none; it <i>slides</i> the plane, so there's genuinely no second special direction to find. The defective test to memorize: <b>for every \(\lambda\), does \(\operatorname{rank}(A-\lambda I)=n-(\text{algebraic mult.})\) fail?</b> Here \(\operatorname{rank}(J-I)=1\) but needs to be 0. That's the whole diagnostic in a rank computation.</p></details>
+<details><summary>Ex D · a 3×3 where you should compute nothing: triangular</summary>
+<p>\(A=\begin{bmatrix}2&5&9\\0&3&7\\0&0&-1\end{bmatrix}\) is upper-triangular ⇒ \(\lambda=2,3,-1\), read, don't grind. Trace \(=4=\) sum ✔; \(\det=-6=\) product ✔. <b>Look for structure before reaching for the cubic:</b> exams hide triangles in 3×3s constantly (a column of zeros = you can expand the determinant immediately; two zeros in a row = cofactor along it).</p></details>
+
+<h3 id="e-table">3. Property table (the exam's short answer) <a class="anchor" href="#e-table">#</a></h3>
+<table><tr><th>Fact</th><th>Why it's true / when to use it</th></tr>
+<tr><td>Triangular ⇒ eigenvalues = diagonal</td><td>\(\det(\lambda I-A)\) is triangular</td></tr>
+<tr><td>\(\operatorname{tr}=\sum\lambda,\ \det=\prod\lambda\)</td><td>free sanity checks; <b>singular ⇔ 0 is an eigenvalue</b></td></tr>
+<tr><td>\(A^{-1}\): same \(v\), eigenvalue \(1/\lambda\). \(A^k\): \(\lambda^k\)</td><td>eigenvectors are the preserved directions. They survive any power; only the scalars change. Powers, Markov chains, recurrences</td></tr>
+<tr><td>\(A^T\) has the same eigenvalues (different eigenvectors)</td><td>\(\det(\lambda I-A^T)=\det((\lambda I-A)^T)=\det(\lambda I-A)\). "Left" vs "right" eigenvectors. PageRank uses both</td></tr>
+<tr><td>Distinct eigenvalues ⇒ independent eigenvectors ⇒ diagonalizable</td><td>standard induction; the quick green light for §5</td></tr>
+<tr><td><b>Spectral theorem:</b> real symmetric ⇒ all \(\lambda\in\mathbb{R}\), orthogonal eigenbasis, always diagonalizable by an <i>orthogonal</i> \(P\) (\(A=PDP^T\))</td><td>the single most-used theorem in applied linear algebra: PCA, covariance matrices, quadratic forms/optimization (Hessians), vibrations, quantum, and the foundation of SVD (§5)</td></tr>
+<tr><td>\(0\le\) geometric multiplicity \(\le\) algebraic; equality for every \(\lambda\) ⇔ diagonalizable</td><td>the Ex-C test</td></tr>
+</table>
+
+<h3 id="e-probe">4. Visual 4 · probe every direction at once <a class="anchor" href="#e-probe">#</a></h3>
+<div class="viz"><span class="viztitle">Visual 4 · The eigen probe</span> Each grey segment joins a unit vector to its image under A. An eigenvector is a segment whose two ends sit on <i>one line through the origin</i>, the map only scaled it.
+<div class="controls">
+<label>a <input id="eA" type="number" value="4" step="0.5"/></label><label>b <input id="eB" type="number" value="1" step="0.5"/></label>
+<label>c <input id="eC" type="number" value="2" step="0.5"/></label><label>d <input id="eD" type="number" value="3" step="0.5"/></label>
+</div>
+<canvas id="eigCanvas"></canvas>
+<div class="kv muted" id="eigOut2"></div>
+<div class="muted"><b>Do this now:</b> set (4,1,2,3) → the highlights land exactly on the two directions from Ex A. Set (0,−1,1,0) → zero highlights, and the readout confirms complex eigenvalues. Set (1,2,0,3) (triangular) → λ=1,3 read off the diagonal, and the probe finds them anyway, the picture never lies even when you skip the algebra. Set (3,1,1,2) symmetric → the lines are perpendicular. <b>The probe is a visualization of the definition, not of the recipe, and it never gives a wrong answer.</b></div>
+</div>
+
+<h3 id="e-pi">5. Visual 5 · power iteration (eigenvalues in motion) <a class="anchor" href="#e-pi">#</a></h3>
+<p>The algorithm that ranks the web is three lines: start with any random \(x\); repeatedly set \(x\leftarrow Ax/\|Ax\|\). Why it works is a one-line proof: expand \(x_0\) in the eigenbasis, then
+\[ A^kx_0=\lambda_1^k\Big(c_1v_1+\sum_{i\ge2}c_i(\lambda_i/\lambda_1)^k v_i\Big)\longrightarrow \lambda_1^kc_1v_1 \]
+every non-dominant component shrinks geometrically at rate \(|\lambda_2/\lambda_1|^k\). It's slow but embarrassingly simple, and it scales to matrices with billions of rows because it only ever needs <i>products</i>, never a determinant. (This is exactly §5's \(A^k=PD^kP^{-1}\) behavior, watched from the inside.)</p>
+<div class="viz"><span class="viztitle">Visual 5 · Power iteration sandbox</span> The running vector \(x\) (red) chasing the dominant eigenvector (dashed), on the <i>same</i> matrix as Visual 4.
+<div class="controls"><button id="piStep">Step once</button><button id="piRun">auto-run</button><button id="piReset" class="ghost">reset x</button><button id="piExA" class="ghost">load Ex A (4,1;2,3)</button><button id="piRot" class="ghost">load 90° rotation</button></div>
+<canvas id="eigCanvas2"></canvas>
+<div class="kv muted" id="piOut"></div>
+<div class="muted"><b>Ex A</b> → x locks onto the λ=5 direction within ~6 steps: \(|\lambda_2/\lambda_1|=0.4\), so the error divides by ~2.5 per step: you can watch the geometric rate. <b>Rotation</b> → x circles forever and never converges: both eigenvalues have the same modulus, so there's no "dominant" direction. <b>Conclusion for the exam:</b> convergence is about <i>gaps</i> between eigenvalue moduli, not sizes. That's why PageRank's damping factor exists (and why Krylov/shift-invert methods are built the way they are): they manufacture gaps. Changing a–d here also refreshes Visual 4 above, so the two always agree.</div>
+</div>
+
+<h3 id="e-pagerank">6. PageRank, end-to-end <a class="anchor" href="#e-pagerank">#</a></h3>
+<p>A link is a vote. Put page \(j\)'s out-links in column \(j\): split 1 unit among them → a column-stochastic matrix \(M\) (columns sum to 1). Importance \(x\) should satisfy \(x=Mx\), i.e. be the eigenvector for \(\lambda=1\). Existence is guaranteed (Perron–Frobenius: a nonnegative matrix with column sums 1 has \(\lambda_1=1\) with a nonnegative eigenvector), and it's found by power iteration, the only reason the algorithm scales.</p>
+<div class="formula">\[ M=\begin{bmatrix}0&0&\tfrac12\\1&0&\tfrac12\\0&1&0\end{bmatrix},\quad x_{k+1}=Mx_k,\quad x_0=\big(\tfrac13,\tfrac13,\tfrac13\big)\ \longrightarrow\ x_\infty=\big(\tfrac15,\tfrac25,\tfrac25\big) \]</div>
+<p>Pages 1→2→3→1, plus 3→2 (page 3 splits its vote). Solve the fixed point by hand instead of trusting the machine: \(x_1=\tfrac12x_3,\;x_2=x_1+\tfrac12x_3,\;x_3=x_2,\;x_1+x_2+x_3=1\) ⇒ \((1,2,2)/5\). Pages 2 and 3 end up 2× page 1's importance, <b>purely from link structure, no page's text ever read.</b> Real PageRank adds a "damping" teleport term, \(G=\alpha M+(1-\alpha)\tfrac{1}{n}ee^T\), which (a) fixes dangling pages and (b) forces a unique dominant eigenvector, a gap-manufacturing patch, per Visual 5's conclusion.</p>
+<pre class="codeblock"><div class="cbhead"><span>demo_eigen.py · eig, the check step, Fibonacci as an eigenproblem, PageRank by hand</span><button class="cbcopy">Copy</button></div><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+A = np.array([[<span class="tok-num">4.</span>,<span class="tok-num">1.</span>],[<span class="tok-num">2.</span>,<span class="tok-num">3.</span>]])            <span class="tok-com"># Ex A</span>
+w, V = np.<span class="tok-fn">linalg</span>.<span class="tok-fn">eig</span>(A)
+<span class="tok-fn">print</span>(<span class="tok-str">"lambda ="</span>, w)                          <span class="tok-com"># [5. 2.]</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"vectors ="</span>, V)                          <span class="tok-com"># columns ∝ [1,1] and [1,-2] — each rescaled</span>
+                                              <span class="tok-com"># arbitrarily. Compare DIRECTION, never</span>
+                                              <span class="tok-com"># numbers, to your hand answer.</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"check Av==lambda v:"</span>, np.<span class="tok-fn">allclose</span>(A@V[:,<span class="tok-num">0</span>], w[<span class="tok-num">0</span>]*V[:,<span class="tok-num">0</span>]))  <span class="tok-com"># True</span>
+
+<span class="tok-com"># Fibonacci as a 2x2 eigenproblem: [F_{n+1}, F_n]^T = [[1,1],[1,0]]^n [1,0]^T</span>
+B = np.array([[<span class="tok-num">1.</span>,<span class="tok-num">1.</span>],[<span class="tok-num">1.</span>,<span class="tok-num">0.</span>]])
+wb,_ = np.<span class="tok-fn">linalg</span>.<span class="tok-fn">eig</span>(B)
+phi = wb.<span class="tok-fn">real</span>.<span class="tok-fn">max</span>()                            <span class="tok-com"># 1.6180339887…</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"dominant eigenvalue ="</span>, phi)   <span class="tok-com"># THE golden ratio — Binet's formula is just</span>
+<span class="tok-com"># "A^n = P D^n P^-1" applied to B. The Fibonacci numbers were eigenvalues in disguise,</span>
+<span class="tok-com"># 2000 years before anyone had the words.</span>
+
+<span class="tok-com"># 3-page PageRank: raw power iteration, no eig() call anywhere</span>
+M = np.array([[<span class="tok-num">0.</span>,<span class="tok-num">0.</span>,<span class="tok-num">.5</span>],[<span class="tok-num">1.</span>,<span class="tok-num">0.</span>,<span class="tok-num">.5</span>],[<span class="tok-num">0.</span>,<span class="tok-num">1.</span>,<span class="tok-num">0.</span>]])
+x = np.<span class="tok-fn">ones</span>(<span class="tok-num">3</span>)/<span class="tok-num">3</span>
+<span class="tok-kw">for</span> i <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">30</span>): x = M @ x
+<span class="tok-fn">print</span>(<span class="tok-str">"ranks after 30 iters ≈"</span>, np.<span class="tok-fn">round</span>(x,<span class="tok-num">4</span>))  <span class="tok-com"># [0.2 0.4 0.4] — closed form ✔</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"rate |λ₂/λ₁| ="</span>, np.<span class="tok-fn">sort</span>(np.<span class="tok-fn">abs</span>(np.<span class="tok-fn">linalg</span>.<span class="tok-fn">eigvals</span>(M)))[::<span class="tok-num">-1</span>][<span class="tok-num">1</span>]/[<span class="tok-num">0</span>])  <span class="tok-com"># ~0.7071 — error divides by this each step</span></code></pre>
+<div class="use"><b>Where eigenvalues live in CS.</b> Markov chains: the stationary distribution is \(\lambda=1\)'s eigenvector, and convergence speed is \(|\lambda_2/\lambda_1|^k\) (PageRank, MCMC, Google's original patent). PCA: principal axes = eigenvectors of the covariance matrix (symmetric ⇒ real + orthogonal, the spectral theorem earns its keep). Spectral graph theory: the Laplacian \(L=D-A\)'s second-smallest eigenvalue (the "algebraic connectivity," Fiedler vector) decides good graph cuts, clustering, partitioning, VLSI layout. Recurrences: Fibonacci above. Stability: \(\operatorname{Re}\lambda&lt;0\) ⇒ decay, the whole of §7. Search/ranking: latent semantic indexing is eigen/SVD on a term-document matrix. Physics engines: mode shapes of a mesh; game AI: diffusion-limited heatmaps. The list is embarrassingly long because §0's sentence is true: diagonalize is the universal move.</div>
+<div class="warnbox"><b>Pitfalls.</b> (1) \(v=0\) never, \(\lambda=0\) fine (and means "singular". §2's chain). (2) Eigenvectors are unique only up to scale: a solutions key's \((1,1)\) and your \((2,2)\) and numpy's \((0.707,0.707)\) are the same eigenvector, compare ratios, never digits. (3) Repeated eigenvalue ≠ repeated eigenvectors: check the dimension of the eigenspace, not the algebraic multiplicity (Ex C). (4) A non-symmetric real matrix <i>can</i> have complex eigenvalues, not an error, a diagnosis (rotation, §7). (5) \(A\) and \(A^T\) share \(\lambda\) but their eigenvectors are different families; for symmetric matrices they coincide. That is not a trivial special case; it is the spectral theorem.</div>
+<div class="vidrow">
+<div class="vid" data-yt="PFDu9oVAE-g" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/PFDu9oVAE-g/hqdefault.jpg" alt="3Blue1Brown · Eigenvectors and eigenvalues" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Eigenvectors and eigenvalues, ch.9 (~16 min, the definitive intuition video)</div></div>
+<div class="vid" data-yt="P2LTAUO1TdA" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/P2LTAUO1TdA/hqdefault.jpg" alt="3Blue1Brown · Change of basis" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Change of basis, ch.13: watch right before §5 (the missing intuition for P·D·P⁻¹)</div></div>
+</div>
+<p class="muted">Refs: Strang ch.6 · MIT 18.06 lec 21–24 (eigen, symmetric matrices, SVD) · 3Blue1Brown EOLA ch.8–9 · Langville &amp; Meyer, <i>Google's PageRank and Beyond</i> (<a href="https://doi.org/10.1515/9781400830329" target="_blank" rel="noopener">DOI</a>) · Brin &amp; Page, <a href="https://infolab.stanford.edu/~backrub/google.html" target="_blank" rel="noopener">the 1998 computer-network paper</a>.</p>
+<div class="chapnav"><a href="#lintrans">← 3 · Linear transformations</a><a class="nx" href="#diag">Next: 5 · Diagonalization &amp; SVD →</a></div>
+</section>
+
+<!-- ============================== 5 ============================== -->
+<section class="card" id="diag">
+<h2><span class="chno">05</span>Diagonalization and the SVD: the generalization you'll want next</h2>
+<div class="meta"><span class="pill">core (+ labeled bonus)</span><span class="pill">⏱ 30 min</span><span class="pill">prereq: §3.3 similarity, §4</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#d-diag">A=PDP⁻¹, why it works, when it fails, what it buys</a></li>
+<li><a href="#d-jordan">Defective matrices and Jordan form (awareness level)</a></li>
+<li><a href="#d-svd">SVD, derived rather than declared</a></li>
+<li><a href="#d-viz">Visual 6, the three-stage morph</a></li>
+<li><a href="#d-lowrank">Low-rank approximation + numpy</a></li></ol></div>
+
+<h3 id="d-diag">1. Diagonalization <a class="anchor" href="#d-diag">#</a></h3>
+<div class="formula">\[ A=PDP^{-1},\quad P=\begin{bmatrix}v_1&\cdots&v_n\end{bmatrix},\ D=\mathrm{diag}(\lambda_1,\dots,\lambda_n)\quad\Rightarrow\quad A^k=PD^kP^{-1},\ e^{At}=Pe^{Dt}P^{-1} \]</div>
+<p><b>Why it works, in one line:</b> the eigen-relations \(Av_i=\lambda_iv_i\) for all \(i\) are exactly the matrix equation \(AP=PD\) (columns on both sides), and if \(P\) is invertible (n independent eigenvectors, there's the condition) then \(A=PDP^{-1}\). No trickery, just restating §4 with block notation.</p>
+<p><b>When it works:</b> \(n\) independent eigenvectors exist \(\iff\) geometric = algebraic multiplicity for every \(\lambda\). Two green lights that cover 95% of exam cases: <b>distinct eigenvalues</b> (then the eigenvectors are automatically independent) and <b>real symmetric</b> (spectral theorem gives it for free, and even with an <i>orthogonal</i> P: \(A=PDP^T\), so \(A^k=PD^kP^T\) needs no inverse).</p>
+<p><b>What it buys, three things, all of them appear later in these pages:</b></p>
+<ol>
+<li><b>Powers</b>: \(A^k=PD^kP^{-1}\), raise n scalars instead of multiplying n times. Markov chains and Fibonacci (§4) live here.</li>
+<li><b>Matrix exponentials</b>: \(e^{At}=Pe^{Dt}P^{-1}=P\,\mathrm{diag}(e^{\lambda_it})P^{-1}\), which is literally §7's solution formula \(x=e^{At}x_0\) unpacked.</li>
+<li><b>Decoupling</b>: substitute \(x=Py\) into \(x'=Ax\): then \(y'=Dy\), n <i>independent scalar</i> equations, solved instantly, then rotated back. "Change to the eigenbasis so nothing mixes" is §0's thesis cashed out. (Do this substitution yourself once; it's three lines and it removes all mystery from §7.)</li>
+</ol>
+<details open><summary>Worked: A¹⁰ of §4's Ex A, four steps</summary>
+<p>\(P=\begin{bmatrix}1&1\\1&-2\end{bmatrix}\Rightarrow\det P=-3\neq0\) (invertibility check, do it explicitly every time), \(P^{-1}=\frac1{-3}\begin{bmatrix}-2&-1\\-1&1\end{bmatrix}\). \(D^{10}=\mathrm{diag}(5^{10},2^{10})=\mathrm{diag}(9\,765\,625,1024)\). Multiply out:
+\[ A^{10}=P D^{10}P^{-1}=\tfrac13\begin{bmatrix}2\cdot5^{10}+2^{10}&5^{10}-2^{10}\\2(5^{10}-2^{10})&5^{10}+2\cdot2^{10}\end{bmatrix}=\tfrac13\begin{bmatrix}19\,532\,274&9\,764\,601\\19\,529\,202&9\,767\,673\end{bmatrix} \]
+Two exponentiations + two matrix multiplications, versus nine 2×2 products. And the structure of the answer <i>tells a story</i>: every entry is dominated by \(5^{10}\), the largest eigenvalue raised to the power, the direction \(v_1\) wins, which is power iteration (Visual 5) in closed form. Both pictures are the same fact.</p></details>
+
+<h3 id="d-jordan">2. When it fails: defective matrices and Jordan <a class="anchor" href="#d-jordan">#</a></h3>
+<p>§4 Ex C's \(J=\begin{bmatrix}1&1\\0&1\end{bmatrix}\) has one eigenvector, no basis exists in which it's diagonal. The next-best normal form is the <b>Jordan form</b>: eigenvalues on the diagonal, 1s on the superdiagonal, with <i>generalized eigenvectors</i> \((A-\lambda I)v=w\neq0)\) bridging the missing directions. For a review at this level you need only this much: it always exists, diagonalization is the special case where every Jordan block is 1×1, and the tell-tale symptom is \(te^{\lambda t}\) terms, in §6 that's the "repeated characteristic root" case, in §7 it's the degenerate node. Same defect, three costumes. <b>Bonus tool that dodges Jordan entirely on small problems:</b> Cayley–Hamilton, the characteristic polynomial kills the matrix, \(p(A)=0\), so for 2×2, \(A^2-(\operatorname{tr}A)A+(\det A)I=0\) gives \(A^{-1}=\frac1{\det A}(\operatorname{tr}A\cdot I-A)\) in one line, and \(A^n\) as a linear combination of \(I,A\).</p>
+
+<h3 id="d-svd">3. The SVD, derived <a class="anchor" href="#d-svd">#</a></h3>
+<p>Diagonalization demands square <i>and</i> enough eigenvectors. The <b>Singular Value Decomposition</b> demands nothing:</p>
+<div class="formula">\[ A_{m\times n}=U_{m\times m}\,\Sigma_{m\times n}\,V_n^T,\qquad \sigma_1\ge\sigma_2\ge\cdots\ge0,\quad U^TU=I,\ V^TV=I \]</div>
+<p><b>The derivation is the intuition</b>, so here it is rather than declared. Ask the geometric question §0's Visual 3 already posed: <i>which unit direction does A stretch the most?</i> That's maximizing \(\|Av\|^2=v^TA^Tv\) over \(\|v\|=1\), a quadratic form, whose extremum is the top eigenvector of \(A^TA\) (Lagrange multipliers give \(A^TAv=\sigma^2v\) directly). And \(A^TA\) is always symmetric with nonnegative eigenvalues, so the spectral theorem hands us a real orthonormal eigenbasis \(V\) for free. Call the maxima \(u_i=Av_i/\sigma_i\) (with \(\sigma_i=\sqrt{\lambda_i(A^TA)}\)), extend to orthonormal bases, and by construction \(AV=U\Sigma\), i.e. \(A=U\Sigma V^T\). Nothing about being square or diagonalizable was used.</p>
+<p><b>Read it as §3's geometry</b> (this is the sentence to say out loud while dragging Visual 6): \(V^T\) rotates the input space into the singular-vector frame, \(\Sigma\) stretches along the coordinate axes by \(\sigma_1,\sigma_2,\dots\), and \(U\) rotates into the output frame. <b>Every matrix is rotate → stretch → rotate.</b> Consequences that will recur: the unit circle always lands on an <i>ellipse</i> (the "image of the unit sphere"); \(\sigma_1\) is the most any unit vector is stretched (the operator norm), \(\sigma_{\min}\) the least; <b>rank = number of nonzero \(\sigma\)</b>; \(\kappa=\sigma_{\max}/\sigma_{\min}\) is the conditioning number of §2's "nearly singular," measured not guessed.</p>
+
+<h3 id="d-viz">4. Visual 6 · the three-stage morph <a class="anchor" href="#d-viz">#</a></h3>
+<div class="viz"><span class="viztitle">Visual 6 · SVD as rotate → stretch → rotate</span> Drag the <b>stage</b> slider 0 → 2 and watch the grey unit circle become the blue ellipse in three moves. Gold/rose arrows = right singular vectors \(v_1,v_2\) (orthogonal in the domain); green/purple = \(\sigma_1u_1,\sigma_2u_2\) (the ellipse's own axes, orthogonal in the range).
+<div class="controls">
+<label>a <input id="sA" type="number" value="3" step="0.25"/></label><label>b <input id="sB" type="number" value="1" step="0.25"/></label>
+<label>c <input id="sC" type="number" value="1" step="0.25"/></label><label>d <input id="sD" type="number" value="2" step="0.25"/></label>
+<label>stage <input id="svdStage" type="range" min="0" max="2" step="0.02" value="2"/></label>
+<button data-svpreset="3,1,1,2" class="ghost">symmetric (V=U!)</button><button data-svpreset="0,-1,1,0" class="ghost">rotation (σ=1,1)</button><button data-svpreset="1,0,0,0" class="ghost">projection (σ=1,0)</button><button data-svpreset="2,0,0,0.5" class="ghost">diagonal (already SVD)</button>
+</div>
+<canvas id="svdCanvas"></canvas>
+<div class="kv muted" id="svdOut"></div>
+<div class="muted"><b>Guided tour.</b> Pause at stage 0.5: the circle has rotated but not stretched. \(V^T\) alone. At 1.5 the ellipse is axis-aligned; the final half-stage only tilts it: that's \(U\). <b>Symmetric</b>: the ellipse's axes coincide with the eigen-directions from Visual 3. SVD collapses to eigen-decomposition (up to signs absorbing negative eigenvalues). <b>Rotation</b>: σ₁=σ₂=1, nothing stretched; a rotation is "all rotate, no stretch," which is what orthogonal matrices <i>are</i>. <b>Projection</b>: σ₂=0, one axis annihilated; rank visibly = number of nonzero σ. <b>Diagonal</b>: V and U are already identity, a diagonal matrix is its own SVD, which is the whole point of §5.1 in miniature: <i>diagonal = simple</i>, and SVD is the procedure that finds the coordinates where any matrix is as close to diagonal as possible.</div>
+</div>
+
+<h3 id="d-lowrank">5. Low-rank approximation <a class="anchor" href="#d-lowrank">#</a></h3>
+<p><b>Eckart–Young–Mirsky theorem:</b> among all matrices of rank ≤ k, the closest to \(A\) (in both Frobenius and spectral norms) is exactly the truncated SVD
+\[ A_k=\sum_{i=1}^{k}\sigma_iu_iv_i^{T}=U_k\Sigma_kV_k^{T},\qquad \|A-A_k\|_2=\sigma_{k+1} \]</p>
+<p>The best rank-k approximation is <i>the first k SVD terms</i>, and the error you eat is literally the first singular value you threw away. That single sentence is PCA, latent semantic indexing, JPEG's DCT cousin, and the Netflix Prize (§10D): real-world data has fast-decaying \(\sigma_i\), so k small terms reproduce it almost exactly while storing \(k(m+n+1)\) numbers instead of \(mn\).</p>
+<pre class="codeblock"><div class="cbhead"><span>demo_svd.py · rebuild, then compress an image with a rank-k truncated SVD</span><button class="cbcopy">Copy</button></div><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+
+A = np.array([[<span class="tok-num">3.</span>,<span class="tok-num">0.</span>],[<span class="tok-num">4.</span>,<span class="tok-num">5.</span>]])
+U, s, Vt = np.<span class="tok-fn">linalg</span>.<span class="tok-fn">svd</span>(A)
+<span class="tok-fn">print</span>(<span class="tok-str">"sigma      ="</span>, s)                       <span class="tok-com"># [6.708 2.236] = 3√5, √5 — the §5 Ex2 answer</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"rebuild err ="</span>, np.<span class="tok-fn">abs</span>(U@np.<span class="tok-fn">diag</span>(s)@Vt - A).<span class="tok-fn">max</span>())  <span class="tok-com"># ~1e-15 ✔</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"stretch ratio (kappa) ="</span>, s[<span class="tok-num">0</span>]/s[-<span class="tok-num">1</span>])     <span class="tok-com"># the conditioning number, measured</span>
+
+<span class="tok-com"># The compression demo: a smooth gradient + noise, stored at rank k</span>
+rng = np.random.<span class="tok-fn">default_rng</span>(<span class="tok-num">0</span>)
+X = np.<span class="tok-fn">tile</span>(np.<span class="tok-fn">linspace</span>(<span class="tok-num">0</span>,<span class="tok-num">1</span>,<span class="tok-num">100</span>), (<span class="tok-num">100</span>,<span class="tok-num">1</span>)) + rng.<span class="tok-fn">normal</span>(<span class="tok-num">0</span>,<span class="tok-num">0.08</span>,(<span class="tok-num">100</span>,<span class="tok-num">100</span>))
+U, s, Vt = np.<span class="tok-fn">linalg</span>.<span class="tok-fn">svd</span>(X)
+<span class="tok-fn">print</span>(<span class="tok-str">"first 6 sigmas:"</span>, np.<span class="tok-fn">round</span>(s[:<span class="tok-num">6</span>],<span class="tok-num">2</span>))      <span class="tok-com"># look how fast they drop — that's</span>
+<span class="tok-com"># "this image has structure." Random noise alone would be a flat sigma spectrum.</span>
+<span class="tok-kw">for</span> k <span class="tok-kw">in</span> (<span class="tok-num">1</span>,<span class="tok-num">2</span>,<span class="tok-num">5</span>,<span class="tok-num">10</span>,<span class="tok-num">100</span>):
+    err = np.<span class="tok-fn">norm</span>(X - U[:,:k]@np.<span class="tok-fn">diag</span>(s[:k])@Vt[:k]) / np.<span class="tok-fn">norm</span>(X)
+    <span class="tok-fn">print</span>(<span class="tok-fn">f</span><span class="tok-str">"rank {k:&gt;3}:  rel. error {err:.3f}   stores {k*(2*100+1)} of 10000 numbers"</span>)
+<span class="tok-com"># rank 2: ~0.10 error from 402 numbers (25x smaller). This is the Netflix trick</span>
+<span class="tok-com"># and it is literally "sum of the first k sigma_i u_i v_i^T" — §10D.</span>
+
+<span class="tok-com"># PCA in 6 lines, because it IS the SVD of the centered data</span>
+Xd = rng.<span class="tok-fn">normal</span>(<span class="tok-num">0</span>,<span class="tok-num">1</span>,(<span class="tok-num">500</span>,<span class="tok-num">2</span>)) @ np.array([[<span class="tok-num">3.</span>,<span class="tok-num">0.</span>],[<span class="tok-num">0.</span>,<span class="tok-num">0.3</span>]])   # anisotropic cloud
+<span class="tok-fn">print</span>((Xd - Xd.<span class="tok-fn">mean</span>(<span class="tok-num">0</span>)).<span class="tok-fn">T</span> @ (Xd - Xd.<span class="tok-fn">mean</span>(<span class="tok-num">0</span>)))   <span class="tok-com"># covariance (up to 1/n): symmetric —</span>
+<span class="tok-com"># spectral theorem applies: real eigenvalues, orthogonal eigenvectors = principal axes.</span></code></pre>
+<div class="use"><b>Uses.</b> PCA, principal components are the columns of \(V\), and "variance explained" is \(\sigma_i^2/\sum_j\sigma_j^2\) (that pie chart in every notebook is a singular-value spectrum). Recommenders (§10D). Rank &amp; the pseudoinverse: \(A^+=V\Sigma^+U^T\) inverts the nonzero σ's and ignores the crushed directions, the least-squares solution every regression library returns, including underdetermined/overdetermined cases where "the" inverse doesn't exist. Numerics: \(\kappa(A)=\sigma_{\max}/\sigma_{\min}\) predicts how many digits of accuracy your solve loses (§2's condition demo). NLP: LSI = SVD on the term-document matrix. Computer vision: essential matrix decomposition, structure from motion. Signal: total least squares.</div>
+<div class="warnbox"><b>Pitfalls.</b> (1) SVD of a symmetric matrix is <i>not</i> its eigen-decomposition: same directions up to signs, but singular values are \(|\lambda|\), a negative eigenvalue becomes a positive σ with a flipped column of U. (2) \(A^k=PD^kP^{-1}\) requires \(P\) from <b>independent</b> eigenvectors, check \(\det P\neq0\) explicitly; if the columns are secretly dependent, the formula "computes" garbage that looks plausible. (3) In §7 the exponential \(e^{At}=Pe^{Dt}P^{-1}\): the entries of \(P\) don't get exponentiated, only \(D\)'s, a classic misread. (4) Order matters: \(U\Sigma V^T\) with mismatched orderings gives a wrong matrix silently (numpy sorts σ descending; keep the pairing consistent if you truncate by hand).</div>
+<p class="muted">Refs: Strang ch.7 &amp; his SVD lectures · MIT OCW <a href="https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/" target="_blank" rel="noopener">18.065</a> (Strang, "Matrix Methods in Data Analysis", the SVD as the center of applied linear algebra; lec 3–9) · Golub &amp; Van Loan, <i>MATRIX COMPUTATIONS</i> ch.2 (the reference, if you ever need the numerical truth) · Shlens, <i>A Tutorial on the Spectral Basis of PCA</i> (<a href="https://arxiv.org/abs/1404.1100" target="_blank" rel="noopener">arXiv:1404.1100</a>).</p>
+<div class="chapnav"><a href="#eigen">← 4 · Eigenvalues</a><a class="nx" href="#ode">Next: 6 · ODEs →</a></div>
+</section>
+<!-- ============================== 6 ============================== -->
+<section class="card" id="ode">
+<h2><span class="chno">06</span>Single-equation ODEs</h2>
+<div class="meta"><span class="pill">core</span><span class="pill">⏱ 35 min</span><span class="pill">prereq: §1.1 (solution spaces), calc II integration</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#o-first">First-order: name the type, run the matching method</a></li>
+<li><a href="#o-second">Second-order, constant coefficients, the characteristic root, derived</a></li>
+<li><a href="#o-uncoh">Forcing: undetermined coefficients &amp; resonance</a></li>
+<li><a href="#o-viz">Visual 7, slope fields</a></li>
+<li><a href="#o-ex">Worked examples + numpy</a></li></ol></div>
+
+<div class="hist"><b>History.</b> Newton (1670s) wrote differential equations to describe motion. ODEs were the <i>reason</i> calculus was invented, not a later application. The Bernoullis (1690s) built the first-order toolkit (the brachistochrone was the poster child); Euler gave us the constant-coefficient method and the integrating factor; Lagrange, variation of parameters. Picard and Lindelöf (1890s) finally answered "does a solution even exist, and is it unique?" rigorously, the theorem that guarantees the curves in Visual 7 never cross. Most models a CS student meets are first- or second-order with constant coefficients: about 10% of ODE theory, covering 90% of engineering.</div>
+
+<h3 id="o-first">1. First-order: recognition, then routine <a class="anchor" href="#o-first">#</a></h3>
+<p>The skill being tested is <b>recognition</b>, match the equation to a type, then the method is mechanical:</p>
+<table><tr><th>Type</th><th>Signature</th><th>Method, in one sentence</th></tr>
+<tr><td>Separable</td><td>\(y'=g(x)h(y)\)</td><td>\(\int dy/h(y)=\int g(x)\,dx\), get all y left, all x right</td></tr>
+<tr><td>Linear</td><td>\(y'+P(x)y=Q(x)\)</td><td>Integrating factor \(\mu=e^{\int P\,dx}\); then \((\mu y)'=\mu Q\), integrate both sides</td></tr>
+<tr><td>Exact</td><td>\(M\,dx+N\,dy=0\) with \(M_y=N_x\)</td><td>Find a potential \(\psi\) with \(\psi_x=M,\psi_y=N\); the solutions are the level curves \(\psi=C\)</td></tr>
+<tr><td>Bernoulli</td><td>\(y'+Py=Qy^{n}\)</td><td>Substitute \(u=y^{1-n}\), the nonlinearity exponent becomes 0: it's linear again</td></tr>
+<tr><td>Homogeneous</td><td>\(y'=F(y/x)\)</td><td>Substitute \(v=y/x\); it becomes separable</td></tr></table>
+<p><b>Derive the integrating factor so it's not a spell.</b> You want to multiply \(y'+Py=Q\) by some \(\mu\) making the left side an exact derivative: \(\mu y'+\mu Py\stackrel{!}{=}(\mu y)'=\mu y'+\mu'y\), matching middle terms gives \(\mu'/\mu=P\Rightarrow\mu=e^{\int P}\). Every "trick" on this table has such a two-line derivation; learn the derivation once and the table has no arbitrary rows. (Exact equations are the same logic run backwards: \(M_y=N_x\) is precisely the integrability condition \(\psi_{xy}=\psi_{yx}\).)</p>
+<div class="note"><b>Why exactly 2 arbitrary constants for 2nd order?</b> §1.1 answered it in advance: the solutions of a linear homogeneous ODE form a vector space whose dimension = the order, and initial conditions \((y(0),y'(0))\) are <i>coordinates</i> on it (the map \(y\mapsto(y(0),y'(0))\) is an isomorphism). "General solution \(=C_1y_1+C_2y_2\)" is not notation. It's a statement that \(\{y_1,y_2\}\) is a <b>basis of the solution space</b>. §7 makes this literal by turning the ODE into a 2×2 system.</div>
+
+<h3 id="o-second">2. Second-order, constant coefficients <a class="anchor" href="#o-second">#</a></h3>
+<div class="formula">\[ ay''+by'+cy=0\ \Longrightarrow\ ar^2+br+c=0\ \Longrightarrow\ y=\begin{cases} C_1e^{r_1t}+C_2e^{r_2t} & r_1\neq r_2\in\mathbb{R}\quad(\text{overdamped / node})\\[2pt] (C_1+C_2t)e^{rt} & r \text{ repeated}\quad(\text{critical / degenerate})\\[2pt] e^{\alpha t}\big(C_1\cos\beta t+C_2\sin\beta t\big) & r=\alpha\pm i\beta\quad(\text{underdamped / spiral})\end{cases} \]</div>
+<p><b>Why \(e^{rt}\) is the right guess, and it's §4:</b> test \(y=e^{rt}\): then \(y'=re^{rt}\) and \(y''=r^2e^{rt}\), so substituting gives \((ar^2+br+c)e^{rt}=0\), and \(e^{rt}\neq0\) so the quadratic must vanish. Read it in operator language: \(e^{rt}\) is an <b>eigenfunction of \(\frac{d}{dt}\)</b> (\(\frac{d}{dt}e^{rt}=re^{rt}\), §3 Ex 2), so the "characteristic equation" <i>is</i> the characteristic equation of the operator \(aD^2+bD+c\). The repeated-root case is the ODE shadow of §4 Ex C's defective matrix, when the operator has only one exponential solution, the rescue vector is the generalized one, and \(te^{rt}\) is a generalized eigenfunction: differentiate \(te^{rt}\) and you get \(e^{rt}+rte^{rt}\): the operator "almost" kills it, exactly the Jordan-chain behavior \( (A-\lambda I)w=v\). The complex case unfolds via Euler, \(e^{(\alpha+i\beta)t}=e^{\alpha t}(\cos\beta t+i\sin\beta t)\), and taking real/imaginary parts gives the two independent real solutions.</p>
+<div class="use"><b>Translate the three cases once, remember them forever (this IS §7's phase portrait in words):</b> real distinct roots, sum of two exponentials: over/under-shooting approach to equilibrium, no oscillation; complex \(\alpha\pm i\beta\), sinusoid in a \(e^{\alpha t}\) envelope: ring then settle (α&lt;0) or ring then blow up (α&gt;0); repeated, the fast-without-overshoot knife-edge. A mass-spring-damper is <i>literally</i> this equation (m=1, b=c/damping, c=k/stiffness), so the classification you'll do abstractly in §7 has your hands already felt it in a physics course.</div>
+
+<h3 id="o-uncoh">3. Forcing terms: undetermined coefficients &amp; resonance <a class="anchor" href="#o-uncoh">#</a></h3>
+<p>\(ay''+by'+cy=g(t)\): general solution = \(y_h+y_p\). <b>Undetermined coefficients</b>, guess \(y_p\) from the same family as \(g\): \(e^{at}\to Ae^{at}\); \(\sin/\cos\to A\cos\omega t+B\sin\omega t\); polynomial of degree n → polynomial of degree n; products combine guesses. <b>Then perform the exam's most-forgotten check:</b> does your guess overlap \(y_h\)? If yes, multiply by \(t\) (by \(t^2\) if the overlap was a repeated root). Overlap = <b>resonance</b>: drive a system at its natural frequency and the response grows like \(t\cdot\)(oscillation), unbounded amplitude. <b>Variation of parameters</b> (\(y_p=-y_1\!\int\!\frac{y_2g}{W}+y_2\!\int\!\frac{y_1g}{W}\), \(W\) the Wronskian) handles any \(g\) at all, heavier, universal; it's also, in §8's language, the convolution formula \(y_p=g*h\) where \(h\) is the impulse response. The two chapters are one idea.</p>
+
+<h3 id="o-viz">4. Visual 7 · slope fields: the solution family, unsolved <a class="anchor" href="#o-viz">#</a></h3>
+<div class="viz"><span class="viztitle">Visual 7 · Slope field + RK4 sample curves</span> At every \((x,y)\) the field draws a short segment of slope \(y'\). Each colored curve is a different constant \(C\), generated by RK4 stepping along the field, which is exactly what numerical solvers do.
+<div class="controls"><label>equation</label><select id="slopeF"><option>y - x</option><option>x*y</option><option>y(1-y)</option><option>sin(x)*y</option></select></div>
+<canvas id="slopeCanvas"></canvas>
+<div class="kv muted" id="slopeOut"></div>
+<div class="muted"><b>Read the logistic field (y(1−y)) carefully:</b> y≡0 and y≡1 are horizontal lines, <b>equilibrium solutions</b> (\(y'=0\)); below 0 the flow falls away, between 0 and 1 it rises to 1, above 1 it falls back to 1. You just did §7's <i>stability classification</i> on a scalar ODE by looking: 0 is unstable, 1 is stable, before solving anything. Curves cannot cross (uniqueness): two solutions touching would share an initial condition. This picture is the qualitative-theory seed Poincaré grew into phase portraits.</div>
+</div>
+
+<h3 id="o-ex">5. Worked examples <a class="anchor" href="#o-ex">#</a></h3>
+<details open><summary>Ex 1 · linear first-order, integrating factor derived and used: y′+2y=e⁻ᵗ, y(0)=1 <span class="muted">(you'll redo this exact problem with Laplace in §8; watch the two tools agree)</span></summary>
+<p>\(\mu=e^{2t}\): \((e^{2t}y)'=e^{t}\Rightarrow e^{2t}y=e^{t}+C\Rightarrow y=e^{-t}+Ce^{-2t}\). Apply \(y(0)=1\): \(1+C=1\Rightarrow C=0\): <b>\(y=e^{-t}\)</b>. Verify by substitution: \(y'+2y=-e^{-t}+2e^{-t}=e^{-t}\) ✔. Structure readout: the general solution is \(y_p=e^{-t}\) (the forcing's family) plus \(Ce^{-2t}\) (the homogeneous memory). The \(e^{-2t}\) term dies at rate 2, the <b>pole at \(s=-2\)</b> §8 will draw, the eigenvalue of the 1×1 system \(x'=-2x\) §7 will classify.</p></details>
+<details><summary>Ex 2 · the standard 2nd-order IVP: y″−3y′+2y=0, y(0)=1, y′(0)=0</summary>
+<p>\(r^2-3r+2=(r-1)(r-2)=0\Rightarrow r=1,2\). \(y=C_1e^{t}+C_2e^{2t}\). Two conditions, two unknowns (§1's "coordinates"): \(y(0)=C_1+C_2=1\); \(y'(0)=C_1+2C_2=0\). Subtract: \(C_2=-1,\ C_1=2\). <b>\(y=2e^{t}-e^{2t}\)</b>. Sanity: \(y(0)=1\) ✔, \(y'(0)=2-2=0\) ✔. Note the answer contains a growing term. That is not a mistake but the diagnosis \(r=1&gt;0\): this IVP diverges, which §7's unstable-node row predicts (both eigenvalues positive). <b>Applying ICs is literally solving a 2×2 linear system from §2</b>, the matrix is \(\begin{bmatrix}1&1\\r_1&r_2\end{bmatrix}\) (a Vandermonde; invertible iff \(r_1\neq r_2\), which is <i>why</i> distinct roots give a basis and the repeated root needs the \(t\)-rescue).</p></details>
+<details><summary>Ex 3 · repeated root: y″+4y′+4y=0</summary>
+<p>\((r+2)^2=0\): one root, \(r=-2\). First solution \(e^{-2t}\); the defective-root rule (multiply by \(t\)) gives the second: \(y=(C_1+C_2t)e^{-2t}\). Verify \(y=te^{-2t}\): \(y'=e^{-2t}(1-2t)\), \(y''=e^{-2t}(-4+4t)\); plug: \(e^{-2t}[(-4+4t)+4(1-2t)+4t]=0\) ✔. Visual 10 at ζ=1 is this solution, the critically damped curve, and §7's degenerate node is the same object seen as a system.</p></details>
+<details><summary>Ex 4 · resonance: y″+4y=sin2t</summary>
+<p>\(y_h=C_1\cos2t+C_2\sin2t\). The forcing \(\sin2t\) <b>is</b> a homogeneous term, overlap detected before guessing (the exam's favorite trap): try \(y_p=t(A\cos2t+B\sin2t)\). Compute: \(y_p'=A\cos2t+B\sin2t+2t(-A\sin2t+B\cos2t)\); \(y_p''=2(-A\sin2t+B\cos2t)+2(-A\sin2t+B\cos2t)+4t(-A\cos2t-B\sin2t)=4(-A\sin2t+B\cos2t)-4y_p\). So \(y_p''+4y_p=4(-A\sin2t+B\cos2t)=\sin2t\) ⇒ \(A=-\tfrac14,\ B=0\):
+\[ y_p=-\tfrac{t}{4}\cos2t \]
+Amplitude grows linearly forever: energy pumped in at the exact resonance frequency never leaves. This is Tacoma Narrows, the wine glass, and "why your simulation exploded when the timestep matched the mode," all in one formula. <b>Moral: write \(y_h\) first, compare, then guess.</b></p></details>
+<details><summary>Ex 5 · separable with a hidden constant-loss: Newton's cooling dT/dt=−k(T−T_env)</summary>
+<p>Let \(u=T-T_{env}\): \(u'=-ku\) separates to \(\ln|u|=-kt+C\Rightarrow u=Ce^{-kt}\Rightarrow T=T_{env}+(T_0-T_{env})e^{-kt}\). Two structural lessons: (1) the equilibrium \(T=T_{env}\) reappears as \(u=0\), separable equations often hide equilibria in the \(h(y)=0\) division you performed; if you divided by \(h\), check those lost solutions (here: exactly the steady state). (2) Exponential approach at rate k, the pattern of Visual 10's decay envelope and the \(e^{-at}\) of Visual 11: <b>every linear first-order system is this equation in a disguise</b>.</p></details>
+<details><summary>Ex 6 · exact equation: (2x+y)dx+(x+2y)dy=0</summary>
+<p>Test: \(M_y=1=N_x\) ✔ exact. Integrate \(M\) in x: \(\psi=x^2+xy+f(y)\); match \(\psi_y=x+2y=N\Rightarrow f(y)=y^2\). Solutions: \(x^2+xy+y^2=C\), ellipses. Notice (preview §5's quadratic-form application): the form \(x^TAx\) with symmetric \(A=\begin{bmatrix}1&\tfrac12\\\tfrac12&1\end{bmatrix}\) has positive eigenvalues ⇒ ellipses not hyperbolas, and the ellipse axes are the eigenvector directions \((1,1),(1,-1)\) (the §3 Ex 3 change of basis!). The phase portrait of the system this ODE defines is a <b>center</b>, because \(\operatorname{tr}=0\). Three chapters, one example.</p></details>
+<pre class="codeblock"><div class="cbhead"><span>demo_ode.py · verify a hand answer numerically + write RK4 yourself (8 lines)</span><button class="cbcopy">Copy</button></div><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+
+<span class="tok-com"># --- Verify Ex 2: y = 2e^t - e^{2t} solves y''-3y'+2y=0 (by brute force) ---</span>
+t   = np.<span class="tok-fn">linspace</span>(<span class="tok-num">0</span>, <span class="tok-num">1</span>, <span class="tok-num">2000</span>)
+y   = <span class="tok-num">2</span>*np.<span class="tok-fn">exp</span>(t) - np.<span class="tok-fn">exp</span>(<span class="tok-num">2</span>*t)
+yp  = np.<span class="tok-fn">gradient</span>(y, t); ypp = np.<span class="tok-fn">gradient</span>(yp, t)
+<span class="tok-fn">print</span>(<span class="tok-str">"max residual of y''-3y'+2y:"</span>, np.<span class="tok-fn">max</span>(np.<span class="tok-fn">abs</span>(ypp - <span class="tok-num">3</span>*yp + <span class="tok-num">2</span>*y)))  <span class="tok-com"># ~1e-5 (finite-diff noise)</span>
+
+<span class="tok-com"># --- RK4 from scratch: the integrator inside solve_ivp, scipy, and game engines ---</span>
+<span class="tok-kw">def</span> <span class="tok-fn">rk4</span>(f, y0, t0, h, n):
+    y = <span class="tok-fn">float</span>(y0)
+    <span class="tok-kw">for</span> i <span class="tok-kw">in</span> <span class="tok-fn">range</span>(n):
+        t = t0 + i*h
+        k1 = f(t, y)
+        k2 = f(t + h/<span class="tok-num">2</span>, y + h/2*k1)
+        k3 = f(t + h/<span class="tok-num">2</span>, y + h/2*k2)
+        k4 = f(t + h,    y + h*k3)
+        y += h*(k1 + <span class="tok-num">2</span>*k2 + <span class="tok-num">2</span>*k3 + k4)/<span class="tok-num">6</span>
+    <span class="tok-kw">return</span> y
+
+f = <span class="tok-kw">lambda</span> t, y: -<span class="tok-num">2</span>*y + np.<span class="tok-fn">exp</span>(-t)     <span class="tok-com"># Ex 1's equation</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">rk4</span>(f, <span class="tok-num">1.0</span>, <span class="tok-num">0.0</span>, <span class="tok-num">0.01</span>, <span class="tok-num">100</span>), np.<span class="tok-fn">exp</span>(-<span class="tok-num">1</span>))   <span class="tok-com"># 0.3678794... both — RK4 nails it</span>
+
+<span class="tok-com"># --- Stiffness demo (the reason "explicit Euler blows up" is an exam fact) ---</span>
+<span class="tok-kw">def</span> <span class="tok-fn">euler</span>(lam, h, n, y0=<span class="tok-num">1.0</span>):
+    y = y0
+    <span class="tok-kw">for</span> _ <span class="tok-kw">in</span> <span class="tok-fn">range</span>(n): y = y + h*lam*y
+    <span class="tok-kw">return</span> y
+<span class="tok-fn">print</span>(<span class="tok-str">"Euler on y'=-2y, h=1.2:"</span>, euler(-<span class="tok-num">2</span>, <span class="tok-num">1.2</span>, <span class="tok-num">20</span>))  <span class="tok-com"># DIVERGES (836.7): 1+h*lambda = -1.4, |.|>1</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"Euler on y'=-2y, h=0.6:"</span>, euler(-<span class="tok-num">2</span>, <span class="tok-num">.6</span>, <span class="tok-num">20</span>))  <span class="tok-com"># decays to 1e-14, but OSCILLATES: mult=-0.2 (sign flip)</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"Euler on y'=-2y, h=0.4:"</span>, euler(-<span class="tok-num">2</span>, <span class="tok-num">.4</span>, <span class="tok-num">20</span>))  <span class="tok-com"># decays cleanly: mult=+0.2, no sign flip</span>
+<span class="tok-com"># Euler multiplies by (1+h*lambda) each step: stable iff |1+h*lambda|&lt;1. Here</span>
+<span class="tok-com"># lambda=-2, so that is 1-2h &lt; 1 in magnitude =&gt; 0 &lt; h &lt; 1. The exact</span>
+<span class="tok-com"># ODE is stable for ANY h&gt;0; the numerical method has its own eigenvalue condition.</span>
+<span class="tok-com"># This is §7's Re(lambda)&lt;0 rule, re-applied to the integrator — eigenvalues decide</span>
+<span class="tok-com"># stability twice: once for the physics, once for the code solving it.</span></code></pre>
+<div class="warnbox"><b>Pitfalls.</b> (1) The resonance \(t^s\) factor (Ex 4), write \(y_h\) before choosing \(y_p\), every time. (2) When using ICs you need a <i>correct</i> \(y'\): the commonest slip is differentiating \(C_1e^{r_1t}+C_2e^{r_2t}\) wrong (or forgetting the product rule on \((C_1+C_2t)e^{rt}\)). (3) Diverging answers are correct answers. \(e^{+t}\) is a fact, not an error; don't "fix" instability into stability. (4) \(\int dy/y=\ln|y|\): dropping the absolute value silently discards the negative solution branch (where the equilibrium lives). (5) \(y_h\) and \(y_p\) must be summed <i>before</i> applying ICs, applying them to \(y_p\) alone is a classic.</div>
+<h4>Videos &amp; reading</h4>
+<div class="vidrow">
+<div class="vid" data-yt="p_di4Zn4wz4" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/p_di4Zn4wz4/hqdefault.jpg" alt="3Blue1Brown · Differential equations, a tourist guide" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Differential equations, a tourist's guide. DE series ch.1 (what "solving" means)</div></div>
+<div class="vid" data-yt="-j8PzkZ70Lg" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/-j8PzkZ70Lg/hqdefault.jpg" alt="3Blue1Brown · Laplace transform prelude" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · The Physics of Euler's Formula, the Laplace-transform prelude (bridge to §8)</div></div>
+</div>
+<p class="muted">Refs: Boyce &amp; DiPrima ch.1–3 · MIT OCW <a href="https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/" target="_blank" rel="noopener">18.03</a> lec 1–14 · Paul's Online Notes <a href="https://tutorial.math.lamar.edu/Classes/DE/de.aspx" target="_blank" rel="noopener">Differential Equations</a>, the best free <i>problem</i> source (worked solutions at every step) · Strogatz, <i>Nonlinear Dynamics and Chaos</i> ch.2, if you want to fall in love with the phase line.</p>
+<div class="chapnav"><a href="#diag">← 5 · Diagonalization</a><a class="nx" href="#systems">Next: 7 · Systems →</a></div>
+</section>
+
+<!-- ============================== 7 ============================== -->
+<section class="card" id="systems">
+<h2><span class="chno">07</span>Systems x′ = Ax and phase portraits</h2>
+<div class="meta"><span class="pill">core</span><span class="pill">⏱ 25 min</span><span class="pill">prereq: §4 (+§5.1 decoupling)</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#s-solve">Why the solution IS the eigen-decomposition</a></li>
+<li><a href="#s-class">Classification from trace and determinant alone</a></li>
+<li><a href="#s-viz">Visuals 8–10, portrait, (tr,det) map, damped oscillator</a></li>
+<li><a href="#s-ex">Worked example: full IVP</a></li></ol></div>
+
+<div class="hist"><b>History.</b> Poincaré (1880s) founded <i>qualitative</i> dynamics: determine what solutions do, settle, spiral, diverge, from a handful of computed numbers, without ever solving. Lyapunov (1890s) made stability rigorous. This machinery is why control theory, robotics, and epidemiology work: you usually cannot write the trajectory, but you can compute five numbers and know whether the system recovers. In CS terms: phase portraits are the mathematics of "does it settle?", the question behind every simulation, controller, and load-balancing loop you'll ever trust.</div>
+
+<h3 id="s-solve">1. Solving x′ = Ax <a class="anchor" href="#s-solve">#</a></h3>
+<p>Try \(x=ve^{rt}\): \(x'=rv e^{rt}\), \(Ax=ve^{rt}r\), substituting gives \(Av=rv\). <b>Each eigenpair is a solution \(e^{\lambda t}v\)</b>, and the solution space is a vector space (§1/§6's remark), so linear combinations are solutions:</p>
+<div class="formula">\[ x(t)=c_1e^{\lambda_1t}v_1+c_2e^{\lambda_2t}v_2 \qquad(\text{distinct real }\lambda\text{'s; apply }x(0)\text{ to find }c_1,c_2) \]</div>
+<p>The three cases, which are §6.2 verbatim (a second-order scalar ODE <i>is</i> a 2×2 system, see Ex 2): <b>complex pair</b> \(\alpha\pm i\beta\) with eigenvector \(a+ib\) unfolds by Euler into the two real solutions \(e^{\alpha t}(a\cos\beta t-b\sin\beta t)\) and \(e^{\alpha t}(a\sin\beta t+b\cos\beta t)\), spirals; <b>repeated defective</b> root gives \((v,\ tv+u)e^{\lambda t}\) where \((A-\lambda I)u=v\), the Jordan rescue, again. The coordinate-free one-liner is \(x(t)=e^{At}x_0\) with \(e^{At}=Pe^{Dt}P^{-1}\) (§5's item 2), the decoupling substitution \(x=Py\) makes the proof two lines.</p>
+<div class="note"><b>The physical reading, which makes every classification obvious:</b> each eigenmode is an independent "channel" of the system: \(v_i\) is a <i>shape</i> the system can move in, \(e^{\lambda_it}\) is that shape's <i>time profile</i>. Decay/grow/rotate is decided by \(\operatorname{Re}\lambda_i\) alone; shapes never mix (they're the coordinates where nothing mixes. §0's thesis). Nonlinear system near an equilibrium? Linearize: \(x'=Jx\) with \(J\) the Jacobian (§2's CS use) and everything on this page applies <i>approximately</i>. Hartman–Grobman's promise, which you'll take on faith here and which is why "eigenvalues of the Jacobian" is the answer to most of engineering.</div>
+
+<h3 id="s-class">2. Classification with only tr and det <a class="anchor" href="#s-class">#</a></h3>
+<p>For \(A=\begin{bmatrix}a&b\\c&d\end{bmatrix}\): \(\lambda^2-(\mathrm{tr})\lambda+\det=0\): <b>two numbers decide everything</b>:
+<table><tr><th>condition</th><th>eigenvalues</th><th>name</th><th>behavior / where you've seen it</th></tr>
+<tr><td>\(\det&lt;0\)</td><td>real, opposite signs</td><td><b>saddle</b></td><td>unstable: attracted along one eigen-line, expelled along the other. Ex 6's ellipse case flips sign → hyperbolas.</td></tr>
+<tr><td>\(\det&gt;0,\ \mathrm{tr}^2\ge4\det,\ \mathrm{tr}&lt;0\)</td><td>real, both negative</td><td><b>stable node</b> (sink)</td><td>straight-in decay along eigen-directions; §6's overdamped</td></tr>
+<tr><td>same, \(\mathrm{tr}&gt;0\)</td><td>real, both positive</td><td><b>unstable node</b> (source)</td><td>time-reversed sink; §6's \(y''-3y'+2y=0\) Ex 2 diverges exactly this way</td></tr>
+<tr><td>\(\det&gt;0,\ \mathrm{tr}^2&lt;4\det,\ \mathrm{tr}&lt;0\)</td><td>complex, \(\operatorname{Re}&lt;0\)</td><td><b>stable spiral</b></td><td>oscillates while decaying, underdamped spring; Visual 10 at ζ=0.25</td></tr>
+<tr><td>same, \(\mathrm{tr}&gt;0\)</td><td>complex, \(\operatorname{Re}&gt;0\)</td><td><b>unstable spiral</b></td><td>growing oscillation, flutter, reactor runaway, the divergent numerical method in §6's demo</td></tr>
+<tr><td>\(\mathrm{tr}=0,\det&gt;0\)</td><td>pure \(\pm i\beta\)</td><td><b>center</b></td><td>closed orbits, perpetual sloshing, predator–prey, §6 Ex 6's ellipses; neutrally stable, and the delicate one (nonlinear terms can turn a center into a spiral, which is beyond this review, but know the caveat)</td></tr></table>
+The boundary \(\mathrm{tr}^2=4\det\) (the parabola in Visual 9) = repeated eigenvalues; crossing \(\det=0\) = an eigenvalue crossing zero (the bifurcation the stability people get excited about). <b>The rule to internalize:</b> stability ⇔ \(\mathrm{tr}&lt;0\) and \(\det&gt;0\) (for 2×2), no eigenvalue computation needed; that's the whole content of "all Re λ &lt; 0."</p>
+
+<h3 id="s-viz">3. Visuals 8–10 <a class="anchor" href="#s-viz">#</a></h3>
+<div class="grid2h">
+<div class="viz"><span class="viztitle">Visual 8 · Phase portrait</span> Vector field of \(x'=Ax\), 8 trajectories, eigen-directions dashed when real.
+<div class="controls"><label>a <input id="pA" type="number" value="-1" step="0.5"/></label><label>b <input id="pB" type="number" value="2" step="0.5"/></label><label>c <input id="pC" type="number" value="-2" step="0.5"/></label><label>d <input id="pD" type="number" value="-1" step="0.5"/></label></div>
+<canvas id="phaseCanvas"></canvas>
+<div class="kv muted" id="phaseOut"></div>
+</div>
+<div class="viz"><span class="viztitle">Visual 9 · The classification map</span> Same matrix's \((\mathrm{tr},\det)\) live on the six-region map. The parabola is \(\mathrm{tr}^2=4\det\) (repeated eigenvalues); below the axis is det&lt;0 (saddles).
+<canvas id="tdCanvas"></canvas>
+<div class="muted">Watch the red dot <i>walk between regimes</i> as you type, every region change is an eigenvalue crossing zero or becoming complex. The phase portrait and the map are the same fact read twice: the portrait is <b>where trajectories go</b>; the map is <b>which regime that is</b>.</div>
+</div>
+</div>
+<div class="viz"><span class="viztitle">Visual 10 · One equation, all three regimes: the damped oscillator</span> \(y''+2\zeta\omega_0y'+\omega_0^2y=0\) integrated by RK4 as \(\zeta\) slides; right: the two poles in the s-plane.
+<div class="controls"><label>ζ damping <input id="oscZ" type="range" min="0" max="2" step="0.01" value="0.25"/></label><label>ω₀ <input id="oscW" type="number" value="2" step="0.25"/></label></div>
+<canvas id="oscCanvas"></canvas>
+<canvas id="oscPlaneCanvas"></canvas>
+<div class="kv muted" id="oscOut"></div>
+<div class="muted"><b>Sweep ζ from 0.1 to 1.5 slowly.</b> Spiral decay (complex λ = the spiral row above) → the two X's slide toward each other → at ζ=1 they collide on the real axis: <b>critical damping</b>, the fastest return with zero overshoot, the repeated root of §6 Ex 3, the degenerate node of this section's table → past 1 they split along the axis: two real negative poles, slow creep. §6's three characteristic-root cases, §7's classification table, and §8's pole-stability rule are <b>one picture with one slider</b>, the densest single visual on this site.</div>
+</div>
+
+<h3 id="s-ex">4. Worked example <a class="anchor" href="#s-ex">#</a></h3>
+<details open><summary>Full IVP: x′=[[1,1],[4,1]]·x, x(0)=(2,0) · compute, classify, interpret</summary>
+<p><b>Classify first (§7.2's point):</b> tr=2, det=1−4=−3&lt;0 → <b>saddle, unstable</b>, before any eigenvector is found. <b>Then solve:</b> \(\lambda^2-2\lambda-3=0\Rightarrow\lambda=3,-1\) (opposite signs ✔ consistent with the saddle). \(\lambda=3\): \((A-3I)=\begin{bmatrix}-2&1\\4&-2\end{bmatrix}\Rightarrow v_1=(1,2)\). \(\lambda=-1\): \(\begin{bmatrix}2&1\\4&2\end{bmatrix}\Rightarrow v_2=(1,-2)\).
+\[ x(t)=c_1e^{3t}\binom12+c_2e^{-t}\binom1{-2},\qquad c_1+c_2=2,\;2c_1-2c_2=0\Rightarrow c_1=c_2=1 \]
+<b>Interpret (this is the exam's part b):</b> \(x(t)=e^{3t}(1,2)+e^{-t}(1,-2)\). The \(e^{-t}\) mode dies; the solution eventually runs along the λ=3 eigen-direction, <i>unless</i> you start exactly on the stable line \((1,-2)\), where the coefficient vanishes and you decay to 0. <b>A saddle is stable on a set of measure zero.</b> That's the whole philosophy of stabilization: almost every perturbation eventually aligns you with the dominant mode.</p></details>
+<details><summary>Scalar-to-system conversion, and the SIR case study (the model with a threshold hiding in its eigenvalues)</summary>
+<p>Any \(n\)-th-order ODE becomes an \(n\times n\) system by stacking derivatives: \(x_1=y,\ x_2=y'\): \(y''+2y'+y=0\Rightarrow x'=\begin{bmatrix}0&1\\-1&-2\end{bmatrix}x\): tr=−2, det=1, disc=0 → repeated λ=−1, <b>the same critical damping</b> as §6 Ex 3, seen as a system. This is literally how <code>solve_ivp</code> sees your ODE.<br/><br/>
+<b>SIR epidemic</b> (\(S'= -\beta SI,\ I'=\beta SI-\gamma I\)): the disease-free equilibrium \((S,I)=(1,0)\) has Jacobian \(\begin{bmatrix}-\beta&-\beta\\0&\beta-\gamma\end{bmatrix}\), triangular, so read it (Ex D's skill): \(\lambda=\beta-\gamma,\ \lambda=0\) (the \(\lambda=0\) direction is the disease-free state itself, which is why this Jacobian is always singular); the infected-exponential \(I'\approx(\beta-\gamma)I\) grows iff \(\beta/\gamma&gt;1\). <b>R₀ = β/γ is an eigenvalue ratio</b>. "herd immunity threshold" is a stability statement in disguise, and it's the same \(|\lambda_2/\lambda_1|\)-style thinking as Visual 5.</p></details>
+<div class="use"><b>Uses.</b> Everything that settles, rings, or diverges: RLC transients; robot equilibria ("can this posture be stabilized?"); power-grid small-signal stability (an \(A\) with 10⁴ states. QR algorithm §4's raison d'être); load-balancing and consensus loops in distributed systems (eigenvalues of the mixing matrix = convergence rate of every gossip algorithm); flocking/steering; page-rank-adjacent random walks as continuous-time chains. The skill the industry pays for is exactly this section's: <b>predict behavior without simulating it</b>.</div>
+<div class="warnbox"><b>Pitfalls.</b> (1) <b>center vs. stable spiral</b> is the trace sign, and it's delicate, near-tr = 0 systems are hard to classify from approximate matrices (and nonlinear terms decide, know the caveat). (2) Eigenvector scaling is free, pick clean numbers; \(c_i\) absorbs it. (3) For complex λ write the <b>real</b> combination or your "solution" is complex-valued for a real system (the Euler expansion of §7.1, usually the missing step). (4) The \(c_i\) come from solving at \(t=0\), a system of equations for the coefficients in the eigenbasis: convert \(x(0)\) with \(P^{-1}\), don't eyeball it. (5) \(x'=Ax+f\): the homogeneous story classifies the <i>transient</i>; \(f\) adds a particular/forced response (§6's \(y_h+y_p\) again, and §8's tool handles the whole thing in one transform).</div>
+<div class="vidrow">
+<div class="vid" data-yt="ToIXSwZ1pJU" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/ToIXSwZ1pJU/hqdefault.jpg" alt="3Blue1Brown · Solving the heat equation" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · Solving the heat equation. DE3: an eigenbasis in action, every mode decaying as e^(-n²t)</div></div>
+
+</div>
+<p class="muted">Refs: MIT 18.03 lec 25–31 · Boyce &amp; DiPrima ch.7 (7.1–7.3 = core, 7.5 = the classification) · Hirsch–Smale–Devaney for the phase-plane pictures · Strogatz ch.5–6.</p>
+<div class="chapnav"><a href="#ode">← 6 · ODEs</a><a class="nx" href="#laplace">Next: 8 · Laplace →</a></div>
+</section>
+<!-- ============================== 8 ============================== -->
+<section class="card" id="laplace">
+<h2><span class="chno">08</span>Laplace transforms</h2>
+<div class="meta"><span class="pill">core</span><span class="pill">⏱ 30 min</span><span class="pill">prereq: §6 (+§7 for the stability reading)</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#l-def">The transform, a change of basis, not a spell</a></li>
+<li><a href="#l-table">The table, and how to derive every line</a></li>
+<li><a href="#l-step">Steps, impulses, delays, why Laplace beats §6</a></li>
+<li><a href="#l-poles">Poles, partial fractions, and stability</a></li>
+<li><a href="#l-viz">Visual 11, pole ↔ decay</a></li>
+<li><a href="#l-ex">Worked examples + numpy</a></li></ol></div>
+
+<div class="hist"><b>History.</b> Laplace (1780s) met this integral in probability and celestial mechanics, solving ODEs was a side effect. <b>Heaviside</b> (1890s) turned it into engineers' "operational calculus," treating \(p=d/dt\) as an algebraic symbol to crack circuit equations by pure manipulation. It worked brilliantly and was attacked for decades as unrigorous; the foundations (Doetsch, Widder, and later Schwartz's distributions to legitimize \(\delta\)) arrived only in the 1930s–50s. Once transfer functions matured in 20th-century control theory, Laplace became its working language: the \(s\)-domain is where engineers actually <i>think</i>.</div>
+
+<h3 id="l-def">1. The transform, de-magicked <a class="anchor" href="#l-def">#</a></h3>
+<div class="formula">\[ F(s)=\mathcal{L}\{f(t)\}=\int_0^\infty e^{-st}f(t)\,dt,\qquad s=\sigma+i\omega \]</div>
+<p><b>What it secretly is:</b> the (one-sided) inner product of \(f\) with \(e^{-st}\), and \(e^{-st}\) is an <b>eigenfunction of differentiation</b> (§3 Ex 2, §6.2). The Laplace transform is therefore "<i>project the signal onto the eigenfunctions of \(\frac{d}{dt}\) and keep the coefficients</i>", exactly §1's change of basis, run on a function space (and exactly the same sentence you'll read again in §9 about Fourier, on the imaginary axis). That's why differentiation gets so much simpler in the new coordinates.</p>
+<p><b>The payoff, derived by integration by parts</b>, do this once yourself and the formula is permanent:</p>
+<div class="formula">\[ \mathcal{L}\{y'\}=\int_0^\infty e^{-st}y'\,dt=\big[e^{-st}y\big]_0^\infty+s\int_0^\infty e^{-st}y\,dt=sY(s)-y(0),\qquad \mathcal{L}\{y''\}=s^2Y(s)-sy(0)-y'(0) \]</div>
+<p><b>Derivatives in \(t\) become multiplication by \(s\)</b>, with the initial conditions appearing automatically in the boundary term. One IVP becomes</p>
+<div class="formula">\[ \underbrace{ay''+by'+cy=g}_{\text{calculus problem}}\ \Longrightarrow\ (as^2+bs+c)\,Y(s)=(\text{IC terms})+G(s)\quad\text{· one algebra line} \]</div>
+<div class="note"><b>The characteristic polynomial just moved house.</b> That \(as^2+bs+c\) is <i>the same quadratic</i> §6.2 solved for \(r\). Its roots are now the <b>poles</b> of \(Y(s)\). The Laplace transform didn't invent a new method; it re-derived the characteristic equation while <i>also</i> absorbing the initial conditions and the forcing in one stroke. The partial-fraction numerators turn out to be the constants \(c_1,c_2\) of §6's method, same answer, one fewer "guess."</div>
+
+<h3 id="l-table">2. The table and how to derive each line <a class="anchor" href="#l-table">#</a></h3>
+<table><tr><th>\(f(t),\ t\ge0\)</th><th>\(F(s)\)</th><th>where it comes from</th></tr>
+<tr><td>\(1,\quad e^{at},\quad t^n\ (n=0,1,2,\dots)\)</td><td>\(\dfrac1s,\quad \dfrac1{s-a},\quad \dfrac{n!}{s^{n+1}}\)</td><td>the integral directly; \(t^n\) by parts, or differentiate \(1/s\) repeatedly ("differentiating under the integral", the same trick powers several rows below)</td></tr>
+<tr><td>\(\sin\omega t,\quad \cos\omega t\)</td><td>\(\dfrac{\omega}{s^2+\omega^2},\quad \dfrac{s}{s^2+\omega^2}\)</td><td>Euler: transform \(e^{i\omega t}\to\frac1{s-i\omega}\) and split real/imaginary parts</td></tr>
+<tr><td>\(e^{at}f(t)\)</td><td>\(F(s-a)\)</td><td><b>s-shifting:</b> the \(e^{at}\) absorbs into the \(e^{-st}\) kernel</td></tr>
+<tr><td>\(u(t-c)f(t-c)\)</td><td>\(e^{-cs}F(s)\)</td><td><b>t-shifting:</b> substitute \(\tau=t-c\); the \(e^{-sc}\) pulls out as a constant factor</td></tr>
+<tr><td>\(\delta(t-c)\)</td><td>\(e^{-cs}\)</td><td>\(\delta\)'s sampling property evaluated at \(t=c\)</td></tr>
+<tr><td>\((f*g)(t)=\int_0^t f(\tau)g(t-\tau)\,d\tau\)</td><td>\(F(s)G(s)\)</td><td>swap the order of a double integral: <b>convolution ↔ multiplication</b></td></tr>
+<tr><td>\(\int_0^t f(\tau)\,d\tau\)</td><td>\(F(s)/s\)</td><td>convolution with \(1\): the transfer function of an integrator</td></tr>
+<tr><td>\(t^n f(t)\)</td><td>\((-1)^n F^{(n)}(s)\)</td><td>differentiate under the integral sign, n times</td></tr></table>
+<p>Two rows deserve ownership beyond memorization: <b>s-shifting</b> (so \(e^{-t}\cos2t\) is \(\frac{s}{s^2+4}\) with \(s\to s+1\): every damped oscillation is one shift from a clean one) and <b>t-shifting</b> (a delay in time is a factor \(e^{-cs}\) in \(s\)). The table is small and <i>generative</i>, re-derive one line a day and within a week the chapter has no magic in it.</p>
+
+<h3 id="l-step">3. Steps, impulses, delays: the reason Laplace exists <a class="anchor" href="#l-step">#</a></h3>
+<p>§6's undetermined coefficients needs a tame \(g(t)\). Real inputs are switches, kicks, and packets: \(u(t-c)\) turns on at \(t=c\); \(\delta(t-c)\) is the unit impulse, a hammer strike, a sampled spike, the thing you <i>feed</i> a system to learn it. The t-shift rule handles both mechanically; and combining \(\mathcal{L}\{f*g\}=FG\) with the impulse gives the identity that <b>is</b> systems theory:</p>
+<div class="formula">\[ Y(s)=H(s)G(s)\quad\Longleftrightarrow\quad y(t)=(g*h)(t)=\int_0^t g(\tau)\,h(t-\tau)\,d\tau,\qquad h=\mathcal{L}^{-1}\{H\} \]</div>
+<p>\(H(s)=Y(s)/G(s)\) is the <b>transfer function</b>, the whole system packaged as a rational function; \(h\), its inverse transform, is the <b>impulse response</b>: what the system outputs when kicked once. Know one, you know the other. §6's variation-of-parameters formula was quietly computing this same convolution with the Green's function. The two chapters are one theorem with different hats. And every block-diagram box, filter spec, and PID-tuning conversation you'll ever meet is a rational \(H(s)\) wearing marketing copy.</p>
+
+<h3 id="l-poles">4. Poles, partial fractions, and stability <a class="anchor" href="#l-poles">#</a></h3>
+<p><b>Solving an IVP</b> is a four-step loop: transform each term → collect \(Y(s)\) algebraically → <b>partial fractions</b> → invert term-by-term from the table. The marks live in step three; the three denominator shapes you'll meet:</p>
+<div class="formula">\[ \frac{Ps+Q}{(s-r_1)(s-r_2)}=\frac{A}{s-r_1}+\frac{B}{s-r_2};\qquad \frac{P}{(s-r)^2}=\frac{A}{s-r}+\frac{B}{(s-r)^2};\qquad \frac{Ps+Q}{s^2+bs+c}=\text{complete the square}\to\text{damped sine/cosine} \]</div>
+<p>The <b>cover-up method</b> finds \(A\) at a simple pole \(r_1\) in one second: \(A=\lim_{s\to r_1}(s-r_1)Y(s)\). It fails silently on repeated roots, split off one factor at a time there.</p>
+<p><b>Stability = pole location, and this is §7 with new glasses.</b> Each simple pole \(p\) contributes an \(e^{pt}\) to the inverse transform, so</p>
+<div class="formula">\[ \text{all poles of }H(s)\text{ in the left half-plane }(\operatorname{Re}p\lt0)\iff\text{every response decays}\iff\text{stable} \]</div>
+<p>The \(j\omega\) axis is the stability boundary. A pole at \(-\sigma+i\omega\) gives a sinusoid of frequency \(\omega\) inside an envelope \(e^{-\sigma t}\): <b>distance from the axis = decay rate = \(-\operatorname{Re}\lambda\) in §7's portrait</b> (Visual 11 draws both, literally). Poles on the axis: marginal, sustained oscillation (§7's center); right half-plane: growth, unstable. And the reason this isn't a <i>new</i> fact: for \(x'=Ax\), transforming gives \(X(s)=(sI-A)^{-1}x_0\), whose poles solve \(\det(sI-A)=0\). <b>The poles ARE the eigenvalues.</b> §7 and §8 were never different chapters.</p>
+
+<h3 id="l-viz">5. Visual 11 · pole ↔ decay <a class="anchor" href="#l-viz">#</a></h3>
+<div class="viz"><span class="viztitle">Visual 11 · One pole, seen twice</span> Left: \(f(t)=e^{-at}u(t)\) in the time domain, half-life marked. Right: the same system as a single ✕ in the s-plane.
+<div class="controls"><label>a <input id="lapA" type="number" value="1.5" step="0.25"/></label></div>
+<canvas id="lapTimeCanvas"></canvas>
+<canvas id="lapPlaneCanvas"></canvas>
+<div class="kv muted" id="lapOut"></div>
+<div class="muted"><b>Slide \(a\to 0\):</b> the pole walks to the \(j\omega\) axis while the curve flattens toward a constant, the exact moment §7 calls "marginal." <b>Make \(a\) negative:</b> the pole crosses into the right half-plane and the curve grows, unstable. <b>Set \(a=3\):</b> half-life \(\ln 2/3\approx0.23\), read it off the dashed marker. The distance from the pole to the axis <i>is</i> the decay rate: §7's \(-\operatorname{Re}\lambda\), §6's characteristic root, and this section's "pole location," all the same number.</div>
+</div>
+
+<h3 id="l-ex">6. Worked examples + numpy <a class="anchor" href="#l-ex">#</a></h3>
+<details open><summary>Worked 1 · the basic IVP: y′+2y=e⁻ᵗ, y(0)=0 <span class="muted">(the same ODE as §6 Ex 1 with a different initial condition; two methods, one structure)</span></summary>
+<p>Transform: \(sY+2Y=\frac1{s+1}\Rightarrow Y=\frac1{(s+1)(s+2)}\). Partial fractions: \(\frac1{(s+1)(s+2)}=\frac{A}{s+1}+\frac{B}{s+2}\); cover-up: \(A=\frac1{-1+2}=1\), \(B=\frac1{-2+1}=-1\). So \(Y=\frac1{s+1}-\frac1{s+2}\) and <b>\(y=e^{-t}-e^{-2t}\)</b>. <b>Read the answer:</b> poles at \(-1\) and \(-2\), one contributed by the forcing, one by the system. That's §6's \(y_p+y_h\) visible directly in the denominator, no guessing at forms. Sanity: \(y(0)=0\) ✔, \(y\to0\) ✔ (both poles left half-plane). <b>Partial fractions is ~80% of the work on any Laplace exam question, get fast at it.</b></p></details>
+<details><summary>Worked 2 · a step forcing buys a piecewise answer for free</summary>
+<p>\(y'+y=u(t-1),\ y(0)=0\). Transform: \((s+1)Y=\frac{e^{-s}}{s}\Rightarrow Y=e^{-s}\cdot\frac1{s(s+1)}\). Partial-fraction the non-shifted part: \(\frac1{s(s+1)}=\frac1s-\frac1{s+1}\), inverse \(=1-e^{-t}\). By the t-shifting rule (\(e^{-cs}F(s)\leftrightarrow u(t-c)f(t-c)\)):
+\[ y(t)=u(t-1)\big(1-e^{-(t-1)}\big)=\begin{cases}0,&t\lt1\\[2pt]1-e^{-(t-1)},&t\ge1\end{cases} \]
+Dead until the switch flips, then the standard step response, delayed by exactly one. <b>This is Laplace's raison d'être:</b> §6 would handle this as two separate IVPs matched at \(t=1\); here it's one algebra line and \(e^{-cs}\) <i>is</i> the delay. (The same \(e^{-cs}\) models network latency, digital pipelines, and transmission lines, one table row, an entire field of engineering.)</p></details>
+<details><summary>Worked 3 · resonance seen as a double pole: y″+4y=cos2t, zero ICs</summary>
+<p>\((s^2+4)Y=\frac{s}{s^2+4}\Rightarrow Y=\frac{s}{(s^2+4)^2}\). Recognize (or table-row: differentiate \(\frac{\omega}{s^2+\omega^2}\) w.r.t. \(s\) and adjust) \(\frac{s}{(s^2+\omega^2)^2}\leftrightarrow\frac{t}{2\omega}\sin\omega t\), so with \(\omega=2\): <b>\(y=\frac t4\sin2t\)</b>. §6 Ex 4's linearly growing amplitude, without the guessing game. <b>The mechanism is now visible:</b> \(Y\) has <i>double poles</i> at \(\pm2i\), the forcing's frequency landed exactly on the system's. <b>Repeated pole ⇒ the \(t\)-multiplication ⇒ resonance.</b> §6's awkward "multiply your guess by \(t\)" rule was always a statement about pole multiplicity.</p></details>
+<details><summary>Worked 4 · the impulse response, and why it contains the whole system</summary>
+<p>\(y''+3y'+2y=\delta(t)\), zero ICs: \((s^2+3s+2)Y=1\Rightarrow Y=\frac1{(s+1)(s+2)}=\frac1{s+1}-\frac1{s+2}\Rightarrow h(t)=e^{-t}-e^{-2t}\). This \(h\) <b>is</b> the system: response to any input \(g\) is \(g*h\) (§8.3). Physical reads: \(h(0^+)=0\) but \(h'(0^+)=1\), a unit impulse injects <i>velocity</i>, never position; and \(h\) decays because both poles (\(-1,-2\)) are left-half-plane. Compare Worked 1: same \(Y\), different story, a forcing of \(e^{-t}\) into this system produced exactly \(e^{-t}*h\), computed identically. The transfer-function view and the algebraic view are one view.</p></details>
+<details><summary>Worked 5 · the canonical transfer function (Visual 10 in formula form)</summary>
+<p>Unity-DC-gain second-order system: \(H(s)=\dfrac{\omega_0^2}{s^2+2\zeta\omega_0 s+\omega_0^2}\), mass-spring-damper (\(m=1,k=\omega_0^2,c=2\zeta\omega_0\)), §6.2's equation packaged. Poles: \(s=-\zeta\omega_0\pm\omega_0\sqrt{\zeta^2-1}\). <b>ζ &lt; 1:</b> complex conjugate pair → underdamped step response with overshoot \(M_p=e^{-\pi\zeta/\sqrt{1-\zeta^2}}\) (the spiral of §7); <b>ζ = 1:</b> repeated real pole → critical (fastest, no overshoot); <b>ζ &gt; 1:</b> two real poles → overdamped creep. Settling time ≈ \(4/(\zeta\omega_0)\), <i>again</i> "distance from the axis."</p></details>
+<pre class="codeblock"><div class="cbhead"><span>demo_laplace.py · transfer functions, pole sweeps, and a numeric cross-check</span><button class="cbcopy">Copy</button></div><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+<span class="tok-kw">try</span>:
+    <span class="tok-kw">from</span> scipy.signal <span class="tok-kw">import</span> TransferFunction, impulse, step
+    <span class="tok-kw">from</span> scipy.integrate <span class="tok-kw">import</span> solve_ivp
+<span class="tok-kw">except</span> ImportError:
+    <span class="tok-fn">print</span>(<span class="tok-str">"pip install scipy numpy"</span>); raise SystemExit
+
+<span class="tok-com"># Worked 1: y'+2y = e^-t, y(0)=0.  Plant H=1/(s+2), input G=1/(s+1).</span>
+plant = TransferFunction([<span class="tok-num">1</span>], [<span class="tok-num">1</span>, <span class="tok-num">2</span>])         <span class="tok-com"># 1/(s+2): the one pole of §8, Visual 11</span>
+t, h = impulse(plant)                        <span class="tok-com"># impulse response = e^(-2t)u(t)</span>
+t, y = step(plant)                           <span class="tok-com"># step response  = (1 - e^(-2t))u(t)</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"pole:"</span>, plant.poles)                  <span class="tok-com"># [-2.] left half-plane -&gt; stable (the whole criterion!)</span>
+
+<span class="tok-com"># Worked 5: sweep zeta, print the pole pair and the step overshoot</span>
+w0 = <span class="tok-num">2.0</span>
+<span class="tok-kw">for</span> zeta <span class="tok-kw">in</span> (<span class="tok-num">0.1</span>, <span class="tok-num">0.5</span>, <span class="tok-num">1.0</span>, <span class="tok-num">2.0</span>):
+    sys = TransferFunction([w0**<span class="tok-num">2</span>], [<span class="tok-num">1</span>, <span class="tok-num">2</span>*zeta*w0, w0**<span class="tok-num">2</span>])
+    tt, yy = step(sys, T=np.<span class="tok-fn">linspace</span>(<span class="tok-num">0</span>, <span class="tok-num">10</span>, <span class="tok-num">2000</span>))
+    <span class="tok-fn">print</span>(<span class="tok-fn">f</span><span class="tok-str">"zeta={zeta:&lt;4} poles={np.round(sys.poles,3)} peak={yy.max():.3f}"</span>)
+<span class="tok-com"># zeta=0.1: poles -0.2+-2j   peak ~1.73  (ringing — the spiral of §7)</span>
+<span class="tok-com"># zeta=1.0: repeated real    peak=1.000  (critical — Visual 10's sweet spot)</span>
+<span class="tok-com"># The peak IS the phase portrait, measured as one scalar.</span>
+
+<span class="tok-com"># Cross-check Worked 1 by pure numerics (no transform, no CAS):</span>
+sol = <span class="tok-fn">solve_ivp</span>(<span class="tok-kw">lambda</span> t, y: [-<span class="tok-num">2</span>*y[<span class="tok-num">0</span>] + np.<span class="tok-fn">exp</span>(-t)], [<span class="tok-num">0</span>, <span class="tok-num">5</span>], [<span class="tok-num">0</span>],
+                t_eval=np.<span class="tok-fn">linspace</span>(<span class="tok-num">0</span>, <span class="tok-num">5</span>, <span class="tok-num">21</span>))
+hand = np.<span class="tok-fn">exp</span>(sol.t) - np.<span class="tok-fn">exp</span>(-<span class="tok-num">2</span>*sol.t)      <span class="tok-com"># e^-t - e^-2t</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"max|numeric - hand answer| ="</span>, np.<span class="tok-fn">abs</span>(sol.y[<span class="tok-num">0</span>] - hand).<span class="tok-fn">max</span>())  <span class="tok-com"># ~1e-9 ✔</span></code></pre>
+<div class="use"><b>Uses.</b> Circuit/transient analysis, the \(s\)-domain is literally how SPICE treats linear parts · control systems: transfer functions, PID design, Bode/Nyquist plots, gain/phase margins, all restatements of "where are the poles?" · signal filtering: the cutoff frequency of every RC/RL filter <i>is</i> its pole's real part; Visual 11's slider is a filter dial · delay: \(e^{-cs}\) models pure latency (networks, pipelines, transmission lines) · solving coupled linear systems <i>without ever computing eigenvectors</i>, the poles of \(Y(s)\) already encode them · and its discrete cousin, the \(z\)-transform (\(z=e^{sT}\)), is the foundation of digital control and DSP, the reason your audio interface works.</div>
+<div class="warnbox"><b>Pitfalls.</b> (1) Dropping the IC terms when transforming \(y'\), \(y''\), write \(sY-y(0)\) mechanically, half the errors in this chapter live here. (2) The t-shift rule needs the shift <i>inside</i> the function: \(\mathcal{L}\{u(t-c)f(t-c)\}=e^{-cs}F(s)\), but \(\mathcal{L}\{u(t-c)f(t)\}=e^{-cs}\mathcal{L}\{f(t+c)\}\), the classic. (3) Check partial fractions by recombining, or evaluate both sides at \(s=0\) (a free checksum: \(\int_0^\infty f=F(0)\) when it converges). (4) Impulse convention: \(\mathcal{L}\{\delta(t)\}=1\) assumes the integral captures the full spike at \(0^-\); state it if your text is picky. (5) If \(\deg\) numerator ≥ \(\deg\) denominator after clearing fractions, long-divide first, the polynomial part is impulses and derivatives of impulses hiding in the answer.</div>
+<div class="vidrow"><div class="vid" data-yt="-j8PzkZ70Lg" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/-j8PzkZ70Lg/hqdefault.jpg" alt="3Blue1Brown · Laplace prelude" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · The Physics of Euler's Formula, the visual prelude to the Laplace transform</div></div><div class="vid" data-yt="spUNpyF58BY" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/spUNpyF58BY/hqdefault.jpg" alt="3Blue1Brown · Fourier transform" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · But what is the Fourier Transform?. §9.6's bridge, watched early: the same eigenfunction story on the jω axis</div></div></div>
+<p class="muted">Refs: Kreyszig ch.6 · MIT OCW <a href="https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/" target="_blank" rel="noopener">18.03</a> lec 19–24 (Milner's notes are excellent here) · Paul's Online Notes, <a href="https://tutorial.math.lamar.edu/Classes/DE/LaplaceIntro.aspx" target="_blank" rel="noopener">Laplace Transforms chapter</a>, complete worked solutions · Boyce &amp; DiPrima ch.6 · Nise, <i>Control Systems Engineering</i> ch.2–4 (the engineering sequel) · Oppenheim–Willsky–Nawab, <i>Signals and Systems</i> ch.9. For video: the two clips above (Euler's-formula prelude + the Fourier-transform visual) preview exactly what §8 formalizes in s; MIT 18.03 lec 19–24 (linked in §11) carries the full problem sets.</p>
+<div class="chapnav"><a href="#systems">← 7 · Systems</a><a class="nx" href="#fourier">Next: 9 · Fourier →</a></div>
+</section>
+
+<!-- ============================== 9 ============================== -->
+<section class="card" id="fourier">
+<h2><span class="chno">09</span>Fourier series and the bridge to the transform</h2>
+<div class="meta"><span class="pill">core</span><span class="pill">⏱ 35 min</span><span class="pill">prereq: §1 (inner product!), integration by parts</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#f-def">The formulas, and why they're Gram–Schmidt</a></li>
+<li><a href="#f-conv">Convergence, symmetry, Gibbs</a></li>
+<li><a href="#f-parseval">Parseval: energy and the license to compress</a></li>
+<li><a href="#f-viz">Visuals 12–14, builder, spectrum, epicycles</a></li>
+<li><a href="#f-ex">Worked examples</a></li>
+<li><a href="#f-bridge">Bridge: Fourier transform → DFT → FFT</a></li></ol></div>
+
+<div class="hist"><b>History.</b> Fourier's 1807 memoir and 1822 <i><a href="https://archive.org/details/thorieanalytiqu00fourgoog" target="_blank" rel="noopener">Théorie analytique de la chaleur</a></i> claimed that essentially any temperature profile is a sum of sines and cosines, a scandal. Lagrange objected (having argued a version of the impossibility for decades; corners can't be smooth waves, he said, and he was wrong in the limit but right that something had to be proved); the resulting argument <i>forced</i> Dirichlet to state actual convergence conditions (1829), and Riemann invented his integral decades later to fix Fourier integration rigorously. <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Gibbs/" target="_blank" rel="noopener">Gibbs</a> (1899), after Wilbraham (1848!) noticed it, quantified the ~9% overshoot near a jump that no number of terms removes. Carleson's 1966 theorem (\(L^2\) functions have Fourier series converging almost everywhere) was called one of the hardest results of the century. Cooley–Tukey (1965) made the discrete version fast; the <a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1" target="_blank" rel="noopener">paper</a> launched digital signal processing, with it: streaming audio, JPEG, MRI, and modem handshake tones.</div>
+
+<h3 id="f-def">1. The formulas and why they are just Gram–Schmidt <a class="anchor" href="#f-def">#</a></h3>
+<div class="formula">\[ f(x)\sim \frac{a_0}{2}+\sum_{n=1}^\infty\left(a_n\cos\frac{n\pi x}{L}+b_n\sin\frac{n\pi x}{L}\right),\qquad a_n=\frac1L\int_{-L}^{L}f(x)\cos\frac{n\pi x}{L}\,dx,\quad b_n=\frac1L\int_{-L}^{L}f(x)\sin\frac{n\pi x}{L}\,dx \]</div>
+<div class="formula">\[ \text{Complex form:}\quad f\sim\sum_{n=-\infty}^{\infty}c_n\,e^{in\pi x/L},\qquad c_n=\frac1{2L}\int_{-L}^{L}f(x)\,e^{-in\pi x/L}\,dx \]</div>
+<p><b>The derivation is one §1 sentence.</b> Put an inner product on functions: \(\langle f,g\rangle=\int_{-L}^{L}f\,g\,dx\), the integral of a product <i>is</i> a dot product (§1's preview). The trig family is an <b>orthogonal set</b>:</p>
+<div class="formula">\[ \int_{-L}^{L}\cos\frac{m\pi x}L\cos\frac{n\pi x}L\,dx=\begin{cases}0,&m\ne n\\ L,&m=n\ne0\end{cases},\qquad \int_{-L}^{L}\sin\frac{m\pi x}L\cos\frac{n\pi x}L\,dx=0\ \ \forall m,n \]</div>
+<p>Prove it with the product-to-sum identities in three lines each (do it now, the \(\sin\perp\cos\) fact is just "odd function on a symmetric interval integrates to 0"). Then to extract \(a_n\): take the inner product of the whole series with \(\cos\frac{n\pi x}L\). <b>Every other term dies by orthogonality</b>; you're left with \(a_n\cdot L=\langle f,\cos_n\rangle\). That's the Euler formula. <b>a projection</b>, \(a_n=\langle f,\cos_n\rangle/\langle\cos_n,\cos_n\rangle\), the infinite-dimensional twin of Gram–Schmidt (§1.3) and the same move §8 made with \(e^{-st}\). Sines and cosines are not a magical family; they are <b>an orthonormal basis that happens to fit \(\frac{d}{dx}\): the eigenfunctions of differentiation on periodic functions</b> (\(\frac{d}{dx}e^{inx}=\,in\,e^{inx}\)). §0's program, executed at last: in this basis, differentiation is diagonal, multiply mode \(n\) by \(in\).</p>
+<div class="note"><b>Symmetry shortcuts = free integrals.</b> \(f\) even \(\Rightarrow\) \(b_n=0\) (cosine-only); \(f\) odd \(\Rightarrow\) \(a_n=0\) (sine-only), because even×odd is odd and odd functions integrate to 0 over \([-L,L]\). <b>Half-range expansions:</b> given \(f\) only on \((0,L)\), extend <i>evenly</i> → pure cosine series, or <i>oddly</i> → pure sine series, the same formula on \((0,L)\), two different functions outside it, two different series. And <b>half-wave symmetry</b> (\(f(x+L)=-f(x)\), like the square wave) kills every <i>even</i> harmonic. Check all three before writing one integral; exams are built on this paragraph.</div>
+
+<h3 id="f-conv">2. Convergence and the Gibbs phenomenon <a class="anchor" href="#f-conv">#</a></h3>
+<p>Dirichlet's conditions (piecewise monotone with finitely many jumps per period) suffice, and then the series converges to \(f(x)\) wherever \(f\) is continuous and to the <b>midpoint of the jump</b> otherwise: \(\frac{f(x^+)+f(x^-)}2\). A series of smooth functions can't produce a corner: it can only <i>average across</i> it. So the square wave at \(x=0\) converges to 0, not \(\pm1\): every such series splits the difference.</p>
+<p><b>Gibbs:</b> near a jump the partial sums overshoot by a fixed <b>≈ 8.949% of the jump height</b>, forever, increasing \(N\) narrows the spike (width \(\sim1/N\)) but never lowers it (the scaled limit is the sine integral \(\mathrm{Si}\)). Not a bug in your coefficients: it's the structural refusal of smooth functions to converge uniformly to a discontinuous one. Visual 12 shows you the overshoot standing its ground at \(N=61\). <b>Why a CS student cares:</b> the same constant causes ringing artifacts around sharp edges after JPEG quantization, in over-sharpened photos, and in reconstructed CT/MRI slices; the mitigation in every real pipeline is a <b>window</b> (smooth the edge first, pay in transition width to stop Gibbs), negotiation, not solution.</p>
+
+<h3 id="f-parseval">3. Parseval: energy and the license to compress <a class="anchor" href="#f-parseval">#</a></h3>
+<div class="formula">\[ \frac1L\int_{-L}^{L}|f(x)|^2\,dx=\frac{a_0^2}{2}+\sum_{n=1}^{\infty}\big(a_n^2+b_n^2\big)\qquad\text{(complex form: }\ \frac1{2L}\int|f|^2=\sum_{-\infty}^{\infty}|c_n|^2\text{)} \]</div>
+<p>Parseval is the <b>Pythagorean theorem in the orthogonal basis</b>: total energy = sum of squared components (write it as \(\|f\|^2=\sum|\langle f,e_n\rangle|^2\) and it's §1's theorem verbatim). Two uses you'll actually make: <b>(1)</b> a free checksum, compute both sides, mismatch means a coefficient is wrong (Ex 3 works it on the square wave); <b>(2)</b> it licenses lossy compression: discard the harmonics with the smallest \(|c_n|\) and you provably lose the least energy. That is the entire mathematics of the JPEG quality slider and MP3 bitrates. And the decay ladder: jump ⇒ \(c_n\sim1/n\); only a kink ⇒ \(\sim1/n^2\); \(C^k\) ⇒ \(\sim1/n^{k+1}\) (one integration by parts per derivative). <b>Smooth signals are cheap; edges are expensive</b>, which is exactly why cartoon-style images compress so well and film grain so badly.</p>
+
+<h3 id="f-viz">4. Visuals 12–14 <a class="anchor" href="#f-viz">#</a></h3>
+<div class="viz"><span class="viztitle">Visual 12 · The Fourier builder</span> Dashed grey = the target wave; green = the partial sum \(S_N\) with \(N\) harmonics.
+<div class="controls">
+<label>N <input id="fourN" type="range" min="1" max="61" step="1" value="9"/></label>
+<label>wave <select id="fourType"><option value="square">square, odd, bₙ=4/nπ, 1/n decay</option><option value="sawtooth">sawtooth, odd, bₙ=2(−1)ⁿ⁺¹/n, 1/n</option><option value="triangle">triangle, even, aₙ=8/π²n², 1/n²</option></select></label>
+</div>
+<canvas id="fourCanvas"></canvas>
+<div class="kv muted" id="fourLabel"></div>
+</div>
+<div class="grid2h">
+<div class="viz"><span class="viztitle">Visual 13 · The spectrum</span> \(|c_n|\) per harmonic: the frequency-domain portrait of the same wave. Bars brighter than the cut = the harmonics the current \(N\) keeps.
+<canvas id="fourSpecCanvas"></canvas>
+</div>
+<div class="viz"><span class="viztitle">Visual 14 · Epicycles: the complex form in motion</span> Each term \(c_ne^{inx}\) is a rotating arrow of length \(|c_n|\); chained tip-to-tail, the last tip's vertical position <i>draws</i> \(f(x)\). This is \(\sum c_n e^{inx}\) as a mechanism.
+<div class="controls"><button id="epiTog">pause</button></div>
+<canvas id="epiCanvas"></canvas>
+</div>
+</div>
+<div class="muted"><b>The guided sequence.</b> (1) Square wave at N=1, a humble sine; at N=9, an uncanny brick with wiggly edges; at N=61, the wiggles have become <i>one tight spike</i> at the jump, still ~9% tall. <b>Gibbs, measured with your eyes.</b> (2) Switch to triangle: same N, dramatically better, now look at Visual 13 and watch the bar heights collapse as \(1/n^2\) vs the saw/square's \(1/n\): <i>the spectrum is the convergence rate.</i> (3) Press play on Visual 14 and stare at it while re-reading §9.1: those circles are the projection coefficients of §1's Gram–Schmidt, rotating; the "sum of sinusoids" slogan finally has a body. The epicycles view also explains why audio engineers draw exactly these circles.</div>
+
+<h3 id="f-ex">5. Worked examples <a class="anchor" href="#f-ex">#</a></h3>
+<details open><summary>Worked 1 · the classic odd square wave (the one to memorize cold)</summary>
+<p>\(f=1\) on \((0,\pi)\), \(f=-1\) on \((-\pi,0)\), \(L=\pi\). Odd ⇒ \(a_n=0\) for free. Compute:
+\[ b_n=\frac1\pi\int_{-\pi}^{\pi}f\sin nx\,dx=\frac2\pi\int_0^{\pi}\sin nx\,dx=\frac2\pi\cdot\frac{1-\cos n\pi}{n}=\frac{2\big(1-(-1)^n\big)}{n\pi}=\begin{cases}\dfrac4{n\pi},&n\ \text{odd}\\[4pt]0,&n\ \text{even}\end{cases} \]
+\[ \boxed{\,f(x)\sim\frac4\pi\left(\sin x+\frac{\sin 3x}{3}+\frac{\sin 5x}{5}+\cdots\right)\,} \]
+Even \(n\) die because of half-wave symmetry (§9.1's note), not by accident. First harmonic amplitude \(4/\pi\approx1.273&gt;1\): the overshoot seed is already in \(b_1\). At \(x=\pi/2\): \(1=\frac4\pi(1-\frac13+\frac15-\cdots)\), the Leibniz series for \(\pi/4\), which is Fourier series casually evaluating itself.</p></details>
+<details><summary>Worked 2 · half-range cosine expansion of f(x)=x on (0,π)</summary>
+<p>Even extension ⇒ cosine series. \(a_0=\frac2\pi\int_0^\pi x\,dx=\pi\). For \(n\ge1\), integrate by parts (\(u=x,\ dv=\cos nx\,dx\)):
+\[ a_n=\frac2\pi\int_0^\pi x\cos nx\,dx=\frac2\pi\left[\frac{x\sin nx}{n}+\frac{\cos nx}{n^2}\right]_0^\pi=\frac{2\big((-1)^n-1\big)}{\pi n^2}=\begin{cases}\dfrac{-4}{\pi n^2},&n\ \text{odd}\\[4pt]0,&n\ \text{even}\end{cases} \]
+\[ f(x)\sim\frac\pi2-\frac4\pi\left(\cos x+\frac{\cos 3x}{9}+\frac{\cos 5x}{25}+\cdots\right) \]
+The even extension is a <b>triangle wave</b>: continuous, kinked at \(0,\pi\). Coefficients decay \(1/n^2\) where the square's decayed \(1/n\), <i>one extra power of \(n\) bought by one extra degree of continuity</i>. At \(x=0\) the series gives \(\frac\pi2-\frac4\pi\cdot\frac{\pi^2}8=0\)... matching the even extension's own value \(|0|=0\), the series converges to 0 ✔ and simultaneously proves \(\sum_{\text{odd}}1/n^2=\pi^2/8\). Smoothness ⇔ decay: the rule that makes gradients compress and edges resist.</p></details>
+<details><summary>Worked 3 · Parseval as checksum (and a bonus: Basel via Fourier)</summary>
+<p>Square wave: left side \(\frac1\pi\int_{-\pi}^{\pi}1\,dx=2\) (since \(f^2\equiv1\)); right side \(\sum_{n\text{ odd}}b_n^2=\sum_{n\text{ odd}}\frac{16}{n^2\pi^2}\). Equate: \(\frac{16}{\pi^2}\sum_{\text{odd}}\frac1{n^2}=2\Rightarrow\sum_{\text{odd}}\frac1{n^2}=\frac{\pi^2}{8}\). <b>a famous series, proved by computing an integral two ways.</b> (The sawtooth version gives \(\sum 1/n^2=\pi^2/6\), the Basel problem.) <b>Exam habit:</b> finish any coefficient computation, then run Parseval; if the energies disagree, a \(b_n\) is wrong; it catches arithmetic errors that "look fine."</p></details>
+<details><summary>Worked 4 · solving the heat equation with the basis (the "why" behind the whole chapter)</summary>
+<p>Rod on \((0,\pi)\): \(u_t=u_{xx}\), \(u(0,t)=u(\pi,t)=0\), initial profile \(u(x,0)=f(x)=\sum b_n\sin nx\). Separate variables \(u=XT\): \(X''=\lambda X\) with \(X(0)=X(\pi)=0\). <b>an eigenvalue problem for \(\frac{d^2}{dx^2}\)</b>, giving \(\lambda_n=-n^2\), \(X_n=\sin nx\); time then contributes \(e^{-n^2t}\) per mode, so
+\[ u(x,t)=\sum_{n}b_n\,e^{-n^2t}\sin nx \]
+<b>Every mode evolves independently and high modes die like \(e^{-n^2t}\): the heat equation smooths, hard and fast, and the Fourier coefficients are why.</b> Wave equation instead gives \(e^{\pm int}\) (oscillation, no decay). This is §0's thesis, diagonalize the operator, applied to a PDE: the sine basis diagonalizes \(d^2/dx^2\) exactly as eigenvectors diagonalize a matrix (§5). §9 wasn't the end of the material; it was the last chapter of <i>linear</i> methods.</p></details>
+<pre class="codeblock"><div class="cbhead"><span>demo_fourier.py · FFT to find hidden tones, low-pass filter, and MEASURE the Gibbs constant</span><button class="cbcopy">Copy</button></div><code><span class="tok-kw">import</span> numpy <span class="tok-kw">as</span> np
+rng = np.<span class="tok-fn">default_rng</span>(<span class="tok-num">7</span>)
+N, fs = <span class="tok-num">1024</span>, <span class="tok-num">200.0</span>                       <span class="tok-com"># samples, sampling rate (Hz)</span>
+t = np.<span class="tok-fn">arange</span>(N)/fs
+x = np.<span class="tok-fn">sin</span>(<span class="tok-num">2</span>*np.<span class="tok-fn">pi</span>*<span class="tok-num">7</span>*t) + <span class="tok-num">0.5</span>*np.<span class="tok-fn">sin</span>(<span class="tok-num">2</span>*np.<span class="tok-fn">pi</span>*<span class="tok-num">23</span>*t) + rng.<span class="tok-fn">normal</span>(<span class="tok-num">0</span>, <span class="tok-num">.2</span>, N)
+
+X = np.<span class="tok-fn">fft</span>(x)                            <span class="tok-com"># the DFT of §9.6</span>
+freqs = np.<span class="tok-fn">fftfreq</span>(N, <span class="tok-num">1</span>/fs)
+top = np.<span class="tok-fn">sort</span>(freqs[np.<span class="tok-fn">argsort</span>(np.<span class="tok-fn">abs</span>(X))[::-1][:<span class="tok-num">5</span>]])
+<span class="tok-fn">print</span>(<span class="tok-str">"spectral peaks (Hz):"</span>, top)       <span class="tok-com"># you just recovered 7 and 23 from noise</span>
+
+<span class="tok-com"># Low-pass: zero everything above 12 Hz, invert. Visual 13's "keep N harmonics"</span>
+Y = X.<span class="tok-fn">copy</span>(); Y[np.<span class="tok-fn">abs</span>(freqs) &gt; <span class="tok-num">12</span>] = <span class="tok-num">0</span>
+<span class="tok-fn">print</span>(<span class="tok-str">"energy kept:"</span>, np.<span class="tok-fn">sum</span>(np.<span class="tok-fn">abs</span>(Y)**<span class="tok-num">2</span>)/np.<span class="tok-fn">sum</span>(np.<span class="tok-fn">abs</span>(X)**<span class="tok-num">2</span>))  <span class="tok-com"># Parseval, discretely</span>
+
+<span class="tok-com"># Gibbs, measured: peak of the square-wave partial sum, N -> huge</span>
+<span class="tok-kw">def</span> <span class="tok-fn">square_partial</span>(N, xs):
+    <span class="tok-kw">return</span> np.<span class="tok-fn">sum</span>([<span class="tok-num">4</span>/(k*np.<span class="tok-fn">pi</span>)*np.<span class="tok-fn">sin</span>(k*xs) <span class="tok-kw">for</span> k <span class="tok-kw">in</span> <span class="tok-fn">range</span>(<span class="tok-num">1</span>, N+<span class="tok-num">1</span>, <span class="tok-num">2</span>)], axis=<span class="tok-num">0</span>)  <span class="tok-com"># odd k only, k &lt;= N</span>
+xs = np.<span class="tok-fn">linspace</span>(<span class="tok-num">1e-4</span>, np.<span class="tok-fn">pi</span>/<span class="tok-num">2</span>, <span class="tok-num">200000</span>)   <span class="tok-com"># just left of the jump region</span>
+<span class="tok-kw">for</span> N <span class="tok-kw">in</span> (<span class="tok-num">10</span>, <span class="tok-num">100</span>, <span class="tok-num">1000</span>, <span class="tok-num">10000</span>):
+    peak = square_partial(N, xs).<span class="tok-fn">max</span>()
+    <span class="tok-fn">print</span>(<span class="tok-fn">f</span><span class="tok-str">"N={N:&gt;6}  max = {peak:.6f}  overshoot {(peak-1)/2*100:.2f}%"</span>)
+<span class="tok-com"># N=10: 9.12%, N=100: 8.95%, N=10000: 8.95%... it does NOT go to 0.</span>
+<span class="tok-com"># The /2 matters: the square wave jumps by 2, so "8.949% overshoot" always means 8.949% OF THE</span>
+<span class="tok-com"># JUMP HEIGHT = (peak-1)/2, not of the plateau value 1 (which would read a misleading 17.9%).</span>
+<span class="tok-com"># The limit is the Gibbs constant (1/pi)∫_0^pi (sin t/t)dt - 1/2 ≈ 0.08949.</span></code></pre>
+<h3 id="f-bridge">6. Bridge: Fourier transform → DFT → FFT <a class="anchor" href="#f-bridge">#</a></h3>
+<p>Let \(L\to\infty\): the frequency spacing \(\Delta\omega=\pi/L\to0\), the discrete sum of harmonics becomes an integral, and the <b>Fourier transform</b> appears (which is precisely §8's transform pinned to the imaginary axis \(s=i\omega\), one more reason the two chapters are twins):
+\[ \hat f(\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt,\qquad f(t)=\frac1{2\pi}\int_{-\infty}^{\infty}\hat f(\omega)e^{i\omega t}\,d\omega \]</p>
+<p>The property list rewrites itself from §8: \(\widehat{f'}=i\omega\hat f\) (the eigenfunction fact, again); modulation/shift in \(t\) ↔ phase in \(\omega\); <b>convolution ↔ multiplication</b> (identical to §8.3, same theorem in \(e^{i\omega t}\) coordinates); multiplication in one domain ↔ convolution in the other (why sampling a signal = repeating its spectrum: <b>aliasing</b>, the Nyquist–Shannon theorem, and every "moiré on a plaid shirt" you've ever seen); Parseval's identity integral version.</p>
+<p><b>Discretize:</b> take \(N\) samples and evaluate on \(N\) equally spaced frequencies → the <b>DFT</b>
+\[ X_k=\sum_{n=0}^{N-1}x_n\,e^{-2\pi i kn/N}, \]
+a matrix–vector product with the Fourier matrix \(F\), whose entries are the \(N\)-th roots of unity. Direct cost: \(O(N^2)\). <b>The FFT:</b> split even/odd indices and \(F_N\) <i>factors</i> into two \(F_{N/2}\) copies plus a diagonal of cheap "twiddle" roots: \(F_N=\begin{bmatrix}I&amp;D\\ I&amp;-D\end{bmatrix}\begin{bmatrix}F_{N/2}&amp;0\\0&amp;F_{N/2}\end{bmatrix}\) (up to reindexing), so \(T(N)=2T(N/2)+O(N)=O(N\log N)\). <b>A fast Fourier transform is fast because a matrix factorization was hiding inside the sum</b>, the same "LU of a structured matrix" idea as §2, executed on roots of unity. On \(N=10^6\): ~50,000× speedup, which is why the entire digital-signal world exists. NumPy's convention (<a href="https://numpy.org/doc/2.3/reference/generated/numpy.fft.fft.html" target="_blank" rel="noopener">docs</a>): negative exponent forward, \(1/N\) only on the inverse; check it once so a phase flip never costs you an afternoon.</p>
+<div class="use"><b>Uses.</b> MP3/AAC = FFT filterbank + psychoacoustic masking (throw away the small \(|c_n|\) a human can't hear. Parseval's mercy) · JPEG = 2-D DCT (§9's cosine-only half-range series of Worked 2, discretized) + quantize the high frequencies · spectrograms and Shazam fingerprints (hashes of FFT peak pairs) · filtering: denoise, equalize, band-limit by editing coefficients, the demo above · solving PDEs mode by mode (Worked 4) · fast convolution and big-integer/polynomial multiplication (\(O(N\log N)\), used in real crypto libraries) · the <b>graph Fourier transform</b>: eigenvectors of the Laplacian (§4's spectral row) generalize "frequency" to networks, spectral clustering and GNNs are §9 transplanted onto graphs · quantum computing: momentum basis = Fourier transform of position basis.</div>
+<div class="warnbox"><b>Pitfalls.</b> (1) The \(a_0/2\): the <i>average value</i> of the wave is \(a_0/2\), and the convention exists so the \(a_n\) formula works at \(n=0\), first thing a grader checks. (2) Write \(1-\cos n\pi=1-(-1)^n\) explicitly; "even terms vanish" is worth knowing cold and citing. (3) Complex coefficients: \(c_n=(a_n-ib_n)/2\), the factor ½ and the sign of the imaginary part break every downstream Parseval check when dropped. (4) \(\int_{-L}^{L}\cos^2\frac{n\pi x}{L}dx=L\), not \(2L\), a factor-2 error invisible to the eye and fatal to coefficients; Parseval (Ex 3) catches it. (5) Sampling: the Nyquist rule, sample below \(2f_{\max}\) and high frequencies <i>impersonate</i> low ones (aliasing, and the demo's \(1/N\) convention note).</div>
+<div class="vidrow">
+<div class="vid" data-yt="spUNpyF58BY" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/spUNpyF58BY/hqdefault.jpg" alt="3Blue1Brown · But what is the Fourier Transform?" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · But what is the Fourier Transform? A visual introduction (~22 min, watch it while Visual 14 runs)</div></div>
+<div class="vid" data-yt="r6sGWTCMz2k" tabindex="0" role="button"><img src="https://i.ytimg.com/vi/r6sGWTCMz2k/hqdefault.jpg" alt="3Blue1Brown · But what is a Fourier series" loading="lazy"/><span class="vplay"></span><div class="vcap">3Blue1Brown · But what is a Fourier series? From heat flow to drawing with circles. DE4 (watch while Visual 14 runs)</div></div>
+</div>
+<p class="muted">Refs: Stein &amp; Shakarchi, <i>Fourier Analysis: An Introduction</i> ch.2–3 (the convergence/Gibbs story done properly) · Bracewell, <i>The Fourier Transform and Its Applications</i> (intuition + the best Gibbs pictures) · 3Blue1Brown's Fourier/FFT visual essays · MIT OCW <a href="https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/" target="_blank" rel="noopener">18.03</a> lec 32–35 · Cooley &amp; Tukey, <a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1" target="_blank" rel="noopener">1965 paper</a> · <a href="https://numpy.org/doc/2.3/reference/generated/numpy.fft.fft.html" target="_blank" rel="noopener">numpy.fft docs</a> · MacTutor: <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Fourier.html" target="_blank" rel="noopener">Fourier</a>, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Gibbs/" target="_blank" rel="noopener">Gibbs</a>.</p>
+<div class="chapnav"><a href="#laplace">← 8 · Laplace</a><a class="nx" href="#capstone">Next: 10 · CS case studies →</a></div>
+</section>
+<!-- ============================== 10 ============================== -->
+<section class="card" id="capstone">
+<h2><span class="chno">10</span>CS case studies: it all ties together</h2>
+<div class="meta"><span class="pill">capstone</span><span class="pill">⏱ 20 min</span><span class="pill">all of §1–§9</span></div>
+<p>The point of this chapter is the <b>connections</b>: each case study is written so you can see two or three earlier chapters colliding in one real system. If a paragraph names a section, click back, the review effect comes from re-reading it <i>with the application in hand</i>.</p>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#c-graphics">A · The graphics pipeline (§2, §3, §5)</a></li>
+<li><a href="#c-pagerank">B · PageRank at scale (§4, §5)</a></li>
+<li><a href="#c-audio">C · Audio filtering &amp; JPEG (§8, §9)</a></li>
+<li><a href="#c-netflix">D · Recommender systems via SVD (§5)</a></li>
+<li><a href="#c-control">E · Control &amp; stability (§6, §7, §8)</a></li>
+<li><a href="#c-pyramid">F · The one-page pyramid</a></li></ol></div>
+
+<h3 id="c-graphics">A. The graphics pipeline <a class="anchor" href="#c-graphics">#</a></h3>
+<p>A vertex starts in <b>model space</b> and ends in <b>clip space</b> through a chain of linear (affine, projective) maps:
+\[ \underbrace{\text{model}}_{\text{rotate+scale+translate}}\ \to\ \underbrace{\text{world}}_{\text{camera position}}\ \to\ \underbrace{\text{view}}_{\text{camera look}}\ \to\ \underbrace{\text{projection}}_{\text{perspective, }\det=0\text{ crush }3D\to2D} \]
+Each is a 4×4 homogeneous matrix (§3 Ex 4); the GPU multiplies them into <b>one</b> MVP matrix once per frame (§2.1's composition), then applies it to every vertex. "factor once, apply many." Back in Visual 3, the <b>Project</b> preset (\(\det=0\)) <i>is</i> the orthographic camera flattening the scene; <b>Shear</b> is a skew; the eigenvector lines are the invariant axes. And an <b>oriented bounding box</b> (§5.1's powers of the covariance matrix / spectral theorem): the PCA axes of a mesh's vertices are its eigenvectors, a tight-fit box for collision detection, computed by one eigen-decomposition with no search. §1's orthogonality is why normals transform by \((M^{-1})^T\): a non-orthogonal model matrix shears your lighting if you forget.</p>
+
+<h3 id="c-pagerank">B. PageRank, at scale <a class="anchor" href="#c-pagerank">#</a></h3>
+<p>The web's link matrix \(M\) (column-stochastic, §4.6) has dominant eigenvalue exactly \(\lambda_1=1\) by construction. PageRank is its \(\lambda_1\) eigenvector, computed by <b>power iteration</b> (Visual 5), not by diagonalizing, because a \(30\text{ billion}\times30\text{ billion}\) matrix can't be: but power iteration only needs a matrix-vector product, and \(M\) is sparse, so each iteration is cheap. Convergence rate \(|\lambda_2/\lambda_1|^k\): the <b>second eigenvalue's size is the cost</b> of the whole ranking. This is why the actual algorithm adds damping \(G=\alpha M+(1-\alpha)\tfrac1n ee^T\) with \(\alpha\approx0.85\), It shrinks \(|\lambda_2|\), manufacturing the eigenvalue gap that Visual 5's rotation case lacked. <b>The single most consequential computation in CS history is "find the dominant eigenvector"</b>. §4's abstract object, run on the planet.</p>
+
+<h3 id="c-audio">C. Audio &amp; image filtering <a class="anchor" href="#c-audio">#</a></h3>
+<p>In Visual 12, <b>keeping the first N harmonics is exactly an ideal low-pass filter.</b> The Gibbs ringing you see at the square wave's jump is the same artifact as the halos around sharp edges in an over-sharpened photo, and the reason real filters use <b>windows</b> (Hamming/Kaiser): trade a slightly wider transition band for killing the ringing. Gibbs, negotiated with, not solved. The FFT (§9.6) does the decomposition in \(O(N\log N)\); the demo in §9 multiplies by a mask and inverse-transforms. <b>JPEG</b>: cut the image into 8×8 blocks, apply the 2-D <b>DCT</b> (the half-range cosine series of §9 Worked 2, discretized, even symmetry, so sines vanish), then <b>quantize the high-frequency coefficients hard</b> (divide by a frequency-weighted table and round). That rounding <i>is</i> the lossy compression, and Parseval (§9.3) is why it's tolerable: the discarded coefficients were the smallest-energy components. The "quality" slider is the size of the divisor. §8's RC-circuit pole and §9's harmonic cut are the same low-pass idea in the two domains. Visual 11's pole <i>is</i> an RC filter's cutoff.</p>
+
+<h3 id="c-netflix">D. Recommender systems via SVD <a class="anchor" href="#c-netflix">#</a></h3>
+<p>The user × movie rating matrix \(R\) is non-square, huge, and 99% empty, plain eigen-decomposition is out (§5's "square + independent eigenvectors"), but <b>SVD always applies</b>. The truncated SVD \(R_k=\sum_{i\le k}\sigma_iu_iv_i^T\) (Eckart–Young, §5.5) forces \(R\approx\) (users × latent factors)·(factors × movies), and each latent factor is a taste dimension ("how much sci-fi," "how much arthouse"). Predict an unseen entry by reconstructing from the top \(k\), exactly the §5.5 rank-compression demo scaled up, and the mathematical core of the 2009 Netflix Prize winner (a refined SVD-family method). <b>The same \(U\Sigma V^T\) that Visual 6 morphs is the one that finds you movies</b>. §5's "abstract generalization" is a working product.</p>
+
+<h3 id="c-control">E. Control &amp; stability <a class="anchor" href="#c-control">#</a></h3>
+<p>A mass-spring-damper \(my''+cy'+ky=F(t)\) is §6.2 and §7 and §8 simultaneously. Overdamped (two real negative roots) / underdamped (complex pair → spiral, Visual 9/10) / undamped (pure imaginary → center). A controller wants the closed-loop poles left of the axis and a fast-but-not-oscillatory step response, i.e. tune \(\zeta\) just below 1 (Visual 10's sweet spot: small overshoot, fastest settle). <b>Poles in LHP ⇔ stable</b> (§8.4) is the frequency-domain restatement of the trace/det test (§7.2) is the eigenvalue condition (§4): <b>one fact, three vocabularies</b>, exactly the §0 thesis. In discrete systems (a flight computer, a game loop at fixed dt) the eigenvalue is measured in the \(z\)-plane, and "stable" becomes "inside the unit circle \(|z|&lt;1\)". §6's numerical-stability demo (\(|1+h\lambda|&lt;1\)) is this rule to one decimal place.</p>
+
+<h3 id="c-pyramid">F. The one-page pyramid <a class="anchor" href="#c-pyramid">#</a></h3>
+<div class="formula">\[ \underbrace{Av=\lambda v}_{\S4} \;\Rightarrow\; \underbrace{A=PDP^{-1}}_{\S5} \;\Rightarrow\; \underbrace{A^k=PD^kP^{-1},\ e^{At}=Pe^{Dt}P^{-1}}_{\S5,\S7} \;\Rightarrow\; \underbrace{x'=Ax\ \text{classified by}\ \operatorname{Re}\lambda}_{\S7} \;\Leftrightarrow\; \underbrace{\text{poles in LHP}}_{\S8} \;\Leftrightarrow\; \underbrace{\text{Fourier = the }\lambda\text{-basis of }d/dt}_{\S9} \]</div>
+<p>And the foundations under it: everything is a <b>linear map between vector spaces</b> (§1, §3) written as a <b>matrix</b> (§2), whose <b>kernel and rank</b> tell you solvability, whose <b>orthogonal structure</b> (§1 Gram–Schmidt) gives least-squares and Fourier, and whose generalization to non-square/non-diagonalizable maps is the <b>SVD</b> (§5). <b>You have now read the whole semester as one argument.</b> The 300-year timeline in §0 was the same argument, discovered out of order because applications (heat, springs, orbits, webs, pixels) kept arriving before the abstraction caught up.</p>
+<div class="chapnav"><a href="#fourier">← 9 · Fourier</a><a class="nx" href="#exam">Next: 11 · Exam pack →</a></div>
+</section>
+
+<!-- ============================== 11 ============================== -->
+<section class="card" id="exam">
+<h2><span class="chno">11</span>Exam pack + master references</h2>
+<div class="meta"><span class="pill">reference</span><span class="pill">the last thing to read, the first thing to review</span></div>
+<div class="toc"><b>On this page</b><ol>
+<li><a href="#x-algo">Seven recipes</a></li>
+<li><a href="#x-drill">90-minute drill (with solutions)</a></li>
+<li><a href="#x-cheat">One-screen cheat sheet</a></li>
+<li><a href="#x-refs">Master references</a></li></ol></div>
+
+<h3 id="x-algo">1. Seven recipes: what to do, in order <a class="anchor" href="#x-algo">#</a></h3>
+<table>
+<tr><th>If the question asks…</th><th>Do this, in this order</th></tr>
+<tr><td><b>Is it a subspace?</b></td><td>Check \(0\in W\) (fastest no), then closure under + and scalar mult. State a basis + dim if yes. (§1)</td></tr>
+<tr><td><b>Solve \(Ax=b\)?</b></td><td>Eliminate to \(U\). Pivot in augmented column → none. No free vars → unique. Free vars → \(x_p+\) null space. For many \(b\): \(LU\). (§2)</td></tr>
+<tr><td><b>Eigenvalues/vectors?</b></td><td>\(\det(A-\lambda I)=0\) → \((A-\lambda I)v=0\) → <b>check \(Av=\lambda v\)</b>. Triangular? read the diagonal. 2×2? use \(\lambda^2-(\operatorname{tr})\lambda+\det\). Verify \(\sum\lambda=\operatorname{tr}\), \(\prod\lambda=\det\). (§4)</td></tr>
+<tr><td><b>Diagonalize / \(A^k\)?</b></td><td>Need \(n\) independent eigenvectors (distinct \(\lambda\) or symmetric). Stack \(P\), check \(\det P\neq0\). \(A^k=PD^kP^{-1}\). (§5)</td></tr>
+<tr><td><b>2nd-order ODE?</b></td><td>Characteristic equation \(ar^2+br+c=0\); three root cases (§6.2). For \(g\neq0\): \(y_h\) first, guess \(y_p\) by family, <b>multiply by \(t\) if it overlaps \(y_h\)</b> (resonance), then apply ICs. (§6)</td></tr>
+<tr><td><b>System \(x'=Ax\) / classify?</b></td><td>Eigen-decompose → \(c_1e^{\lambda_1t}v_1+c_2e^{\lambda_2t}v_2\). Stability: <b>sign of \(\operatorname{Re}\lambda\)</b>, or 2×2 shortcut: \(\det&lt;0\)=saddle; \(\det&gt;0,\operatorname{tr}&lt;0\)=stable (node if \(\operatorname{tr}^2\!\ge\!4\det\) else spiral). (§7)</td></tr>
+<tr><td><b>Laplace?</b></td><td>Transform (write \(sY-y(0)\) etc. mechanically) → solve for \(Y(s)\) → <b>partial fractions</b> (the real work) → invert by table. Step/delta forcing → \(e^{-cs}\) t-shift rule. Poles left half-plane ⇔ stable. (§8)</td></tr>
+<tr><td><b>Fourier?</b></td><td><b>Check even/odd first</b> (kills half the coefficients). Compute Euler integrals; note \(1-(-1)^n\). Half-range ⇒ extend evenly (cosine) or oddly (sine). State convergence at jumps = midpoint. Parseval as a checksum. (§9)</td></tr>
+</table>
+
+<h3 id="x-drill">2. 90-minute self-timed drill <a class="anchor" href="#x-drill">#</a></h3>
+<details><summary>The five problems</summary>
+<ol>
+<li><b>(15 min)</b> \(A=\begin{bmatrix}3&1\\1&3\end{bmatrix}\): eigen-decompose, write \(A=PDP^{-1}\), and compute \(A^5\) exactly.</li>
+<li><b>(20 min)</b> Solve \(y''+2y'+5y=0\). Then build the matrix \(A=\begin{bmatrix}0&1\\-5&-2\end{bmatrix}\), find its eigenvalues, and classify the phase portrait, and explain in one sentence why the two answers must agree.</li>
+<li><b>(15 min)</b> Solve by Laplace: \(y'+3y=\delta(t-1),\ y(0)=0\). Where is the pole, and what does it say about stability?</li>
+<li><b>(25 min)</b> \(f(x)=x^2\) on \((-\pi,\pi)\): find its Fourier series. State whether it's even/odd, which coefficients vanish, compute the rest, and evaluate \(\sum 1/n^2\) using Parseval.</li>
+<li><b>(15 min)</b> Out loud, no notes: give one concrete CS application of §4, §5, §7, §8, §9, and name <i>which specific fact</i> (eigenvalue / pole / coefficient) each application hinges on.</li>
+</ol></details>
+<details><summary>Solutions (attempt first!)</summary>
+<p><b>1.</b> \(\lambda=4,2\); \(v=(1,1),(1,-1)\). \(P=\begin{bmatrix}1&1\\1&-1\end{bmatrix}\), \(A^5=P\,\mathrm{diag}(4^5,2^5)P^{-1}=\tfrac12\begin{bmatrix}1024+32&1024-32\\1024-32&1024+32\end{bmatrix}=\begin{bmatrix}528&496\\496&528\end{bmatrix}\). <span class="muted">(Symmetric ⇒ orthogonal eigenbasis, eigen-directions are the 45° axes. Visual 3's "Symmetric" preset is the same lesson, different eigenvalues.)</span><br/>
+<b>2.</b> \(r^2+2r+5=0\Rightarrow r=-1\pm2i\Rightarrow y=e^{-t}(C_1\cos2t+C_2\sin2t)\). System: \(\operatorname{tr}=-2,\det=5,\operatorname{tr}^2-4\det=4-20&lt;0\) → complex, \(\operatorname{Re}=-1&lt;0\) → <b>stable spiral</b>. They agree because <b>the scalar characteristic equation <i>is</i> the system's</b> (\(\lambda\) of \(A\) = root of the ODE). §6/§7's equivalence, Visual 10 at \(\zeta=1/\sqrt5\).<br/>
+<b>3.</b> \((s+3)Y=e^{-s}\Rightarrow Y=\frac{e^{-s}}{s+3}\Rightarrow y=u(t-1)e^{-3(t-1)}\). Pole at \(s=-3\), left half-plane → <b>stable</b>; the impulse at \(t=1\) just restarts the exponential decay, delayed by 1 (§8.3's delay rule).<br/>
+<b>4.</b> Even ⇒ \(b_n=0\). \(a_0=\frac2\pi\int_0^\pi x^2dx=\frac{2\pi^2}3\)… full: \(a_n=\frac{4(-1)^n}{n^2}\). \(x^2=\frac{\pi^2}3+\sum_{n\ge1}\frac{4(-1)^n}{n^2}\cos nx\). Parseval: \(\frac1\pi\int_{-\pi}^{\pi}x^4dx=\frac{a_0^2}2+\sum a_n^2\) → \(\frac{2\pi^4}5=\frac{2\pi^4}9+16\sum\frac1{n^4}\) (gives \(\sum1/n^4=\pi^4/90\)); evaluating the series at \(x=\pi\) instead gives \(\sum1/n^2=\pi^2/6\).<br/>
+<b>5.</b> Sample answers: §4 dominant eigenvector = PageRank (§10B); §5 truncated SVD = Netflix recommender (§10D); §7 sign of Re λ = SIR threshold R₀ (§7 Ex 2); §8 pole location = PID stability / filter cutoff (§10C,E); §9 DCT coefficients = JPEG (§10C).</p></details>
+
+<h3 id="x-cheat">3. One-screen cheat sheet <a class="anchor" href="#x-cheat">#</a></h3>
+<table>
+<tr><td>\(\det A=0\iff\exists\lambda=0\iff\) singular \(\iff\) 2×2: cols dependent</td><td>\(\operatorname{tr}=\sum\lambda,\ \det=\prod\lambda\) (sanity checks always)</td></tr>
+<tr><td>2×2 char. eqn: \(\lambda^2-(\operatorname{tr})\lambda+\det=0\)</td><td>\(A^k=PD^kP^{-1}\); symmetric ⇒ \(A=PDP^T\), real \(\lambda\), ⊥ eigenvectors</td></tr>
+<tr><td>ODE \(ar^2+br+c=0\): distinct \(r_1,r_2\to e^{r_i t}\); repeated \(\to(1,t)e^{rt}\); \(\alpha\pm i\beta\to e^{\alpha t}(\cos\beta t,\sin\beta t)\)</td><td>System \(x'=Ax\) stable \(\iff\operatorname{Re}\lambda&lt;0\) \(\iff\) tr&lt;0 &amp; det&gt;0 (2×2)</td></tr>
+<tr><td>Stable spiral: tr&lt;0, det&gt;0, tr²&lt;4det · saddle: det&lt;0 · center: tr=0,det&gt;0</td><td>Laplace: \(\mathcal L\{y'\}=sY-y(0)\), \(\mathcal L\{y''\}=s^2Y-sy(0)-y'(0)\); poles LHP ⇔ stable</td></tr>
+<tr><td>\(\mathcal L\{\sin\omega t\}=\frac{\omega}{s^2+\omega^2}\) · \(\mathcal L\{u(t-c)f(t-c)\}=e^{-cs}F(s)\) · \(\mathcal L\{\delta\}=1\)</td><td>Fourier: even⇒cos only, odd⇒sin only; jump⇒midpoint; Gibbs ~9% persists</td></tr>
+<tr><td>Parseval: \(\frac1L\int f^2=\frac{a_0^2}2+\sum(a_n^2+b_n^2)\) (energy / checksum / compression)</td><td>FFT \(O(N\log N)\) vs \(O(N^2)\); convolution↔multiplication in §8 <i>and</i> §9</td></tr>
+</table>
+
+<h3 id="x-refs">4. Master references <a class="anchor" href="#x-refs">#</a></h3>
+<ul class="ref">
+<li><b>Linear algebra:</b> Gilbert Strang, <a href="https://math.mit.edu/~gs/books/books.html" target="_blank" rel="noopener"><i>Introduction to Linear Algebra</i></a> (§1–§5 backbone; the four-subspaces and eigen chapters are the core) and <a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank" rel="noopener">MIT 18.06 video course</a>; for the SVD-as-center-of-everything view, Strang's <a href="https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/" target="_blank" rel="noopener">18.065</a>. David Lay, <i>Linear Algebra and Its Applications</i> (§1–§2 exercises). Trefethen &amp; Bau, <i>Numerical Linear Algebra</i> (conditioning, QR, SVD, done right).</li>
+<li><b>Intuition video:</b> 3Blue1Brown, <a href="http://3b1b.co/eola" target="_blank" rel="noopener">Essence of Linear Algebra</a> (ch.3,5,8,9 map to §2,3,4,5) and the <a href="https://www.3blue1brown.com/topics/differential-equations" target="_blank" rel="noopener">Differential Equations</a> + <a href="https://www.3blue1brown.com/lessons/fourier-series" target="_blank" rel="noopener">Fourier</a> series. These are embedded throughout the chapters above; watch them alongside the matching section, not instead of it.</li>
+<li><b>ODEs / Laplace / Fourier:</b> Boyce &amp; DiPrima, <i>Elementary Differential Equations</i> (ch.1–3, 6–7, 10) · MIT OCW <a href="https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/" target="_blank" rel="noopener">18.03</a> (Milner's lecture notes are gold) · Kreyszig, <i>Advanced Engineering Mathematics</i> (one book covering the whole syllabus) · <b>Paul's Online Notes</b> <a href="https://tutorial.math.lamar.edu/Classes/DE/de.aspx" target="_blank" rel="noopener">Differential Equations</a>, the best source of problems with complete solutions · Strogatz, <i>Nonlinear Dynamics and Chaos</i> (qualitative theory, §7's soul).</li>
+<li><b>Fourier, deeper:</b> Stein &amp; Shakarchi, <i>Fourier Analysis: An Introduction</i> · Bracewell, <i>The Fourier Transform and Its Applications</i> (Gibbs, filtering, intuition) · Cooley &amp; Tukey, <a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1" target="_blank" rel="noopener">original FFT paper</a> · <a href="https://numpy.org/doc/2.3/reference/generated/numpy.fft.fft.html" target="_blank" rel="noopener">numpy.fft docs</a>.</li>
+<li><b>CS applications:</b> PageRank. Langville &amp; Meyer, <i>Google's PageRank and Beyond</i> (<a href="https://doi.org/10.1515/9781400830329" target="_blank" rel="noopener">DOI</a>), Brin &amp; Page <a href="https://infolab.stanford.edu/~backrub/google.html" target="_blank" rel="noopener">1998</a> · PCA. Shlens, <a href="https://arxiv.org/abs/1404.1100" target="_blank" rel="noopener">arXiv:1404.1100</a> · SVD in data science. Strang 18.065 · control. Nise, <i>Control Systems Engineering</i> · graphics, any M/P/V matrix transform tutorial for §3/§10A.</li>
+<li><b>History:</b> Fourier, <a href="https://archive.org/details/thorieanalytiqu00fourgoog" target="_blank" rel="noopener"><i>Théorie analytique de la chaleur</i></a> (1822, Internet Archive scan) · MacTutor (St Andrews) biographies: <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Grassmann.html" target="_blank" rel="noopener">Grassmann</a>, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Cayley/" target="_blank" rel="noopener">Cayley</a>, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Laplace/" target="_blank" rel="noopener">Laplace</a>, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Fourier.html" target="_blank" rel="noopener">Fourier</a>, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Gibbs/" target="_blank" rel="noopener">Gibbs</a>, every named person above links to one.</li>
+<li><b>Double-check your work:</b> this site's canvases (eigen, SVD, phase portrait, Fourier) · <a href="https://www.desmos.com/calculator" target="_blank" rel="noopener">Desmos</a> / <a href="https://www.geogebra.org/" target="_blank" rel="noopener">GeoGebra</a> / <a href="https://www.wolframalpha.com/" target="_blank" rel="noopener">Wolfram Alpha</a> for any eigenvalue or transform · Python+numpy (the <code>demo_*.py</code> blocks above all run as-is) · xEdit-style: <a href="https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/" target="_blank" rel="noopener">18.065</a>'s problem sets.</li>
+</ul>
+<div class="note"><b>Scope note.</b> The core material is the standard undergraduate sequence: vector spaces, linear transformations, matrices and determinants, ODEs and systems, Fourier series, and Laplace transforms. The <b>SVD (§5), matrix exponential (§7), and the Fourier transform / FFT bridge (§9.6)</b> are included as labelled next-step bridges, because they make the core material click and because most of the listed texts gesture at them. Do not let them crowd out the fundamentals. If a topic is not on your syllabus, skim its first paragraph and move on.</div>
+<div class="chapnav"><a href="#capstone">← 10 · Case studies</a><a class="nx" href="#map">Back to top ↑</a></div>
+</section>
+
+</main>
+</div>
+<button id="toTop" title="back to top">↑</button>
+<script src="visuals.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

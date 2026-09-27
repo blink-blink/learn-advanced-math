@@ -1,0 +1,9 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# nothing here needs building, but keep node_modules out if you ever experiment
+node_modules/
